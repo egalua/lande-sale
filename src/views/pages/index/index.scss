@@ -1,0 +1,12 @@
+$caption : green;
+$paragraf: grey;
+
+.wrapper{
+    h1{
+        color: $caption;
+    }
+    p{
+        font-size: 17px;
+        color: $paragraf;
+    }
+}
