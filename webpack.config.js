@@ -42,8 +42,8 @@ const optimization = () => { // правила для оптимизации (м
  */
 function getEntry(){
     if(isDev || isProd) return {
-        'index': PATHS.source + '/views/pages/index/index.js',
-        'about': PATHS.source + '/views/pages/about/about.js'
+        'index': PATHS.source + '/views/pages/index/index.js'
+        // 'about': PATHS.source + '/views/pages/about/about.js'
     };
     if (isComps) return {
         'components': PATHS.source + '/views/components/components.js'
@@ -98,7 +98,7 @@ module.exports = {
     },
     devServer:{
         port: 4200,
-        hot: isDev
+        hot: false // isDev
     },
     optimization: optimization(),
     devtool: isDev ? 'source-map': '', // включение source-map в режиме разработки

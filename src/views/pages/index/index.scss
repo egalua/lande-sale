@@ -1,12 +1,6 @@
-$caption : green;
-$paragraf: grey;
-
-.wrapper{
-    h1{
-        color: $caption;
-    }
-    p{
-        font-size: 17px;
-        color: $paragraf;
-    }
-}
+@import "/styles.glob/common/reset.scss";
+@import "/styles.glob/common/grid.scss";
+@import "template/base.scss";
+@import "blocks/header/header.scss";
+@import "blocks/main/main.scss";
+@import "blocks/footer/footer.scss"; 
