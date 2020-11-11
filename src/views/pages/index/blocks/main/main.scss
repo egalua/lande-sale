@@ -1,5 +1,5 @@
-.main{
-    width: 1440px;
-    margin: auto;
-    border: 1px solid #ccf;
-}
+@import "gallery/gallery.scss";
+@import "key-properties/key-properties.scss";
+@import "map/map.scss";
+@import "slider/slider.scss";
+@import "steps/steps.scss";

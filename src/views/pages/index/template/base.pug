@@ -7,7 +7,11 @@ html(lang="en")
         title 
             block title
     body
-        .wrapper
-            block header
-            block main
-            block footer
+        .wrapper 
+            .content-box.grid-container
+                .row
+                    block header
+                .row
+                    block main
+                .row
+                    block footer
