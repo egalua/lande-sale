@@ -10,7 +10,7 @@ const PATHS = {
 }
 // режим работы: build или dev или comps (process.env.NODE_ENV получить системную переменную ОС NODE_ENV)
 const isDev = (process.env.NODE_ENV === 'development'); 
-const isProd = !isDev && (process.env.NODE_ENV !== 'components'); 
+const isProd = (process.env.NODE_ENV === 'production'); 
 const isComps = !isDev && !isProd;
 
 console.log('isDev = ', isDev);
@@ -94,14 +94,16 @@ module.exports = {
     // },
     output:{ // шаблон имен и местоположение для выходных файлов
         filename: 'app/[name]-bandle.js',
-        path: PATHS.build
+        path: PATHS.buildm
     },
     devServer:{
         port: 4200,
         hot: false // isDev
     },
     optimization: optimization(),
-    devtool: isDev ? 'source-map': '', // включение source-map в режиме разработки
+    devtool: isDev ? 'source-map': 'nosources-source-map', // включение source-map в режиме разработки
+    // в режиме build с isDev===false перестает правильно работать resolve-url-loader
+    // при включении devtool:'source-map' resolve-url-loader работает правильно
     plugins: getPlugin(),
     module:{ // loaders
         rules: [
@@ -124,6 +126,12 @@ module.exports = {
                         }
                     },
                     'css-loader',
+                    {
+                        loader: 'resolve-url-loader',
+                        options:{
+                            // sourceMap: isDev || isComps, // для использования карт
+                        }
+                    },
                     'sass-loader'
                 ] 
             },
