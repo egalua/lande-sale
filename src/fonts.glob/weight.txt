@@ -1,0 +1,32 @@
+Значение    Общее название
+    100         Тонкий (Волосяной) Thin (Hairline)
+    200         Дополнительный светлый (Сверхсветлый) Extra Light (Ultra Light)
+    300         Светлый Light
+    400         Нормальный Normal
+    500         Средний Medium
+    600         Полужирный Semi Bold (Demi Bold)
+    700         Жирный Bold
+    800         Дополнительный жирный (Сверхжирный) Extra Bold (Ultra Bold)
+    900         Черный (Густой) Black (Heavy)
+
+
+
+
+Montserrat-Thin			100
+Montserrat-ThinItalic 		100
+Montserrat-ExtraLight 		200
+Montserrat-ExtraLightItalic 	200
+Montserrat-Light 			300
+Montserrat-LightItalic 		300
+Montserrat-Regular			400
+Montserrat-Italic 			400
+Montserrat-Medium 		500
+Montserrat-MediumItalic 		500
+Montserrat-SemiBold 		600
+Montserrat-SemiBoldItalic 	600
+Montserrat-Bold			700
+Montserrat-BoldItalic		700
+Montserrat-ExtraBold 		800
+Montserrat-ExtraBoldItalic	800
+Montserrat-Black 			900
+Montserrat-BlackItalic 		900
