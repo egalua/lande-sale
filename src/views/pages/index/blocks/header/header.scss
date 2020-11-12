@@ -1,8 +1,15 @@
+@import 'top-nav/top-nav.scss';
+
+$header-height: 800px; // высота блока header, возможно, придётся менять при адаптивном дизайне
+$header-img: url('img/header.gif'); // фоновая картинка header блока
+
 .header{
     width: 100%;
-    height: 800px; // пока так, потом можно перейти к относительным единицам
+    height: $header-height; 
     background-size: cover;
+    position: relative;
 }
 .header_background{
-    background: url('img/header.gif') center center no-repeat; // картинка 880Кб, нужно ужимать для мобильных версий 
+    background: $header-img center center no-repeat; // картинка 880Кб, нужно ужимать для мобильных версий 
 }
+

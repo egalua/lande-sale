@@ -1,0 +1,63 @@
+$item-step: 22px;
+$item-font-size: 18px;
+
+.nav-box{ // контейнер для меню (тег <nav>)
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 23px;
+}
+.nav-box__menu{ // блок меню (тег <ul>)
+    display: flex;
+    justify-content: space-between;
+}
+.nav-box__menu>* + *{ // интервал между пунктами меню
+    margin-left: $item-step;
+}
+.nav-box__menu-item:nth-last-child(-n+2){ // поправка интервала для последних двух пунктов
+    margin-left: $item-step + 7px;
+}
+.nav-box__menu-item{ // пункт меню (тег <li>)
+    display: flex;
+    justify-content: center;
+}
+
+.nav-box__menu-item-link, // ссылка внутри пункта меню (тег <a>)
+.nav-box__menu-item-link:visited{
+    text-decoration: none;
+    color: #F1F5F2;
+    line-height: 21.94px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: $item-font-size;
+
+    position: relative;
+}
+// подпись пункта меню (<a><span>пункт</span><a>)
+.nav-box__menu-item-bold-link{ // вариант с жирным шрифтом
+    font-weight: 500;
+    text-align: center;
+}
+// подпись пункта меню (<a><span>пункт</span><a>)
+.nav-box__menu-item-normal-link{ // вариант с нормальным шрифтом
+    font-weight: 400;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    text-align: center;
+}
+
+// при наведении на ссылку пункта меню
+.nav-box__menu-item-link:hover > .nav-box__menu-item-bold-link{
+    visibility: hidden;
+}
+.nav-box__menu-item-link:hover > .nav-box__menu-item-normal-link{
+    visibility: visible;
+    z-index: 1;
+}
+.nav-box__menu-item-link:hover{
+    border-bottom: 1px solid #fff;
+}
