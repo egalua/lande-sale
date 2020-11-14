@@ -1,0 +1,63 @@
+// $offer-box-width: 737px; // ширина блока с предложением см. header.scss
+$offer-margin-left: 160px; // отступ слева для блока предложений 160px
+$offer-width: 577px; // ширина блока предложений $offer-box-width-$offer-margin-left
+$offer-margin-top: 207px; // верхний отступ блока предложений
+$offer-font-size: 18px; // основной размер шрифта блока предложений
+$offer-title-font-size: 60px; // размер шрифта основного заготовка блока предложений
+$text-color: #F1F5F2; // цвет текста блока
+$get-price-width: 273px; // ширина кнопки "узнать цену"
+
+.offer{ // блок-контейнер для предложения
+    margin-left: $offer-margin-left;
+    margin-top: $offer-margin-top;
+    width: $offer-width;
+    font-family: 'Montserrat', sans-serif;
+}
+.offer-subtitel{ // уточняющий подзаголовок
+    font-size: $offer-font-size;
+    color: $text-color;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+}
+.offer-title{ // предложение
+    margin-top: 16px;
+    font-weight: 900;
+    font-size: $offer-title-font-size;
+    line-height: 73px;
+    color: $text-color;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.get-price-button, // кнопка "узнать цену"
+.get-price-button:visited,
+.get-price-button:active
+{
+    margin-top: 30px;
+    width: $get-price-width;
+    background: #621708;    // rgb(98,23,8)
+    display: flex;
+    align-items: center;
+    margin-left: -5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.get-price-button__text{ // надпись на кнопке
+    color: #F1F5F2;
+    font-size: $offer-font-size;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    margin-left: 74px;
+}
+.get-price-button:hover{
+    background: rgb(94,19,4);
+}
+.offer-sign{ // мотивирующее дополнение к предложению
+    margin-top: 110px;
+    letter-spacing: 0em;
+    line-height: 22px;
+    font-weight: 400;
+    font-size: $offer-font-size;
+    color: #F1F5F2;
+}

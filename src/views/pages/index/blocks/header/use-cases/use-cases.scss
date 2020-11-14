@@ -1,0 +1,36 @@
+@mixin get-case-font($width){
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: $width;
+    line-height: 22px;
+    letter-spacing: -0.03em;
+    color: #2E2E2E;    
+}
+
+$case-width: 252px;
+
+.use-cases{
+    display: flex;
+    background: #fff;
+    flex-grow: 1;
+}
+.case{
+    margin-top: 50px;
+    margin-bottom: 52px;
+}
+.case:first-child{
+    margin-left: 60px;
+    width: $case-width;
+}
+.case:last-child{
+    margin-left: 53px;
+    width: $case-width;
+}
+
+.case__problem{
+    @include get-case-font(700);
+}
+.case__solution{
+    @include get-case-font(400);
+    margin-top: 10px;
+}

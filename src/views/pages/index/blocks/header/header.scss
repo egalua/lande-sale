@@ -1,15 +1,32 @@
-@import 'top-nav/top-nav.scss';
-
+//$container-width: 1440px; // ширина контейнера (см. grid.scss)
+$offer-box-width: 737px; // ширина блока с предложением
+$use-cases-box-width: 703px; // ширина блока "вариантов использования"
 $header-height: 800px; // высота блока header, возможно, придётся менять при адаптивном дизайне
-$header-img: url('img/header.gif'); // фоновая картинка header блока
+$header-img: url('img/header.gif'); // фоновая картинка header-блока (картинка 880Кб, нужно ужимать для мобильных версий)
+
+@import 'top-nav/top-nav.scss';
+@import 'offer/offer.scss';
+@import 'use-cases/use-cases.scss';
 
 .header{
     width: 100%;
     height: $header-height; 
     background-size: cover;
-    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .header_background{
-    background: $header-img center center no-repeat; // картинка 880Кб, нужно ужимать для мобильных версий 
+    background: $header-img center center no-repeat; 
 }
-
+.top-window{
+    display: flex;
+    flex-grow: 1;
+}
+.top-window__offer-box{
+    width: ($offer-box-width/$container-width)*100%;
+}
+.top-window__use-cases-box{
+    width: ($use-cases-box-width / $container-width) * 100%;
+    display: flex;
+    align-items: flex-end;
+}
