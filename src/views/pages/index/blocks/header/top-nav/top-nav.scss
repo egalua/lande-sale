@@ -4,8 +4,8 @@ $item-font-size: 18px; // размер шрифта пунктов меню
 .nav-box{ // контейнер для меню (тег <nav>)
     display: flex;
     justify-content: center;
-    padding-top: 24px;
-    padding-bottom: 23px;
+    padding-top: 21px;
+    padding-bottom: 20px;
 }
 .nav-box__menu{ // блок меню (тег <ul>)
     display: flex;
@@ -23,10 +23,10 @@ $item-font-size: 18px; // размер шрифта пунктов меню
 }
 
 .nav-box__menu-item-link, // ссылка внутри пункта меню (тег <a>)
-.nav-box__menu-item-link:visited{
-    text-decoration: none;
+.nav-box__menu-item-link:visited,
+.nav-box__menu-item-link:active{
     color: #F1F5F2;
-    line-height: 21.94px;
+    line-height: 22x;
 
     font-family: 'Montserrat', sans-serif;
     font-size: $item-font-size;
@@ -46,4 +46,5 @@ $item-font-size: 18px; // размер шрифта пунктов меню
     border-bottom: 1px solid #F1F5F2;
     text-shadow: none;
     color: #F1F5F2;
+    margin-bottom: -1px;
 }
