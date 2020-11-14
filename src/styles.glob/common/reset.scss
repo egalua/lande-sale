@@ -34,7 +34,8 @@ body {
   min-height: 100vh;
   scroll-behavior: smooth;
   // text-rendering: optimizeSpeed;
-  line-height: 1.5;  
+  line-height: 1.5;
+  background: #E5E5E5;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
@@ -56,6 +57,12 @@ img {
 //   text-decoration-skip-ink: auto;
 // }
 
+a[class],
+a[class]:visited,
+a[class]:active,
+a[class]:hover{
+  text-decoration: none;
+}
 
 /* Указываем понятную периодичность в потоке данных у article*/
 // article > * + * {
