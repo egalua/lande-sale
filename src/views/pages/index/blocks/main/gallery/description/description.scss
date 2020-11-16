@@ -1,0 +1,23 @@
+$glr-desc-box-width: 531px; // ширина блока с описанием
+$glr-desc-box-margin-lt: 155px; // левый отступ блока с описанием
+$glr-desc-box-margin-tp: 234px; // верхний отступ блока с описанием
+$glr-desc-ttl-margin-bm: 86px; // нижний отступ заголовка описания
+
+
+.gallery__description-box{ // блок с описанием
+    width: $glr-desc-box-width;
+    margin-left: $glr-desc-box-margin-lt;
+    margin-top: $glr-desc-box-margin-tp;
+    @include get-glr-font(400); // объявлен в gallery.scss
+}
+h3.gallery__description-title{ // заголовок описания
+    font-weight: 700;
+    margin-bottom: $glr-desc-ttl-margin-bm;
+    font-size: 18px !important; // user agent почему-то перекрывает этот стиль, пришлось ставить !important
+    margin-left: 4px;
+}
+.gallery__description-text{ // блок текста описания участка
+    p{
+        margin-bottom: 25px;
+    }
+}
