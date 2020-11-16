@@ -1,0 +1,92 @@
+// Ключевые размеры нужно вынести в переменные !!!
+.gallery__images-box{ // основной контейнер, класс указывает, что это элемент gallery 
+    margin-top: 169px;
+} 
+.images-box{ // основной контейнер (является самостоятельным блоком)
+    position: relative;
+} 
+.images-box:hover > .images-box__pointer-box{
+    display: none;
+}
+.images-box__img-contents{ // блок с малыми картинками и больщой картинкой (класс указывает, что это элемент images-box)
+
+} 
+.img-contents{ // блок с малыми картинками и больщой картинкой (является самостоятельным блоком)
+    overflow: hidden;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin-left:-5px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+} 
+
+.img-contents__large-img{ // большая картинка
+    display: none;
+} 
+
+.img-contents__thumbs{ //список ul с маленькими картинками
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-auto-flow: column;
+    // height: 589px;
+    grid-gap: 5px;
+    position: relative;
+} 
+
+.img-contents__thumbs:after{ // декоративный градиент справа
+    content: '';
+    display: block;
+    width: 109px;
+    height: 589px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: linear-gradient(to right, transparent, white);
+    z-index: 1;
+}
+
+.img-contents__thumb{ // элемент li с маленькой картинкой внутри
+    width: 193px;
+    height: 193px;
+} 
+.img-contents__thumb:hover{ // изменение элемента с картинкой при наведении курсора
+
+    box-shadow: 0px 3px 1.7px rgba(1,2,3,0.2),
+                3px 0px 1.7px rgba(1,2,3,0.2),
+                -3px 0px 1.7px rgba(1,2,3,0.2),
+                0px -3px 1.7px rgba(1,2,3,0.2),
+                
+                -3px -3px 1.7px rgba(1,2,3,0.2),
+                3px 3px 1.7px rgba(1,2,3,0.2),
+                3px -3px 1.7px rgba(1,2,3,0.2),
+                -3px 3px 1.7px rgba(1,2,3,0.2),;
+    outline: 1px solid #fff;
+
+}
+.img-contents__thumb-link{ // ссылка на большую картинку соответствующую маленькой (<a>)
+    display: block;
+} 
+
+.img-contents__thumb-img{ // маленькая картинка (<img>)
+    width: 193px;
+    height: 193px;
+} 
+
+.images-box__pointer-box{ // блок сглазом и текстом "посмотреть", класс указывает, что это элемент images-box
+    position: absolute;
+    top: 282px;
+    left: 237px;
+} 
+.pointer-box{ // блок сглазом и текстом "посмотреть" (является самостоятельным блоком)
+
+} 
+
+.pointer-box__eye-icon{ // глаз Саурона
+    text-align: center;
+    margin-bottom: 5px;
+} 
+.pointer-box__label{ // подпись под "глазом"
+    @include get-glr-font(400); // объявлен в gallery.scss
+    color: #fff;
+} 
