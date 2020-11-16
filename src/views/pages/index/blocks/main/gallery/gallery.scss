@@ -1,0 +1,23 @@
+$gallery-description-width: 737px;
+$gallery-images-width: 703px;
+
+@mixin get-glr-font($font-weight){ // возвращает параметры шрифта блока галереи
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: $font-weight;
+    line-height: 22px;
+    letter-spacing: 0em;
+}
+
+.gallery{ // блок сетки
+    display: flex;
+}
+.gallery__description{ // блок с описанием
+    width: $gallery-description-width;
+}
+.gallery__images{ // блок с галереей
+    width: $gallery-images-width;
+}
+
+@import "description/description.scss";
+@import "images-list/images-list.scss";
