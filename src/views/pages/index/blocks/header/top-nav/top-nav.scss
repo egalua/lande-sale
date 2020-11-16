@@ -31,14 +31,9 @@ $item-font-size: 18px; // размер шрифта пунктов меню
     font-family: 'Montserrat', sans-serif;
     font-size: $item-font-size;
 
-    text-shadow: 0.876px 0.876px 0px rgba(255,255,255,0.85);
-    text-shadow: 0.876px -0.876px 0px rgba(255,255,255,0.85);
-    text-shadow: -0.876px 0.876px 0px rgba(255,255,255,0.85);
-    text-shadow: -0.876px -0.876px 0px rgba(255,255,255,0.85);
-    text-shadow: 0.876px 0px 0px rgba(255,255,255,0.85);
-    text-shadow: 0px 0.876px 0px rgba(255,255,255,0.85);
-    text-shadow: 0px -0.876px 0px rgba(255,255,255,0.85);
-    text-shadow: -0.876px 0px 0px rgba(255,255,255,0.85);
+    text-shadow: 0.008px 0px 0px rgba(255,255,255,0.85),
+                 0px 0.008px 0px rgba(255,255,255,0.85);
+
 }
 
 // при наведении на ссылку пункта меню
