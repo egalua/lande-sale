@@ -1,17 +1,18 @@
 // Ключевые размеры нужно вынести в переменные !!!
-.gallery__images-box{ // основной контейнер, класс указывает, что это элемент gallery 
+.gallery__images-box{ // основной контейнер; класс указывает, что это элемент gallery 
     margin-top: 169px;
 } 
 .images-box{ // основной контейнер (является самостоятельным блоком)
     position: relative;
 } 
-.images-box:hover > .images-box__pointer-box{
+.images-box:hover > .images-box__pointer-box{ // отключение глаза Саурона при наведении курсора на блок галереи
     display: none;
 }
 .images-box__img-contents{ // блок с малыми картинками и больщой картинкой (класс указывает, что это элемент images-box)
 
 } 
-.img-contents{ // блок с малыми картинками и больщой картинкой (является самостоятельным блоком)
+.img-contents{ // блок с малыми картинками и большой картинкой (является самостоятельным блоком)
+    // клонируем его через js для создания gallery-slider
     overflow: hidden;
     padding-top: 5px;
     padding-left: 5px;
@@ -19,12 +20,16 @@
     margin-left:-5px;
     margin-top: -5px;
     margin-bottom: -5px;
-} 
-
-.img-contents__large-img{ // большая картинка
+}
+.img-contents__control-box{ // контейнер для большой картинки и блока управляющих кнопок всплывающей галереи
     display: none;
 } 
+.img-contents__large-img{ // большая картинка
+    
+} 
+.img-contents__tumbs-wrapper{ // обертка для ленты маленьких картинок, нужна в gallery-slider
 
+}
 .img-contents__thumbs{ //список ul с маленькими картинками
     display: grid;
     grid-template-rows: auto auto auto;
@@ -73,20 +78,30 @@
     height: 193px;
 } 
 
+// блок с глазом Саурона
 .images-box__pointer-box{ // блок сглазом и текстом "посмотреть", класс указывает, что это элемент images-box
     position: absolute;
-    top: 282px;
-    left: 237px;
+    top: 204px;
+    left: 198px;
 } 
-.pointer-box{ // блок сглазом и текстом "посмотреть" (является самостоятельным блоком)
+.pointer-box{ // блок сглазом и текстом "посмотреть" (является самостоятельным блоком, поэтому отдельный класс в соответствии с БЭМ)
+    display: flex;
+    flex-direction: column;
+    width: 193px;
+    height: 193px;
 
+    background: rgba(255,255,255,0.3);
 } 
 
 .pointer-box__eye-icon{ // глаз Саурона
     text-align: center;
-    margin-bottom: 5px;
+    margin-top: 78px; 
 } 
 .pointer-box__label{ // подпись под "глазом"
-    @include get-glr-font(400); // объявлен в gallery.scss
+    @include get-glr-font(400); // миксин объявлен в gallery.scss
     color: #fff;
+    text-align: center;
+    margin-top: 5px;
 } 
+
+@import "gallery-slider/gallery-slider.scss";
