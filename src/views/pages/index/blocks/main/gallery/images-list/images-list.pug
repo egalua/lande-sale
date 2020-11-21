@@ -1,17 +1,19 @@
+//- расположение картинок
+-var path="/src/views/pages/index/blocks/main/gallery/images-list/img";
 //- необходимые данные по каждой картинке
 -var images = [
--   {title: "Первая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img1-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img1-thumb.png"},
--   {title: "Вторая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img2-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img2-thumb.png"},
--   {title: "Третья картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img3-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img3-thumb.png"},
--   {title: "Четвёртая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img4-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img4-thumb.png"},
--   {title: "Пятая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img5-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img5-thumb.png"},
--   {title: "Шестая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img6-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img6-thumb.png"},
--   {title: "Седьмая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img7-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img7-thumb.png"},
--   {title: "Восьмая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img8-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img8-thumb.png"},
--   {title: "Девятая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img9-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img9-thumb.png"},
--   {title: "Десятая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img10-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img10-thumb.png"},
--   {title: "Одинадцатая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img11-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img11-thumb.png"},
--   {title: "Двенадцатая картинка", lgHref: "/src/views/pages/index/blocks/main/gallery/images-list/img/img12-lg.jpg", thumbSrc: "/src/views/pages/index/blocks/main/gallery/images-list/img/img12-thumb.png"},
+-   {title: "Первая картинка", lgHref: path + "/img1-lg.jpg", thumbSrc: path + "/img1-thumb.png"},
+-   {title: "Вторая картинка", lgHref: path + "/img2-lg.jpg", thumbSrc: path + "/img2-thumb.png"},
+-   {title: "Третья картинка", lgHref: path + "/img3-lg.jpg", thumbSrc: path + "/img3-thumb.png"},
+-   {title: "Четвёртая картинка", lgHref: path + "/img4-lg.jpg", thumbSrc: path + "/img4-thumb.png"},
+-   {title: "Пятая картинка", lgHref: path + "/img5-lg.jpg", thumbSrc: path + "/img5-thumb.png"},
+-   {title: "Шестая картинка", lgHref: path + "/img6-lg.jpg", thumbSrc: path + "/img6-thumb.png"},
+-   {title: "Седьмая картинка", lgHref: path + "/img7-lg.jpg", thumbSrc: path + "/img7-thumb.png"},
+-   {title: "Восьмая картинка", lgHref: path + "/img8-lg.jpg", thumbSrc: path + "/img8-thumb.png"},
+-   {title: "Девятая картинка", lgHref: path + "/img9-lg.jpg", thumbSrc: path + "/img9-thumb.png"},
+-   {title: "Десятая картинка", lgHref: path + "/img10-lg.jpg", thumbSrc: path + "/img10-thumb.png"},
+-   {title: "Одинадцатая картинка", lgHref: path + "/img11-lg.jpg", thumbSrc: path + "/img11-thumb.png"},
+-   {title: "Двенадцатая картинка", lgHref: path + "/img12-lg.jpg", thumbSrc: path + "/img12-thumb.png"},
 -   ];
 
 //- Формирует блок с картинками галереи
@@ -22,16 +24,40 @@
 //-   thumbSrc: "маленька картинка (аисолютный путь)"
 //- }
 mixin getgallegy(content)
-    each img in content
-        li.img-contents__thumb
-            a(href=img.lgHref title=img.title).img-contents__thumb-link
-                img(src=img.thumbSrc).img-contents__thumb-img
+    ul.img-contents__thumbs
+        each img in content
+            li.img-contents__thumb
+                a(href=img.lgHref title=img.title).img-contents__thumb-link
+                    img(src=img.thumbSrc).img-contents__thumb-img
+
+//- возвращает кнопки управления (влево / вправо)
+mixin getDirButton(classname)
+    div(class=classname)
+        .svg-box
+            <svg viewbox="0 0 60 100">
+                <path d="M 50,0 L 60,10 L 20,50 L 60,90 L 50,100 L 0,50 Z"/>
+            </svg>
+//- возвращает кнопку close
+mixin getCloseButton(classname)
+    div(class=classname)
+        .svg-box
+            <svg viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg">
+                <path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
+            </svg>
+//- возвращает контейнер с большой картинкой
+mixin getLargeImgBox(classname)
+    div(class=classname)
+        img(alt="large image" src=images[0].lgHref).img-contents__large-img
 
 .gallery__images-box.images-box
     //- галерея с картинками
     .images-box__img-contents.img-contents
-        img(alt="large image" src="img/img1-lg.jpg").img-contents__large-img
-        ul.img-contents__thumbs
+        .img-contents__control-box
+            +getLargeImgBox('img-contents__large-img-box')
+            +getDirButton('img-contents__to-left')
+            +getDirButton('img-contents__to-right')
+            +getCloseButton('img-contents__closeBtn')
+        .img-contents__tumbs-wrapper
             +getgallegy(images)
     //- указатель с глазом Саурона
     .images-box__pointer-box.pointer-box
