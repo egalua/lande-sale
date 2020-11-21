@@ -1,0 +1,252 @@
+$img-width: 100px;
+$img-height: 100px;
+
+//Нужно добавить класс active на открытом слайде и добавить к нему какое-то оформление
+// пример: https://news.mail.ru/politics/44217499/gallery/1091389/
+// все кнопки position:fixed;
+// нужно указать номер текущего фото и их общее количество, например: 2/10 
+// кнопок на ленте не нужно
+
+// Нужно выровнять блок по вертикали
+// Нужно решить вопрос с размерами изображений и ленты
+// Нужно решить вопрос со взаимным расположением ленты и изображения
+// Не работает на мобильных!!!
+
+// клавиши управления показом слайдов во всплывающей галерее
+@mixin getCloneGalleryButtons($direction){
+        line-height: 0;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        // min-width: 45px;
+        display: flex;
+        align-items: center;
+
+        svg{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            
+
+            path{
+                fill: #a1a2a5; 
+                // stroke-width: 2;
+                // stroke: #fff;    
+            }
+        }
+        &:hover svg{
+            
+            path{
+                fill: #f1f2f5; //original
+            }
+            
+        }
+        &:hover>.svg-box{
+            transform: scale(1.065);
+        }
+        &:hover{
+            cursor: pointer;
+            background: rgba(0,0,0,0.7);
+        }
+        
+    @if $direction == 'right'{
+        right: 0px;
+        // min-width: 45px;
+        svg{
+            transform: rotate(180deg);
+            
+        }
+    }
+    @if $direction == 'left'{
+        // min-width: 45px;
+        left: 0px;
+    }
+    @if $direction == 'close'{
+        height: auto;
+        position: fixed;
+        right: 15px;
+        top: 15px;
+        svg{
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
+// главный контейнер "всплывающей" галереи
+.galleryBoxClone-js{
+    position: fixed;
+    // width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    // right: 0;
+    left: 0;
+    // bottom: 0;
+
+    // margin: auto;
+    background: rgba(0,0,0, 0.9);
+    z-index: 2;
+
+    line-height: 0;
+    font-size: 0;
+    
+    display: none; // на тот случай, если "всплывающую" галерею уже создавали и вышли мз режима её просмотра
+
+    // клонированный контейнер с галереей (элемент <div>)
+    .images-box__img-contents.img-contents{  
+        overflow: unset; // перекрываем раннее установленные стили для оригинального контейнера
+        padding: 0; 
+        margin: 0;
+        
+        text-align: center;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .img-contents__control-box{ // блок с кнопками управления, кнопкой close и контейнером с большой картинкой
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .img-contents__large-img{ // большая картинка <img> 
+            display: block;
+        }
+        .img-contents__to-left{ // левая кнопка (контейнер <div> с <svg> внутри)
+            @include getCloneGalleryButtons('left');
+        } 
+        .img-contents__to-right{ // правая кнопка (контейнер <div> с <svg> внутри)
+            @include getCloneGalleryButtons('right'); 
+        }
+        .img-contents__closeBtn{ // кнопка "закрыть" 
+            @include getCloneGalleryButtons('close'); 
+        }
+    }
+    .img-contents__large-img-box{ // контейнер для большой картинки
+        display: block;
+        width: 80vmin;
+        height: 80vmin;
+        // margin: 0px auto 5px;
+        border: 1px solid #111215;
+        // position: relative;
+        
+        // .img-contents__large-img{ // большая картинка <img> 
+        //     display: block;
+        // }
+        // .img-contents__to-left{ // левая кнопка (контейнер <div> с <svg> внутри)
+        //     @include getCloneGalleryButtons('left');
+        // } 
+        // .img-contents__to-right{ // правая кнопка (контейнер <div> с <svg> внутри)
+        //     @include getCloneGalleryButtons('right'); 
+        // }
+        // .img-contents__closeBtn{ // кнопка "закрыть" 
+        //     @include getCloneGalleryButtons('close'); 
+        // }
+    }
+
+    
+    .img-contents__tumbs-wrapper{ // конейнер для ленты маленьких картинок (div с overflow:hidden)
+        max-width: 80%;
+        // margin: auto;
+        
+        // border: 1px solid #717275;
+
+        padding: 10px 0; //чтобы при hover на preview-картинки им было куда расти
+        border-radius: 6.5px;
+
+        overflow: hidden;
+
+        display: inline-block;
+        // display: inline-flex;
+        line-height: 0;
+        font-size: 0;
+    } 
+    
+    .img-contents__thumbs{ // блок <ul> - собственно, сама лента
+        // сброс и переопределение параметров из оригинального блока с картинками
+        display: inline-grid;
+        grid-template-rows: auto;
+        grid-auto-flow: column;
+        grid-gap: 5px;
+
+        line-height: 0;
+        font-size: 0;
+
+        transform: translateX(0px); // намёк, что лента будет двигаться с помощью translateX()
+    }
+    .img-contents__thumbs:after{ // декоративный блок с градиентом, скрвающий в оригинальном блоке не поместившиеся справа картинки
+        display: none;
+    }
+    
+    .img-contents__thumb{ // блок <li> == контейнер для preview картинок
+        width: $img-width;
+        height: $img-height;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-contents__thumb:hover{ // изменение preview картинки при наведении курсора
+        box-shadow: none; 
+        outline: none;
+        box-shadow: 1px 0px 0px #000,
+                    0px 1px 0px #000,
+                    -1px 0px 0px #000,
+                    0px -1px 0px #000,
+
+                    -1px -1px 0px #000,
+                    1px 1px 0px #000,
+                    1px -1px 0px #000,
+                    -1px 1px 0px #000,
+
+                    2px 0px 0px #f1f2f5,
+                    0px 2px 0px #f1f2f5,
+                    -2px 0px 0px #f1f2f5,
+                    0px -2px 0px #f1f2f5,
+                    
+                    -2px -2px 0px #f1f2f5,
+                    2px 2px 0px #f1f2f5,
+                    2px -2px 0px #f1f2f5,
+                    -2px 2px 0px #f1f2f5;
+        
+        transform: scale(1.018);
+    }
+    .img-contents__thumb_active, // активная в настоящий момент картинка (её большая копия сейчас просматривается)
+    .img-contents__thumb_active:hover{ // активная в настоящий момент картинка при наведении курсора
+        box-shadow: none; 
+        outline: none;
+        position: relative;
+        // transform: none;
+        // border-bottom: 2px solid lightgrey;
+        // box-shadow: 0px 4px 0px #111215,
+        //             0px 6px 1px #f1f2f5;
+        // outline: 1px solid #fff;
+    }
+    .img-contents__thumb_active:after{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 0;
+        border: 1px solid #f1f2f5;
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        right: 0;
+        font-size: 0;
+        line-height: 0;
+        border-radius: 8px;
+    }
+    
+    .img-contents__thumb-link{ // тег <a> - обёртка для preview картинки, хранит путь до большой картинки соответствующей данной preview
+        display: block;
+    }
+    
+    .img-contents__thumb-img{ // тег <img> - сама preview картинка
+        width: $img-width;
+        height: $img-height;
+    }
+}
