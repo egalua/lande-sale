@@ -1,18 +1,24 @@
 // Ключевые размеры нужно вынести в переменные !!!
-.gallery__images-box{ // основной контейнер; класс указывает, что это элемент gallery 
+
+// основной контейнер; класс указывает, что это элемент gallery 
+.gallery__images-box{ 
     margin-top: 169px;
 } 
-.images-box{ // основной контейнер (является самостоятельным блоком)
+// основной контейнер (является самостоятельным блоком)
+.images-box{ 
     position: relative;
 } 
-.images-box:hover > .images-box__pointer-box{ // отключение глаза Саурона при наведении курсора на блок галереи
+// отключение глаза Саурона при наведении курсора на блок галереи
+.images-box:hover > .images-box__pointer-box{ 
     display: none;
 }
-.images-box__img-contents{ // блок с малыми картинками и больщой картинкой (класс указывает, что это элемент images-box)
+// блок с малыми картинками и больщой картинкой (класс указывает, что это элемент images-box)
+.images-box__img-contents{ 
 
 } 
-.img-contents{ // блок с малыми картинками и большой картинкой (является самостоятельным блоком)
-    // клонируем его через js для создания gallery-slider
+// блок с малыми картинками и большой картинкой (является самостоятельным блоком)
+// клонируем его через js для создания gallery-slider
+.img-contents{ 
     overflow: hidden;
     padding-top: 5px;
     padding-left: 5px;
@@ -21,16 +27,27 @@
     margin-top: -5px;
     margin-bottom: -5px;
 }
-.img-contents__control-box{ // контейнер для большой картинки и блока управляющих кнопок всплывающей галереи
+// контейнер для большой картинки и блока управляющих кнопок всплывающей галереи
+.img-contents__control-box{ 
     display: none;
-} 
-.img-contents__large-img{ // большая картинка
+}
+// большая картинка
+.img-contents__large-img{ 
     
 } 
-.img-contents__tumbs-wrapper{ // обертка для ленты маленьких картинок, нужна в gallery-slider
+// обертка для ленты маленьких картинок, нужна в gallery-slider
+.img-contents__imgs-tape-wrapper{ 
 
 }
-.img-contents__thumbs{ //список ul с маленькими картинками
+// правая и левая кнопки 
+// по бокам блока preview картинок
+.img-contents__tape-to-left, 
+.img-contents__tape-to-right{ 
+    width: 0;
+    height: 0;
+}
+//список ul с маленькими картинками
+.img-contents__imgs-tape{ 
     display: grid;
     grid-template-rows: auto auto auto;
     grid-auto-flow: column;
@@ -38,8 +55,8 @@
     grid-gap: 5px;
     position: relative;
 } 
-
-.img-contents__thumbs:after{ // декоративный градиент справа
+// декоративный градиент справа
+.img-contents__imgs-tape:after{ 
     content: '';
     display: block;
     width: 109px;
@@ -50,12 +67,13 @@
     background: linear-gradient(to right, transparent, white);
     z-index: 1;
 }
-
-.img-contents__thumb{ // элемент li с маленькой картинкой внутри
+// элемент li с маленькой картинкой внутри
+.img-contents__imgs-tape-item{ 
     width: 193px;
     height: 193px;
 } 
-.img-contents__thumb:hover{ // изменение элемента с картинкой при наведении курсора
+// изменение элемента с картинкой при наведении курсора
+.img-contents__imgs-tape-item:hover{ 
 
     box-shadow: 0px 3px 1.7px rgba(1,2,3,0.2),
                 3px 0px 1.7px rgba(1,2,3,0.2),
@@ -69,22 +87,25 @@
     outline: 1px solid #fff;
 
 }
-.img-contents__thumb-link{ // ссылка на большую картинку соответствующую маленькой (<a>)
+// ссылка на большую картинку соответствующую маленькой (<a>)
+.img-contents__large-img-link{ 
     display: block;
 } 
-
-.img-contents__thumb-img{ // маленькая картинка (<img>)
+// маленькая картинка (<img>)
+.img-contents__small-img{ 
     width: 193px;
     height: 193px;
 } 
 
 // блок с глазом Саурона
-.images-box__pointer-box{ // блок сглазом и текстом "посмотреть", класс указывает, что это элемент images-box
+// блок сглазом и текстом "посмотреть", класс указывает, что это элемент images-box
+.images-box__pointer-box{ 
     position: absolute;
     top: 204px;
     left: 198px;
 } 
-.pointer-box{ // блок сглазом и текстом "посмотреть" (является самостоятельным блоком, поэтому отдельный класс в соответствии с БЭМ)
+// блок сглазом и текстом "посмотреть" (является самостоятельным блоком, поэтому отдельный класс в соответствии с БЭМ)
+.pointer-box{ 
     display: flex;
     flex-direction: column;
     width: 193px;
@@ -92,12 +113,13 @@
 
     background: rgba(255,255,255,0.3);
 } 
-
-.pointer-box__eye-icon{ // глаз Саурона
+// глаз Саурона
+.pointer-box__eye-icon{ 
     text-align: center;
     margin-top: 78px; 
 } 
-.pointer-box__label{ // подпись под "глазом"
+// подпись под "глазом"
+.pointer-box__label{ 
     @include get-glr-font(400); // миксин объявлен в gallery.scss
     color: #fff;
     text-align: center;
