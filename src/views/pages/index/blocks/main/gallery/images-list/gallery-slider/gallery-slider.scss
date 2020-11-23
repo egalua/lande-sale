@@ -1,4 +1,5 @@
-$img-width: 100px;
+// размеры preview картинок 
+$img-width: 100px; 
 $img-height: 100px;
 
 //Нужно добавить класс active на открытом слайде и добавить к нему какое-то оформление
@@ -14,19 +15,17 @@ $img-height: 100px;
 
 // клавиши управления показом слайдов во всплывающей галерее
 @mixin getCloneGalleryButtons($direction){
-        line-height: 0;
         position: absolute;
         top: 0;
         height: 100%;
-        // min-width: 45px;
         display: flex;
         align-items: center;
+        line-height: 0;
 
         svg{
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            
 
             path{
                 fill: #a1a2a5; 
@@ -34,56 +33,67 @@ $img-height: 100px;
                 // stroke: #fff;    
             }
         }
-        &:hover svg{
-            
+        // все кнопки подсвечиваются при наведении
+        &:hover svg{ 
             path{
                 fill: #f1f2f5; //original
             }
-            
         }
-        &:hover>.svg-box{
+        // все кнопки увеличиваются при наведении
+        &:hover>.svg-box{ 
             transform: scale(1.065);
         }
-        &:hover{
+        // на всех кнопках меняется курсор
+        &:hover{ 
             cursor: pointer;
-            background: rgba(0,0,0,0.7);
+            // background: rgba(0,0,0,0.01);
         }
-        
+    // правая кнопка большой картинки
     @if $direction == 'right'{
         right: 0px;
-        // min-width: 45px;
         svg{
             transform: rotate(180deg);
-            
         }
     }
+    // левая кнопка большой картинки
     @if $direction == 'left'{
-        // min-width: 45px;
         left: 0px;
     }
-    @if $direction == 'close'{
+    // общие стили для close и кнопок управления лентой
+    @if $direction == 'close' or $direction == 'tape-left-btn' or $direction == 'tape-right-btn'{
         height: auto;
-        position: fixed;
-        right: 15px;
-        top: 15px;
+        width: auto;
         svg{
             width: 30px;
             height: 30px;
         }
     }
+    // кнопка close
+    @if $direction == 'close'{
+        position: fixed;
+        right: 15px;
+        top: 15px;
+    }
+    // левая кнопка ленты
+    @if $direction == 'tape-left-btn'{
+        position: static;
+        height: $img-height;
+    }
+    // правая кнопка ленты
+    @if $direction == 'tape-right-btn'{
+        position: static;
+        transform: rotate(180deg);
+        height: $img-height;
+    }
 }
-// главный контейнер "всплывающей" галереи
+// ----- главный контейнер "всплывающей" галереи -----
 .galleryBoxClone-js{
     position: fixed;
-    // width: 100vw;
     width: 100vw;
     height: 100vh;
     top: 0;
-    // right: 0;
     left: 0;
-    // bottom: 0;
 
-    // margin: auto;
     background: rgba(0,0,0, 0.9);
     z-index: 2;
 
@@ -107,66 +117,74 @@ $img-height: 100px;
         justify-content: center;
         align-items: center;
     }
-    .img-contents__control-box{ // блок с кнопками управления, кнопкой close и контейнером с большой картинкой
+    // блок с кнопками управления, кнопкой close и контейнером с большой картинкой
+    .img-contents__control-box{ 
         position: relative;
         width: 100%;
         display: flex;
         justify-content: center;
-
-        .img-contents__large-img{ // большая картинка <img> 
+        // большая картинка <img> 
+        .img-contents__large-img{ 
             display: block;
         }
-        .img-contents__to-left{ // левая кнопка (контейнер <div> с <svg> внутри)
+        // левая кнопка (контейнер <div> с <svg> внутри)
+        .img-contents__to-left{ 
             @include getCloneGalleryButtons('left');
         } 
-        .img-contents__to-right{ // правая кнопка (контейнер <div> с <svg> внутри)
+        // правая кнопка (контейнер <div> с <svg> внутри)
+        .img-contents__to-right{ 
             @include getCloneGalleryButtons('right'); 
         }
-        .img-contents__closeBtn{ // кнопка "закрыть" 
+        // кнопка "закрыть" 
+        .img-contents__closeBtn{ 
             @include getCloneGalleryButtons('close'); 
         }
     }
-    .img-contents__large-img-box{ // контейнер для большой картинки
+    // контейнер для большой картинки
+    .img-contents__large-img-box{ 
         display: block;
         width: 80vmin;
         height: 80vmin;
-        // margin: 0px auto 5px;
         border: 1px solid #111215;
-        // position: relative;
-        
-        // .img-contents__large-img{ // большая картинка <img> 
-        //     display: block;
-        // }
-        // .img-contents__to-left{ // левая кнопка (контейнер <div> с <svg> внутри)
-        //     @include getCloneGalleryButtons('left');
-        // } 
-        // .img-contents__to-right{ // правая кнопка (контейнер <div> с <svg> внутри)
-        //     @include getCloneGalleryButtons('right'); 
-        // }
-        // .img-contents__closeBtn{ // кнопка "закрыть" 
-        //     @include getCloneGalleryButtons('close'); 
-        // }
     }
-
-    
-    .img-contents__tumbs-wrapper{ // конейнер для ленты маленьких картинок (div с overflow:hidden)
-        max-width: 80%;
-        // margin: auto;
-        
-        // border: 1px solid #717275;
-
-        padding: 10px 0; //чтобы при hover на preview-картинки им было куда расти
-        border-radius: 6.5px;
-
-        overflow: hidden;
-
-        display: inline-block;
-        // display: inline-flex;
+    // конейнер для ленты маленьких картинок 
+    .img-contents__imgs-tape-wrapper{ 
+        // max-width: 100%;
+        max-width: 100vw;
+        display: inline-flex;
         line-height: 0;
         font-size: 0;
+        
+        align-items: center;
     } 
-    
-    .img-contents__thumbs{ // блок <ul> - собственно, сама лента
+    // контейнер ленты preview картинок с overflow:hidden, скрывающий лишнюю часть ленты
+    .img-contents__imgs-tape-hidden-box{ 
+        overflow: hidden;
+        width: 100%;
+        padding: 10px 3px; //чтобы при hover на preview-картинки им было куда расти
+    }
+    // кнопка управления движением ленты (влево)
+    .img-contents__tape-to-left{ 
+        @include getCloneGalleryButtons('tape-left-btn');
+    }
+    // кнопка управления движением ленты (влево)
+    .img-contents__tape-to-right{ 
+        @include getCloneGalleryButtons('tape-right-btn');
+    }
+    // вспомогательные ограничители для ленты
+    .img-contents__tape-to-left:after,
+    .img-contents__tape-to-right:after{
+        content: '';
+        display: block;
+        height: 100%;
+        width: 3px;
+        box-shadow: 3px 0 0 #101010,
+                    3px 3px 0 #101010,
+                    3px -3px 0 #101010;
+        background: transparent;
+    }
+    // блок <ul> - собственно, сама лента
+    .img-contents__imgs-tape{ 
         // сброс и переопределение параметров из оригинального блока с картинками
         display: inline-grid;
         grid-template-rows: auto;
@@ -176,21 +194,24 @@ $img-height: 100px;
         line-height: 0;
         font-size: 0;
 
+        z-index: 1;
+
         transform: translateX(0px); // намёк, что лента будет двигаться с помощью translateX()
     }
-    .img-contents__thumbs:after{ // декоративный блок с градиентом, скрвающий в оригинальном блоке не поместившиеся справа картинки
+    // декоративный блок с градиентом, скрвающий в оригинальном блоке не поместившиеся справа картинки
+    .img-contents__imgs-tape:after{ 
         display: none;
     }
-    
-    .img-contents__thumb{ // блок <li> == контейнер для preview картинок
+    // блок <li> == контейнер для preview картинок
+    .img-contents__imgs-tape-item{ 
         width: $img-width;
         height: $img-height;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
-    .img-contents__thumb:hover{ // изменение preview картинки при наведении курсора
+    // изменение preview картинки при наведении курсора
+    .img-contents__imgs-tape-item:hover{ 
         box-shadow: none; 
         outline: none;
         box-shadow: 1px 0px 0px #000,
@@ -215,18 +236,16 @@ $img-height: 100px;
         
         transform: scale(1.018);
     }
-    .img-contents__thumb_active, // активная в настоящий момент картинка (её большая копия сейчас просматривается)
-    .img-contents__thumb_active:hover{ // активная в настоящий момент картинка при наведении курсора
+    // активная в настоящий момент картинка (её большая копия сейчас просматривается)
+    // активная в настоящий момент картинка при наведении курсора
+    .img-contents__imgs-tape-item_active, 
+    .img-contents__imgs-tape-item_active:hover{ 
         box-shadow: none; 
         outline: none;
         position: relative;
-        // transform: none;
-        // border-bottom: 2px solid lightgrey;
-        // box-shadow: 0px 4px 0px #111215,
-        //             0px 6px 1px #f1f2f5;
-        // outline: 1px solid #fff;
     }
-    .img-contents__thumb_active:after{
+    // "подчеркивание" активной картинки
+    .img-contents__imgs-tape-item_active:after{
         content: '';
         display: block;
         width: 100%;
@@ -240,12 +259,12 @@ $img-height: 100px;
         line-height: 0;
         border-radius: 8px;
     }
-    
-    .img-contents__thumb-link{ // тег <a> - обёртка для preview картинки, хранит путь до большой картинки соответствующей данной preview
+    // тег <a> - обёртка для preview картинки, хранит путь до большой картинки соответствующей данной preview
+    .img-contents__large-img-link{ 
         display: block;
     }
-    
-    .img-contents__thumb-img{ // тег <img> - сама preview картинка
+    // тег <img> - сама preview картинка
+    .img-contents__small-img{ 
         width: $img-width;
         height: $img-height;
     }
