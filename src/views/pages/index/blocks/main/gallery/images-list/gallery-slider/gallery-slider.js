@@ -1,3 +1,73 @@
+class Gallery{
+    constructor(className){
+        // имена классов основных элементов галереи
+        this.cssNames = { 
+            // img-contents
+            // контейнер с большой картинкой и лентой preview
+            commonImgsBox: 'img-contents',
+            // Контейнер с кнопками управления и большой картинкой 
+            LargeImgsBox: 'img-contents__control-box',
+            // левая кнопка рядом с большой картинкой
+            LargeImgToLeft: 'img-contents__to-left',
+            // правая кнопка рядом с большой картинкой
+            LargeImgToRight: 'img-contents__to-right',
+            // img-contents__closeBtn
+            PopupCloseBtn: 'img-contents__closeBtn',
+
+            // контейнер для ленты preview картинок и кнопок управления
+            TapeWrapper: 'img-contents__imgs-tape-wrapper',
+            // левая кнопка ленты с preview картинками
+            TapeToLeft: 'img-contents__tape-to-left',
+            // правая кнопка ленты с preview картинками
+            TapeToRight: 'img-contents__tape-to-right',
+            
+            // лента preview картинок
+            ImgsTape: 'img-contents__imgs-tape',
+            // элемент ленты preview картинок
+            ImgsTapeItem: 'img-contents__imgs-tape-item',
+            // активный элемент ленты preview картинок
+            ImgsTapeItemActive: 'img-contents__imgs-tape-item_active',
+            // ссылка на large вариант preview картинки
+            LargeImgLink: 'img-contents__large-img-link',
+            // маленькая картинка (preview картинка)
+            SmallImg: 'img-contents__small-img',
+            // контейнер для "всплывающей" галереи
+            GalleryBoxClone: 'galleryBoxClone-js'
+        };
+
+        // основной контейнер галереи (css класс images-box)
+        this.gallery = document.querySelector('.' + className);
+        
+        // общий контейнер для большой картинки, кнопок управления и ленты preview картинок
+        this.originalCommonImgsBox = this.gallery.querySelector('.' + this.cssNames.commonImgsBox);
+        
+        this.initPopupGallery();
+        this.openPopupGallery(1);
+    }
+    /**
+     * Инициализация всплывающей галереи
+    */
+    initPopupGallery(){
+        let cloneBox = document.createElement('div');
+        
+        cloneBox.classList.add(this.cssNames.GalleryBoxClone);
+        
+        document.body.appendChild(cloneBox);
+        cloneBox.appendChild(this.originalCommonImgsBox.cloneNode(true));
+
+        this.popupGallery = cloneBox;
+    }
+    openPopupGallery(itemNum){
+        this.popupGallery.style.display = "block";
+        // не забыть выключить при выходе
+        document.body.style.overflow="hidden";
+    }
+}
+
+const gallery = new Gallery('images-box');
+
+/*
+
 const imgBox = document.querySelector('.images-box');
 
 imgBox.addEventListener('click', function imgBoxHandler(ev){
@@ -42,13 +112,13 @@ class gallerySlider{
 
             // лента (блок <ul>) - будем двигать с помощью css translateX()
 
-            this.tape = this.cloneBox.querySelector(".img-contents__thumbs");
+            this.tape = this.cloneBox.querySelector(".img-contents__imgs-tape");
 
             console.log("createGallery: this.tape = ", this.tape);
             
             // для тестов: присваиваем первой preview картинке в ленте active
             
-            this.tape.querySelectorAll('.img-contents__thumb')[0].classList.add('img-contents__thumb_active');
+            this.tape.querySelectorAll('.img-contents__imgs-tape-item')[0].classList.add('img-contents__imgs-tape-item_active');
 
             // для тестов: заглушка - обработчик кновки close
 
@@ -64,14 +134,13 @@ class gallerySlider{
             console.log("createGallery: this.cloneBox is creat = ", this.cloneBox);
             
 
-        // не хватает кнопки close и кнопок next / prev    
-        
-        // стили настроим из css отдельно для клонированного блока
-
     }
 }
 
 let gallery = new gallerySlider('img-contents');
+
+*/
+
 
 // что должен уметь объект gallerySlider?
 // при клике на preview картинку 
