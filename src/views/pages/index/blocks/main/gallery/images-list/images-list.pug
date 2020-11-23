@@ -2,18 +2,18 @@
 -var path="/src/views/pages/index/blocks/main/gallery/images-list/img";
 //- необходимые данные по каждой картинке
 -var images = [
--   {title: "Первая картинка", lgHref: path + "/img1-lg.jpg", thumbSrc: path + "/img1-thumb.png"},
--   {title: "Вторая картинка", lgHref: path + "/img2-lg.jpg", thumbSrc: path + "/img2-thumb.png"},
--   {title: "Третья картинка", lgHref: path + "/img3-lg.jpg", thumbSrc: path + "/img3-thumb.png"},
--   {title: "Четвёртая картинка", lgHref: path + "/img4-lg.jpg", thumbSrc: path + "/img4-thumb.png"},
--   {title: "Пятая картинка", lgHref: path + "/img5-lg.jpg", thumbSrc: path + "/img5-thumb.png"},
--   {title: "Шестая картинка", lgHref: path + "/img6-lg.jpg", thumbSrc: path + "/img6-thumb.png"},
--   {title: "Седьмая картинка", lgHref: path + "/img7-lg.jpg", thumbSrc: path + "/img7-thumb.png"},
--   {title: "Восьмая картинка", lgHref: path + "/img8-lg.jpg", thumbSrc: path + "/img8-thumb.png"},
--   {title: "Девятая картинка", lgHref: path + "/img9-lg.jpg", thumbSrc: path + "/img9-thumb.png"},
--   {title: "Десятая картинка", lgHref: path + "/img10-lg.jpg", thumbSrc: path + "/img10-thumb.png"},
--   {title: "Одинадцатая картинка", lgHref: path + "/img11-lg.jpg", thumbSrc: path + "/img11-thumb.png"},
--   {title: "Двенадцатая картинка", lgHref: path + "/img12-lg.jpg", thumbSrc: path + "/img12-thumb.png"},
+-   {title: "Первая картинка", lgHref: path + "/img1-lg.jpg", tumbsSrc: path + "/img1-thumbs.png"},
+-   {title: "Вторая картинка", lgHref: path + "/img2-lg.jpg", tumbsSrc: path + "/img2-thumbs.png"},
+-   {title: "Третья картинка", lgHref: path + "/img3-lg.jpg", tumbsSrc: path + "/img3-thumbs.png"},
+-   {title: "Четвёртая картинка", lgHref: path + "/img4-lg.jpg", tumbsSrc: path + "/img4-thumbs.png"},
+-   {title: "Пятая картинка", lgHref: path + "/img5-lg.jpg", tumbsSrc: path + "/img5-thumbs.png"},
+-   {title: "Шестая картинка", lgHref: path + "/img6-lg.jpg", tumbsSrc: path + "/img6-thumbs.png"},
+-   {title: "Седьмая картинка", lgHref: path + "/img7-lg.jpg", tumbsSrc: path + "/img7-thumbs.png"},
+-   {title: "Восьмая картинка", lgHref: path + "/img8-lg.jpg", tumbsSrc: path + "/img8-thumbs.png"},
+-   {title: "Девятая картинка", lgHref: path + "/img9-lg.jpg", tumbsSrc: path + "/img9-thumbs.png"},
+-   {title: "Десятая картинка", lgHref: path + "/img10-lg.jpg", tumbsSrc: path + "/img10-thumbs.png"},
+-   {title: "Одинадцатая картинка", lgHref: path + "/img11-lg.jpg", tumbsSrc: path + "/img11-thumbs.png"},
+-   {title: "Двенадцатая картинка", lgHref: path + "/img12-lg.jpg", tumbsSrc: path + "/img12-thumbs.png"},
 -   ];
 
 //- Формирует блок с картинками галереи
@@ -21,14 +21,14 @@
 //- { 
 //-   title: "всплывающая подсказка", 
 //-   lgHref:"ссылка на большую картинку (абсолютный путь)", 
-//-   thumbSrc: "маленька картинка (аисолютный путь)"
+//-   tumbsSrc: "маленька картинка (аисолютный путь)"
 //- }
 mixin getgallegy(content)
-    ul.img-contents__thumbs
+    ul.img-contents__imgs-tape
         each img in content
-            li.img-contents__thumb
-                a(href=img.lgHref title=img.title).img-contents__thumb-link
-                    img(src=img.thumbSrc).img-contents__thumb-img
+            li.img-contents__imgs-tape-item
+                a(href=img.lgHref title=img.title).img-contents__large-img-link
+                    img(src=img.tumbsSrc).img-contents__small-img
 
 //- возвращает кнопки управления (влево / вправо)
 mixin getDirButton(classname)
@@ -57,8 +57,15 @@ mixin getLargeImgBox(classname)
             +getDirButton('img-contents__to-left')
             +getDirButton('img-contents__to-right')
             +getCloseButton('img-contents__closeBtn')
-        .img-contents__tumbs-wrapper
-            +getgallegy(images)
+        //- Нужно добавить обёртку для .img-contents__imgs-tape-wrapper
+        //- и положить туда кнопки управления лентой: один клик - прокрутка на ширину экрана
+        //- временно сделать их display: none для основной галереи
+        .img-contents__imgs-tape-wrapper
+            +getDirButton('img-contents__tape-to-left')
+            .img-contents__imgs-tape-hidden-box
+                +getgallegy(images)
+            +getDirButton('img-contents__tape-to-right')
+                
     //- указатель с глазом Саурона
     .images-box__pointer-box.pointer-box
         .pointer-box__eye-icon
