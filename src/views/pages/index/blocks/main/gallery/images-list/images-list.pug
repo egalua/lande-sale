@@ -47,7 +47,8 @@ mixin getCloseButton(classname)
 //- возвращает контейнер с большой картинкой
 mixin getLargeImgBox(classname)
     div(class=classname)
-        img(alt="large image" src=images[0].lgHref).img-contents__large-img
+        .img-contents__foto-counter 6/12
+        img(alt="large image" src="").img-contents__large-img
 
 .gallery__images-box.images-box
     //- галерея с картинками
@@ -56,7 +57,7 @@ mixin getLargeImgBox(classname)
             +getLargeImgBox('img-contents__large-img-box')
             +getDirButton('img-contents__to-left')
             +getDirButton('img-contents__to-right')
-            +getCloseButton('img-contents__closeBtn')
+            +getCloseButton('img-contents__closeBtn')            
         //- Нужно добавить обёртку для .img-contents__imgs-tape-wrapper
         //- и положить туда кнопки управления лентой: один клик - прокрутка на ширину экрана
         //- временно сделать их display: none для основной галереи
