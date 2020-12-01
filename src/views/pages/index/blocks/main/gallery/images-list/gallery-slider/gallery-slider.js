@@ -49,15 +49,13 @@ class Gallery{
         
         // создать галерею - это singleton, поэтому только один раз
         this.createPopupGallery();
-        
+        // установить обработчики событий
+        this.setHandlers();
         // =================================================
         // следующие вызовы методов только для тестов самих методов
         // открыть всплывающую галерею (только для тестов)
         // вызов должен осуществлять обработчик клика по preview картинке основной галереи
         this.openPopupGallery(8);
-
-        this.setHandlers();
-
 
         return this;
     }
@@ -66,12 +64,32 @@ class Gallery{
      * Метод устаначливает обработчики для разных событий
      */
     setHandlers(){
+        // большая картинка
+        const largeImg = this.popupGallery.querySelector('.' + this.cssNames.LargeImg);
         const self = this;
 
+        largeImg.addEventListener('load', (ev) => {
+            console.log('large iamge is load');
+            // код для отключения preload анимации
+        });
+        
+        // "наблюдатель" за большой картинкой
+        const largeImgObserv = new MutationObserver((mutRec)=>{ 
+            console.log('mutation record = ', mutRec);
+            // код для включения preload анимации
+        });
+        
+        largeImgObserv.observe(largeImg, {
+            attributes: true, // наблюдать за атрибутами
+            attributeFilter: ['src'] // наблюдать только за src
+        });
+
+        // изменение размеров окна
         window.addEventListener('resize', (e)=>{
             self.showActiveItem();
         });
 
+        // отмена стандартой реакции клика по ссылкам
         this.popupGallery.addEventListener('click', (e)=>{
             e.preventDefault();
         });
@@ -79,15 +97,26 @@ class Gallery{
         // обработчик клика по preview картинке из ленты
         const smallImgClickHandler = this.smallImgClickHandler.bind(this);
         this.popupGallery.addEventListener('click', smallImgClickHandler);
+        
         // обработчик закрытия всплывающей галереи (close)
         const closeHandler = this.closeHandler.bind(this);
         this.popupGallery.addEventListener('click', closeHandler);
+        
         // обработчик нажатия на правую кнопку рядом с большой картинкой
         const nextImgHandler = this.nextImgHandler.bind(this);
         this.popupGallery.addEventListener('click', nextImgHandler);
+        
         // обработчик нажатия на левую кнопку рядом с большой картинкой
         const prevImgHandler = this.prevImgHandler.bind(this);
         this.popupGallery.addEventListener('click', prevImgHandler);
+        
+        // обработчик нажания на левую кнопку ленты preview картинок
+        const toLeftTapeHandler = this.toLeftTapeHandler.bind(this);
+        this.popupGallery.addEventListener('click', toLeftTapeHandler);
+        
+        // обработчик нажания на правую кнопку ленты preview картинок
+        const toRightTapeHandler = this.toRightTapeHandler.bind(this);
+        this.popupGallery.addEventListener('click', toRightTapeHandler);
     }
     /**
      * Обработчик клика по preview картинки из ленты
@@ -95,16 +124,12 @@ class Gallery{
      */
     smallImgClickHandler(event){
         let target = event.target;
-        // console.log('smallImgClickHandler: this = ', this);
-
         target = target.closest("." + this.cssNames.ImgsTapeItem);
         
         if(target !== null){
             // узнать индекс элемента в псевдомассиве preview картинок
             const itmIdx = this.getImgItemIndex(target);
             // выполнить this.openPopupGallery(индекс)
-            console.log('smallImgClickHandler:  itmIdx = ', itmIdx);
-
             if(itmIdx != -1) this.openPopupGallery(itmIdx);
         }
     }
@@ -146,14 +171,47 @@ class Gallery{
             this.openPopupGallery(this.getNewActiveIdx(-1));
         }
     }
+    /**
+     * Обработчик клика по левой кнопке ленты
+     * @param {Event} event объект события
+     */
     toLeftTapeHandler(event){
         let target = event.target;
 
         target = target.closest('.' + this.cssNames.TapeToLeft);
         if(target !== null){
-            
+            // смещение ленты
+            let tapeOffset = this.getTapeOffset();
+            // ширина viewfinder
+            let viewfinderWidth = this.getViewfinderWidth();
+
+            tapeOffset -= viewfinderWidth;
+            tapeOffset = this.alignTapeOnLeft(tapeOffset);
+
+            this.setTapeOffset(tapeOffset);
+        }
+        
+    }
+    /**
+     * Обработчик клика по правой кнопке ленты
+     * @param {Event} event объект события
+     */
+    toRightTapeHandler(event){
+        let target = event.target;
+
+        target = target.closest('.' + this.cssNames.TapeToRight);
+        if(target !== null){
+            // смещение ленты
+            let tapeOffset = this.getTapeOffset();
+            // ширина viewfinder
+            let viewfinderWidth = this.getViewfinderWidth();
+
+            tapeOffset += viewfinderWidth;
+            tapeOffset = this.alignTapeOnRight(tapeOffset);
+            this.setTapeOffset(tapeOffset);
         }
     }
+
     /* ------- get methods ------- */
     /**
      * Возвращает вычисленный новый индекс активной preview картинки
@@ -292,6 +350,53 @@ class Gallery{
         
         return gapWidth + itemsWidth;
     }
+    /**
+     * Возвращает ширину preview картинки
+     * @returns {Float} ширина элемента ленты
+     */
+    getTapeItemWidth(){
+        const item = this.popupGallery.querySelector('.' + this.cssNames.ImgsTapeItem);
+        return parseFloat(window.getComputedStyle(item).width);
+    }
+    /**
+     * Возвращает индекс частично видимой в viewfinder блоке картинки
+     * или -1 если таковых нет
+     * @param {String} direct строки "left" и "right"
+     * @returns {Integer} индекс частично видимой картинки слева от viewfinder или справа
+     * @param {Float} tapeOffset смещение ленты
+     * @returns {Object} {leftIdx:@integer, rightIdx:@integer} - индексы слева и справа "обрезанных" элементов (==-1, если обрезанного элемента нет)
+     */
+    getPartlyVisImgIdx(tapeOffset){
+        // индексы слева и справа "обрезанных" элементов
+        let partlyVis = {leftIdx:-1, rightIdx: -1};
+        // ширина viewfinder блока
+        const viewfinderWidth = this.getViewfinderWidth();
+        // шаг ленты
+        const tapeStep = this.getTapeStep();
+        // элемнтов ленты всего 
+        const totalItms = this.popupGallery.querySelectorAll("." + this.cssNames.ImgsTapeItem).length;
+        // ширина элемента ленты
+        const tapeItemWidth = this.getTapeItemWidth();
+        
+        const commonLimitIdx1 = Math.abs(tapeOffset) / tapeStep;
+        const commonLimitIdx2 = (Math.abs(tapeOffset) + viewfinderWidth - tapeItemWidth) / tapeStep;
+        const leftMinIdx = (Math.abs(tapeOffset) - tapeItemWidth) / tapeStep;
+        const rightMaxIdx = (Math.abs(tapeOffset) + viewfinderWidth) / tapeStep;
+
+
+        for(let i = 0; i < totalItms; i++){
+            // left
+            if(i < commonLimitIdx1 && i >= leftMinIdx && i < commonLimitIdx2){
+                partlyVis.leftIdx = i;
+            } 
+            // right
+            if(i > commonLimitIdx1 && i <= rightMaxIdx && i > commonLimitIdx2){
+                partlyVis.rightIdx = i;
+            }
+        }
+
+        return partlyVis;
+    }
     /* ------- create methods ------- */
     /**
      * Создание всплывающей галереи
@@ -319,16 +424,12 @@ class Gallery{
         this.popupGallery.style.display = "block";
         // не забыть выключить при выходе
         document.body.style.overflow="hidden";
-        console.log('openPopupGallery: start itemNum = ', itemNum);
         // установить нужную большую картинку
         this.setLargeImg(itemNum);
-        console.log('openPopupGallery: after setLargeImg itemNum = ',itemNum);
         // переставить класс active к нужному элементу ленты
         this.setActiveClass(itemNum);
-        console.log('openPopupGallery: after setActiveClass itemNum = ', itemNum);
         // установить ленту на картинку с классом active 
         this.showActiveItem();
-        console.log('openPopupGallery: after showActiveItem itemNum = ', itemNum);
     }
     /* ------- set methods ------- */
     /**
@@ -358,9 +459,6 @@ class Gallery{
             for(let i = 0; i < tapeActiveItems.length; i++){
                 tapeActiveItems[i].classList.remove(this.cssNames.ImgsTapeItemActive);
             }
-            // for(let i in tapeActiveItems){
-            //     tapeActiveItems[i].classList.remove(this.cssNames.ImgsTapeItemActive);
-            // }
         }
         // псевдомассив контейнеров preview картинок
         const tapeItems = this.popupGallery.querySelectorAll('.' + this.cssNames.ImgsTapeItem);
@@ -404,12 +502,6 @@ class Gallery{
         // шаг ленты
         let tapeStep = this.getTapeStep();
 
-        console.log('showActiveItem: tapeWidth = ', tapeWidth);
-        console.log('showActiveItem: tapeOffset = ', tapeOffset);
-        console.log('showActiveItem: viewfinderWidth = ', viewfinderWidth);
-        console.log('showActiveItem: itemPosition = ', itemPosition);
-        console.log('showActiveItem: tapeStep = ', tapeStep);
-
         // картинка не видна в окне Viewfinder полностью
         // itemPosition > (Math.abs(tapeOffset) + viewfinderWidth) || itemPosition < Math.abs(tapeOffset)
         if( (viewfinderWidth - itemPosition + Math.abs(tapeOffset)) < tapeStep || itemPosition < Math.abs(tapeOffset)){
@@ -425,7 +517,115 @@ class Gallery{
         // применяем новое значение tapeOffset
         this.setTapeOffset(tapeOffset);
     }
+    /* ------- align methods ------- */
+    /**
+     * Выравнивает ленту слева - по левому краю viewfinder
+     * @param {Float} tapeOffset смещение ленты, для которого нужно выполнить выравнивание
+     * @returns {Float} новое значение смещения ленты
+     */
+    alignTapeOnLeft(tapeOffset){
+        
+        // текущее смещение ленты
+        let currentTapeOffset = this.getTapeOffset();
+        // индексы "обрезанных" элементов ленты при текущем смещении
+        let currentPartlyItmIdx = this.getPartlyVisImgIdx(currentTapeOffset);
+        // всего элементов в ленте
+        let totalItems = this.popupGallery.querySelectorAll('.' + this.cssNames.ImgsTapeItem).length;
+        // ширина ленты
+        let tapeWidth = this.getTapeWidth();
+        // ширина блока viewfinder
+        let viewfinderWidth = this.getViewfinderWidth();
 
+        // возможны 3 варианта:
+        // 3. есть пустое пространство справа == выравниваем правую границу ленты с правой границей viewfinder
+        // 1. NOT(есть обрезанный элемент справа, это последний элемент, элемент слева не обрезан)
+        //    AND есть обрезанный элемент слева == выравниваем слева по обрезанному элементу (движением вправо)
+        // 2. есть пустое пространство слева == выравниваем левую границу ленты слева по viewfinder
+
+        // если лента в крайнем левом положении, т.е. выровнена по правому краю с viewfinder
+        if( (currentTapeOffset + tapeWidth) == viewfinderWidth){
+            return currentTapeOffset;
+        }
+ 
+        // 3. есть пустое пространство справа == выравниваем правую границу ленты с правой границей viewfinder
+        if((tapeOffset + tapeWidth) < viewfinderWidth){
+            tapeOffset = viewfinderWidth - tapeWidth;
+        }
+        
+        // 1. NOT(есть обрезанный элемент справа, это последний элемент, элемент слева не обрезан)
+        //    AND есть обрезанный элемент слева == выравниваем слева по обрезанному элементу (движением вправо)
+        
+        // индекс нового "обрезанного" слева элемента ленты 
+        const clippedItemIndex = this.getPartlyVisImgIdx(tapeOffset).leftIdx;
+
+        if( !(  (currentPartlyItmIdx.rightIdx != -1) && 
+                (currentPartlyItmIdx.rightIdx == totalItems - 1) && 
+                (currentPartlyItmIdx.leftIdx == -1) ) 
+            &&  (clippedItemIndex != -1)
+            ){
+                tapeOffset = -this.getItemPosition(clippedItemIndex);
+            }
+
+        // 2. есть пустое пространство слева == выравниваем левую границу ленты слева по viewfinder
+        if(tapeOffset > 0){
+            tapeOffset = 0;
+        }
+
+        return tapeOffset;
+
+    }
+    /**
+     * Выравнивает ленту справа - по правому краю viewfinder
+     * @param {Float} tapeOffset новое смещение ленты для которого нужно выполнить выравнивание
+     * @returns {Float} новое значение смещения ленты
+     */
+    alignTapeOnRight(tapeOffset){
+        // возможны 3 варианта:
+        // 2. есть пустое пространство слева == выравниваем левую границу ленты с левой границей viewfinder
+        // 1. NOT(есть обрезанный элемент слева, это первый элемент, элемент справа не обрезан)
+        //    AND(есть обрезанный элемент справа == выравниваем справа по обрезанному элементу (движением влево))
+        // 3. есть пустое пространство справа == выравниваем правую границу ленты с правой границей viewfinder
+
+        // текущее смещение ленты
+        let currentTapeOffset = this.getTapeOffset();
+        // индексы "обрезанных" элементов ленты при текущем смещении
+        let currentPartlyItmIdx = this.getPartlyVisImgIdx(currentTapeOffset);
+        // всего элементов в ленте
+        let totalItems = this.popupGallery.querySelectorAll('.' + this.cssNames.ImgsTapeItem).length;
+        // ширина ленты
+        let tapeWidth = this.getTapeWidth();
+        // ширина блока viewfinder
+        let viewfinderWidth = this.getViewfinderWidth();
+        
+        
+        // если лента в крайнем правом положении, т.е. выровнена по левому краю с viewfinder
+        if(currentTapeOffset == 0){
+            return currentTapeOffset;
+        }
+        
+        // 2. есть пустое пространство слева == выравниваем левую границу ленты с левой границей viewfinder
+        if(tapeOffset > 0){
+            tapeOffset = 0;
+        }
+        
+        // индекс нового "обрезанного" справа элемента ленты
+        const clippedItemIndex = this.getPartlyVisImgIdx(tapeOffset).rightIdx;
+        // 1. NOT(есть обрезанный элемент слева, это первый элемент, элемент справа не обрезан)
+        //    AND(есть обрезанный элемент справа == выравниваем справа по обрезанному элементу (движением влево))
+        if( !( (currentPartlyItmIdx.leftIdx != -1) && (currentPartlyItmIdx.leftIdx == 0) && (currentPartlyItmIdx.rightIdx == -1) ) && (clippedItemIndex != -1)){
+            const itemWidth = this.getTapeItemWidth();
+            const itemPosition = this.getItemPosition(clippedItemIndex);
+
+            tapeOffset = viewfinderWidth - itemPosition - itemWidth;
+        }
+        
+        // 3. есть пустое пространство справа == выравниваем правую границу ленты с правой границей viewfinder
+        if((tapeOffset + tapeWidth) < viewfinderWidth){
+            tapeOffset = viewfinderWidth - tapeWidth;
+        }
+
+        return tapeOffset;
+    }
 
 }
 
