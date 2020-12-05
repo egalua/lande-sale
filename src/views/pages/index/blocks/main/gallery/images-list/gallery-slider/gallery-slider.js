@@ -41,9 +41,10 @@ class Gallery{
             // маленькая картинка (preview картинка)
             SmallImg: 'img-contents__small-img',
             // контейнер для "всплывающей" галереи
-            GalleryBoxClone: 'galleryBoxClone-js'
+            GalleryBoxClone: 'galleryBoxClone-js',
+            // preloader для большой картинки
+            Preloader: 'img-contents__large-img-preloader'
         };
-
         // основной контейнер галереи (css класс images-box)
         this.gallery = document.querySelector('.' + className);
         
@@ -67,21 +68,38 @@ class Gallery{
         // большая картинка
         const largeImg = this.popupGallery.querySelector('.' + this.cssNames.LargeImg);
         const self = this;
-
+        
+        // установка обработчика окончания загрузки большой картинки
         largeImg.addEventListener('load', (ev) => {
-            console.log('large iamge is load');
             // код для отключения preload анимации
+            const target = ev.target;
+            
+            window.requestAnimationFrame(()=>{
+                target.style.display = '';
+            });
         });
         
         // "наблюдатель" за большой картинкой
         const largeImgObserv = new MutationObserver((mutRec)=>{ 
-            console.log('mutation record = ', mutRec);
             // код для включения preload анимации
+            // большая картинка
+            const largeImg = self.popupGallery.querySelector('.' + self.cssNames.LargeImg);
+            // контейнер большой картинки
+            const largeImgBox = largeImg.parentNode;
+            // предыдущее значение атрибута src большой картинки
+            const oldSrc = mutRec[0].target.currentSrc;
+                        
+            largeImgBox.style.backgroundImage = 'url(' + oldSrc + ')';
+            
+            window.requestAnimationFrame(()=>{
+                largeImg.style = "display:none;"
+            });
         });
         
         largeImgObserv.observe(largeImg, {
             attributes: true, // наблюдать за атрибутами
-            attributeFilter: ['src'] // наблюдать только за src
+            attributeFilter: ['src'], // наблюдать только за src
+            attributeOldValue: true // передавать и старое и новое старое значение атрибута в колбэк
         });
 
         // изменение размеров окна
