@@ -129,6 +129,11 @@ $img-height: 100px;
             width: 100%;
             height: 100%; 
             object-fit: cover;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
         }
         // левая кнопка (контейнер <div> с <svg> внутри)
         .img-contents__to-left{ 
@@ -166,6 +171,9 @@ $img-height: 100px;
         border: 1px solid #111215;
         position: relative;
         margin-top: 28px;
+        background-size:  cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
     }
     // конейнер для ленты маленьких картинок 
     .img-contents__imgs-tape-wrapper{ 
