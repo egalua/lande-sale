@@ -129,7 +129,8 @@ module.exports = {
                     {
                         loader: 'resolve-url-loader',
                         options:{
-                            // sourceMap: isDev || isComps, // для использования карт
+                            sourceMap: isDev || isComps, // для использования карт
+                            removeCR: true
                         }
                     },
                     'sass-loader'
