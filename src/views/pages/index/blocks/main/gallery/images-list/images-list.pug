@@ -49,7 +49,8 @@ mixin getLargeImgBox(classname)
     div(class=classname)
         .img-contents__foto-counter 6/12
         img(alt="large image" src="").img-contents__large-img
-
+        .img-contents__large-img-preloader
+            include preloader/preloader.pug
 .gallery__images-box.images-box
     //- галерея с картинками
     .images-box__img-contents.img-contents
