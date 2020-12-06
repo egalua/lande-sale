@@ -2,16 +2,7 @@
 $img-width: 100px; 
 $img-height: 100px;
 
-//Нужно добавить класс active на открытом слайде и добавить к нему какое-то оформление
 // пример: https://news.mail.ru/politics/44217499/gallery/1091389/
-// все кнопки position:fixed;
-// нужно указать номер текущего фото и их общее количество, например: 2/10 
-// кнопок на ленте не нужно
-
-// Нужно выровнять блок по вертикали
-// Нужно решить вопрос с размерами изображений и ленты
-// Нужно решить вопрос со взаимным расположением ленты и изображения
-// Не работает на мобильных!!!
 
 // клавиши управления показом слайдов во всплывающей галерее
 @mixin getCloneGalleryButtons($direction){
@@ -23,14 +14,11 @@ $img-height: 100px;
         line-height: 0;
 
         svg{
-            border-radius: 50%;
             width: 35px;
             height: 35px;
 
             path{
                 fill: #a1a2a5; 
-                // stroke-width: 2;
-                // stroke: #fff;    
             }
         }
         // все кнопки подсвечиваются при наведении
@@ -46,33 +34,35 @@ $img-height: 100px;
         // на всех кнопках меняется курсор
         &:hover{ 
             cursor: pointer;
-            // background: rgba(0,0,0,0.01);
+            background:rgba(0,0,0,0.6);
         }
     // правая кнопка большой картинки
     @if $direction == 'right'{
-        right: 0px;
+        left: 100%;
         svg{
             transform: rotate(180deg);
         }
     }
     // левая кнопка большой картинки
     @if $direction == 'left'{
-        left: 0px;
+        right: 100%;
     }
     // общие стили для close и кнопок управления лентой
     @if $direction == 'close' or $direction == 'tape-left-btn' or $direction == 'tape-right-btn'{
         height: auto;
         width: auto;
         svg{
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
         }
     }
     // кнопка close
     @if $direction == 'close'{
         position: fixed;
-        right: 15px;
-        top: 15px;
+        top: 0;
+        right: 0;
+        bottom: auto;
+        padding: 5px;
     }
     // левая кнопка ленты
     @if $direction == 'tape-left-btn'{
