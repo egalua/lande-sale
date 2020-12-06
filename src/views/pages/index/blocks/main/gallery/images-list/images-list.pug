@@ -1,5 +1,6 @@
 //- расположение картинок
--var path="/src/views/pages/index/blocks/main/gallery/images-list/img";
+//- -var path="/src/views/pages/index/blocks/main/gallery/images-list/img";
+-var path="./img";
 //- необходимые данные по каждой картинке
 -var images = [
 -   {title: "Первая картинка", lgHref: path + "/img1-lg.jpg", tumbsSrc: path + "/img1-thumbs.png"},
@@ -51,13 +52,16 @@ mixin getLargeImgBox(classname)
         img(alt="large image" src="").img-contents__large-img
         .img-contents__large-img-preloader
             include preloader/preloader.pug
+        +getDirButton('img-contents__to-left')
+        +getDirButton('img-contents__to-right')        
+//- -----------------------------------------
 .gallery__images-box.images-box
     //- галерея с картинками
     .images-box__img-contents.img-contents
         .img-contents__control-box
             +getLargeImgBox('img-contents__large-img-box')
-            +getDirButton('img-contents__to-left')
-            +getDirButton('img-contents__to-right')
+            //- +getDirButton('img-contents__to-left')
+            //- +getDirButton('img-contents__to-right')
             +getCloseButton('img-contents__closeBtn')            
         //- Нужно добавить обёртку для .img-contents__imgs-tape-wrapper
         //- и положить туда кнопки управления лентой: один клик - прокрутка на ширину экрана
