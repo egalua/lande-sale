@@ -141,7 +141,8 @@ module.exports = {
                 // use:['file-loader'],
                 loader: 'file-loader',
                 options:{
-                    outputPath: 'img'
+                    outputPath: 'img',
+                    name: '[name].[ext]'
                 }
             },
             { // правило для подключения шрифтов
