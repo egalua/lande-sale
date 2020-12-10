@@ -284,9 +284,11 @@ export default class PopupGallery{
     getTapeOffset(){
         const tape = this.popupGallery.querySelector('.' + this.cssNames.ImgsTape);
         const style = window.getComputedStyle(tape);
-        const transform = style.transform.match(/(-?[0-9\.]+)/g);
-
-        return parseFloat(transform[4]);
+        if(style.transform != 'none'){
+            const transform = style.transform.match(/(-?[0-9\.]+)/g);
+            return parseFloat(transform[4]);
+        }
+        return 0;
     }
     /**
      * Возвращает ширину окна мшуцаштвук ("визира")
