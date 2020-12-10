@@ -1,10 +1,14 @@
 @mixin get-case-font($width){
     font-family: Montserrat;
-    font-size: 18px;
+    // font-size:  18px;
+    font-size: calc(0.17857142857142857142857142857143vw + 15.428571428571428571428571428571px); // 100vw/560 + 108px/7
     font-weight: $width;
     line-height: 22px;
     letter-spacing: -0.03em;
     color: #2E2E2E;    
+    @media screen and (min-width:1440px){
+        font-size: 18px;
+    }
 }
 
 $case-width: 252px;
@@ -13,18 +17,33 @@ $case-width: 252px;
     display: flex;
     background: #fff;
     flex-grow: 1;
+
 }
 .case{
-    margin-top: 50px;
-    margin-bottom: 52px;
+    margin-top: 3.4722222222222222222222222222222vw; // 50px
+    margin-bottom: 3.6111111111111111111111111111111vw; // 52px
 }
 .case:first-child{
-    margin-left: 60px;
+    margin-left: 4.1666666666666666666666666666667vw; // 60px
     width: $case-width;
 }
 .case:last-child{
-    margin-left: 53px;
+    margin-left: 3.6805555555555555555555555555556vw; // 53px
     width: $case-width;
+}
+
+@media(min-width: 1440px){
+    .case{
+        margin-top: 50px;
+        margin-bottom: 52px;
+    }
+    .case:first-child{
+        margin-left: 60px;
+    }
+    .case:last-child{
+        margin-left: 53px;
+    }
+    
 }
 
 .case__problem{

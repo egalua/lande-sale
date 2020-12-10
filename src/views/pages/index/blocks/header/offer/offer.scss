@@ -1,11 +1,14 @@
 // $offer-box-width: 737px; // ширина блока с предложением см. header.scss
-$offer-margin-left: 160px; // отступ слева для блока предложений 160px
-$offer-width: 577px; // ширина блока предложений $offer-box-width-$offer-margin-left
-$offer-margin-top: 207px; // верхний отступ блока предложений
-$offer-font-size: 18px; // основной размер шрифта блока предложений
-$offer-title-font-size: 60px; // размер шрифта основного заготовка блока предложений
+$offer-margin-left: (160px / $offer-box-width)*100%; // отступ слева для блока предложений 160px
+$offer-width: (577px/$offer-box-width)*100%; // ширина блока предложений $offer-box-width-$offer-margin-left
+$offer-margin-top: (207px/$offer-box-width)*100%; // верхний отступ блока предложений
+$offer-font-size: 1.25vw; // основной размер шрифта блока предложений 18px при viewport 1440px
+$offer-title-font-size: 4.1666666666666666666666666666667vw; // размер шрифта основного заготовка блока предложений
+$offer-title-font-size-max: 60px; // максимальный размер шрифта основного заготовка блока предложений
 $text-color: #F1F5F2; // цвет текста блока
-$get-price-width: 273px; // ширина кнопки "узнать цену"
+$get-price-width: calc(100vw*(273/1440)); // ширина кнопки "узнать цену"
+$get-price-height: calc(100vw*(52/1440)); // высота кнопки "узнать цену"
+
 
 .offer{ // блок-контейнер для предложения
     margin-left: $offer-margin-left;
@@ -18,12 +21,13 @@ $get-price-width: 273px; // ширина кнопки "узнать цену"
     color: $text-color;
     font-weight: 400;
     letter-spacing: -0.03em;
+    white-space: nowrap;
 }
 .offer-title{ // предложение
     margin-top: 16px;
     font-weight: 900;
-    font-size: $offer-title-font-size;
-    line-height: 73px;
+    font-size: $offer-title-font-size;// от 60px для vw=1440px до 25px для vw=600px
+    line-height: 1.2166666666666666666666666666667; // 73px
     color: $text-color;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -39,8 +43,11 @@ $get-price-width: 273px; // ширина кнопки "узнать цену"
     display: flex;
     align-items: center;
     margin-left: -5px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    // padding-top: 15px;
+    // padding-bottom: 15px;
+    height: $get-price-height;
+
+    // width: calc(0.02678571428571428571428571428571 * 100vw + 234.42857142857142857142857142857);
 }
 .get-price-button__text{ // надпись на кнопке
     color: #F1F5F2;
@@ -55,9 +62,71 @@ $get-price-width: 273px; // ширина кнопки "узнать цену"
 }
 .offer-sign{ // мотивирующее дополнение к предложению
     margin-top: 110px;
+    margin-top: 7.6388888888888888888888888888889vw; //100*(110/1440)vw
     letter-spacing: 0em;
     line-height: 22px;
     font-weight: 400;
     font-size: $offer-font-size;
     color: #F1F5F2;
+    white-space: nowrap;
 }
+
+@media(min-width:1440px){
+    .offer-title{ // максимальный размер шрифта заголовка блока предложения
+        font-size: $offer-title-font-size-max;
+    }
+    .offer-subtitel,
+    .offer-sign,
+    .get-price-button__text{
+        font-size: 18px;
+    }
+    .get-price-button{ // кнопка "узнать цену"
+        width: 273px;
+        height: 52px;
+    }
+
+}
+// размер шрифта блока меняется от 18px до 16px
+@media(max-width:1285px){
+    .offer-subtitel,
+    .offer-sign,
+    .get-price-button__text{
+        font-size: 16px;
+    }
+    // размеры кнопки меняются от 243x42 до 273x52
+    .get-price-button{ // кнопка "узнать цену"
+        width: 243px;
+        height: 42px;
+    }
+}
+// переход на мобильную версию
+@media(max-width:767px){
+    .offer{
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+        align-items: center;
+    }
+    .offer-subtitel{
+        margin-top: 188px
+    }
+    .offer-title{
+        text-align: center;
+        margin-top: 23px;
+    }
+
+}
+// заголовок блока 
+@media(max-width:600px){
+    .offer-title{ // минимальный размер шрифта заголовка блока предложения
+        font-size: 25px;
+       // white-space: nowrap;
+    }
+    .offer-sign{
+        display:none;
+    }
+}
+
+
