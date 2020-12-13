@@ -38,14 +38,20 @@ $get-price-height: calc(100vw*(52/1440)); // высота кнопки "узна
 .get-price-button:active
 {
     margin-top: 30px;
-    width: $get-price-width;
     background: #621708;    // rgb(98,23,8)
     display: flex;
     align-items: center;
     margin-left: -5px;
     // padding-top: 15px;
     // padding-bottom: 15px;
+    width: $get-price-width;
     height: $get-price-height;
+    
+    max-width: 273px;
+    min-width: 243px;
+    max-height: 52px;
+    min-height: 42px;
+
 
     // width: calc(0.02678571428571428571428571428571 * 100vw + 234.42857142857142857142857142857);
 }
@@ -61,7 +67,6 @@ $get-price-height: calc(100vw*(52/1440)); // высота кнопки "узна
     background: rgb(94,19,4);
 }
 .offer-sign{ // мотивирующее дополнение к предложению
-    margin-top: 110px;
     margin-top: 7.6388888888888888888888888888889vw; //100*(110/1440)vw
     letter-spacing: 0em;
     line-height: 22px;
@@ -80,11 +85,13 @@ $get-price-height: calc(100vw*(52/1440)); // высота кнопки "узна
     .get-price-button__text{
         font-size: 18px;
     }
-    .get-price-button{ // кнопка "узнать цену"
-        width: 273px;
-        height: 52px;
+    // .get-price-button{ // кнопка "узнать цену"
+    //     width: 273px;
+    //     height: 52px;
+    // }
+    .offer-sign{ // мотивирующее дополнение к предложению
+        margin-top: 110px;
     }
-
 }
 // размер шрифта блока меняется от 18px до 16px
 @media(max-width:1285px){
@@ -94,10 +101,10 @@ $get-price-height: calc(100vw*(52/1440)); // высота кнопки "узна
         font-size: 16px;
     }
     // размеры кнопки меняются от 243x42 до 273x52
-    .get-price-button{ // кнопка "узнать цену"
-        width: 243px;
-        height: 42px;
-    }
+    // .get-price-button{ // кнопка "узнать цену"
+    //     width: 243px;
+    //     height: 42px;
+    // }
 }
 // переход на мобильную версию
 @media(max-width:767px){
