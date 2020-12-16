@@ -35,9 +35,8 @@ $header-img: url('img/header.gif'); // фоновая картинка header-б
     align-items: flex-end;
     justify-content: flex-end;
 }
-
+/* стили для мобильных */
 @media screen and (max-width: 767px) {
-/* стили для средних планшетов - начало */
     .top-window__use-cases-box{
         display: none;
     }
@@ -45,6 +44,12 @@ $header-img: url('img/header.gif'); // фоновая картинка header-б
         width: 100%;
     }
 }
+@media screen and (max-width:320px){
+    .header_background{
+        background-image: url('./img/header-background-320px.png');
+    }    
+}
+/* ----- Ограничители ----- */
 @media screen and (max-width: 320px){
     .header{
         height: 640px;
