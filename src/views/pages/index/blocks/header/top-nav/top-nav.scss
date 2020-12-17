@@ -1,46 +1,48 @@
 // $item-step: 22px; // отступ (интервал) между пунктами меню
-$item-step: 1.527777777777777777777777777778%;
-$item-step-ends: 0.486111111111111111111111111111%;
+$item-step: calc(100% * 22 / 1440);
+$item-step-ends: calc(100% * 7 / 1440);
 $item-font-size: 18px; // размер шрифта пунктов меню
 
 //кнопка-габрургер для мобильного меню
 .nav-box__mobile-menu-btn{
     display:none;
 }
-
-.nav-box{ // контейнер для меню (тег <nav>)
+// контейнер для меню (тег <nav>)
+.nav-box{ 
     display: flex;
     // justify-content: center;
     padding-top: 21px;
     padding-bottom: 20px;
 }
-.nav-box__menu{ // блок меню (тег <ul>)
+// блок меню (тег <ul>)
+.nav-box__menu{ 
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
 }
-.nav-box__menu>* + *{ // интервал между пунктами меню
+// интервал между пунктами меню
+.nav-box__menu>* + *{ 
     margin-left: $item-step;
 }
-.nav-box__menu-item:nth-last-child(-n+2){ // поправка интервала для последних двух пунктов
-    // margin-left: $item-step + 7px;
+// поправка интервала для последних двух пунктов
+.nav-box__menu-item:nth-last-child(-n+2){ 
     margin-left: $item-step + $item-step-ends;
 }
-.nav-box__menu-item{ // пункт меню (тег <li>)
+// пункт меню (тег <li>)
+.nav-box__menu-item{ 
     display: flex;
     justify-content: center;
 }
-
-.nav-box__menu-item-link, // ссылка внутри пункта меню (тег <a>)
-.nav-box__menu-item-link:visited,
-.nav-box__menu-item-link:active{
+// ссылка внутри пункта меню (тег <a>)
+.nav-box__menu-item-link, 
+.nav-box__menu-item-link:visited
+{
     color: #F1F5F2;
     line-height: 22x;
 
     font-family: 'Montserrat', sans-serif;
-    // font-size: $item-font-size;
-    font-size: 1.816347124117053481331987891019vw;
+    font-size: calc(100vw * 18 / 991);
 
     white-space: nowrap;
     text-shadow: 0.008px 0px 0px rgba(255,255,255,0.85),
@@ -57,7 +59,8 @@ $item-font-size: 18px; // размер шрифта пунктов меню
 }
 
 // font-size стили для пунктов меню
-@media(min-width:991px){ // начиная с больших планшетов font-size не меняется
+// начиная с больших планшетов font-size не меняется
+@media(min-width:991px){ 
     .nav-box__menu-item-link{
         font-size: $item-font-size;
     }   
@@ -67,7 +70,6 @@ $item-font-size: 18px; // размер шрифта пунктов меню
     // меняем отступы в контейнере для мобильных меню
     .nav-box{
         padding-top: 24px;
-        // padding-bottom: 24px;
         padding-bottom: 5px;
         position: relative;
     }

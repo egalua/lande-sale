@@ -11,9 +11,8 @@ $header-img: url('img/header.gif'); // фоновая картинка header-б
 
 .header{
     width: 100%;
-    // height: $header-height; 
-    // height: calc(100vw/7+4160px/7);
-    height:calc(14.285714285714285714285714285714vw + 594.28571428571428571428571428571px);
+    // height:800px при vw:1440px, 640px при vw:320px
+    height: calc( 100vw / 7 + 4160px / 7 );
     display: flex;
     flex-direction: column;
 }

@@ -79,9 +79,6 @@ $img-height: 100px;
 // ----- главный контейнер "всплывающей" галереи -----
 .galleryBoxClone-js{
     position: fixed;
-    // width: 100vw;
-    // height: 100vh;
-
 
     top: 0;
     left: 0;
@@ -197,25 +194,6 @@ $img-height: 100px;
     .img-contents__tape-to-right{ 
         @include getCloneGalleryButtons('tape-right-btn');        
     }
-    // вспомогательные ограничители для ленты
-    // .img-contents__tape-to-left:after,
-    // .img-contents__tape-to-right:after{
-    //     content: '';
-    //     display: block;
-    //     height: 100%;
-    //     width: 3px;
-    //     position: absolute;
-    //     top: 0;
-    //     // box-shadow: 3px 0 0 #101010,
-    //     //             3px 3px 0 #101010,
-    //     //             3px -3px 0 #101010;
-    //     // background: transparent;
-    //     background: #fff;
-    //     right: -3px;
-    // }
-    // .img-contents__tape-to-left:after{
-        
-    // }
 
     // блок <ul> - собственно, сама лента
     .img-contents__imgs-tape{ 

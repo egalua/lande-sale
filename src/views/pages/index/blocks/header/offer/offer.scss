@@ -36,8 +36,7 @@ $get-price-height: calc(100vw * (52 / 1440)); // высота кнопки "уз
 }
 // кнопка "узнать цену"
 .get-price-button, 
-.get-price-button:visited,
-.get-price-button:active
+.get-price-button:visited
 {
     margin-top: 30px;
     background: #621708;    // rgb(98,23,8)
@@ -95,6 +94,7 @@ $get-price-height: calc(100vw * (52 / 1440)); // высота кнопки "уз
 }
 
 // размер шрифта блока меняется от 18px до 16px
+// чтобы было "смотрибельно"
 @media(max-width:1285px){
     .offer-subtitel,
     .offer-sign,
@@ -152,5 +152,3 @@ $get-price-height: calc(100vw * (52 / 1440)); // высота кнопки "уз
         margin-top: 110px;
     }
 }
-
-

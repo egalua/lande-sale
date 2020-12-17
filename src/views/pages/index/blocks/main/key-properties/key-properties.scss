@@ -1,13 +1,15 @@
-// $key-img-width: 365px;
-// WH(viewport) == 1075vw/56 + 620px/7
-// размеры картинок
-$key-img-width: calc( (1075vw / 56) + (620px / 7) );
-$key-img-height: calc( (1075vw / 56) + (620px / 7) );
+// размеры картинок (365px при vp:1440px)
+$key-img-width: calc( 100vw * (365 / 1440) );
+$key-img-height: calc( 100vw * (365 / 1440) );
+
 // размеры подписей картинок
-$key-caption-width: calc( (100vw / 7) + (471px / 7) );
-$key-caption-height: calc( (25vw / 28) + (274px / 7) );
-// шрифт подписей должен меняться от 18px до 12px
-$key-font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
+// width:273px при vp:1440px
+$key-caption-width: calc( 100vw * (273 / 1440) );
+// height:52px при vp:1440px
+$key-caption-height: calc( 100vw * (52 / 1440) );
+
+// шрифт подписей должен меняться от 18px при vp:1440px
+$key-font-size: calc( 100vw * (18 / 1440) );
 
 // основной контейнер
 .key-properties{
@@ -16,8 +18,12 @@ $key-font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
 // контейнер картинок - предложений
 .key-properties__properties-box{
     display: flex;
-    margin-left: 9.5833333333333333333333333333333vw;
-    margin-top: 11.875vw; // 100*(171/1440)vw
+    // 155px при vp:1440px 
+    margin-left: calc(100vw * (155 / 1440));
+    // 171px при vp:1440px 
+    margin-top: calc(100vw * (171 / 1440) ); 
+    // 114px при vp:1440px
+    margin-right: calc( 100vw * (114 / 1440) ); 
 }
 // контейнер для картинки и описания (подписи)
 .key-properties__img-box{
@@ -31,7 +37,7 @@ $key-font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
 // интервал между картинками
 .key-properties{
     .key-properties__img-box+.key-properties__img-box{
-        // margin-left: 38px;
+        // 38px при vp:1440px
         margin-left: calc(100vw * (38 / 1440) );
     }
 }
@@ -52,18 +58,14 @@ $key-font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
 .key-properties__img-caption{
     position: absolute;
     bottom: 0;
-    
 
     // где-то был миксин для шрифта!!!
     font-size: $key-font-size;
     font-family: Montserrat;
     font-weight: 500;
-    line-height: 100%;
-    line-height: 22px;
-    // Lh(viewportWidth) = 100vw * 7/480 + 1px
-    line-height: calc( (100vw * 7) / 480 + 1px );
-    // letter-spacing: -2%;
-    // letter-spacing: 2%;
+    
+    // line-height:22px при font-size:18px
+    line-height: calc(22 / 18);
     letter-spacing: -0.02em;
 
 
@@ -103,13 +105,6 @@ $key-font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
         min-width: 113px;
         min-height: 42px;
     }
-@media screen and (max-width: 960px){
-    //подпись к картинке
-    .key-properties__img-caption{
-        font-size: 12px;
-        line-height: 15px;
-    }
-}
 @media screen and (min-width: 1440px){
     //подпись к картинке
     .key-properties__img-caption{
@@ -120,30 +115,15 @@ $key-font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
     .key-properties__properties-box{
         margin-top: 182px;
         margin-left: 155px;
+        margin-right: 114px;
     }
     // интервал между картинками
     .key-properties .key-properties__img-box+.key-properties__img-box{
         margin-left: 38px;
     }
-    
-    
 }
 @media screen and (max-width: 767px){
-    // картинка (тег <img>)
-    .key-properties__img{
-        // width: 150px;
-        // height: 150px;
-    }
-    //подпись к картинке
-    .key-properties__img-caption{
-        // font-size: 12px;
-        bottom: calc( (25vw *  (-1/ 56) ) - (137px / 7) );
 
-        // текст подписи
-        >span{
-            flex-basis: 0;
-        }
-    }
 
 }
 
@@ -190,9 +170,88 @@ $key-font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
         }
     }
 }
-
 // стили для мобильной версии
 @media screen and (max-width: 767px){
+    // основной контейнер
+    .key-properties{
+        order: -1;
+        // position: relative;
+        // -33px при 320px, при 767px
+        // 100vw * 33/320
+        // top: calc(33px * -1);
+        transform: translate(0, calc( (100vw * 33 / 320) * -1));
+    }
+    .key-properties__properties-box{
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+    }
+    // убираем интервал между картинками
+    .key-properties{
+        .key-properties__img-box+.key-properties__img-box{
+            margin-left: auto;
+        }
+    }
+    .key-properties__img-box{
+        margin: auto;
+    }
+    // размеры картинок
+    .key-properties__img{
+        width: calc(100vw * (150 / 320) );
+        height: calc(100vw * (150 / 320) );
+    }    
+    // размеры подписей к картинкам
+    //подпись к картинке
+    .key-properties__img-caption{
+        height: calc(100vw * (44 / 320) );
+        width: calc(100vw * (113 / 320) );
+        
+        // менять шрифты от 18 до 12
+        // font-size: calc(100vw * (12 / 320) );
+        font-size: calc( 100vw * (6 / 447) + (3444px / 447) );
+        // меняем line-height:1.2
+        line-height: 1.2;
 
+        transform: translate(0, 50%);
+
+            // текст подписи
+            >span{
+                flex-basis: 0;
+            }        
+    }
+    // вертикальные отступы между картинками
+    .key-properties__img-box:nth-child(1){ // первая картинка 
+        // 49px при vp:320px
+        margin-bottom: calc(100vw * 49 / 320);
+    }
+    .key-properties__img-box:nth-child(2){ // вторая картинка
+        // 46px при 320px
+        margin-bottom: calc(100vw * 46 / 320);
+    }
+
+}
+@media screen and (max-width: 320px){
+    // основной контейнер
+    .key-properties{
+        transform: translate(0, -33px);
+    }
+    //подпись к картинке
+    .key-properties__img-caption{
+        height: 44px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+    // вертикальные отступы между картинками
+    .key-properties__img-box:nth-child(1){ // первая картинка 
+        margin-bottom: 49px;
+    }
+    .key-properties__img-box:nth-child(2){ // вторая картинка
+        margin-bottom: 46px;
+    }
+
+    // ----- Подгонта под макет -----
+    .key-properties__img-caption{
+        transform: translate(0, calc(50% + 1px));
+    }
 
 }

@@ -2,7 +2,7 @@
 
 // основной контейнер; класс указывает, что это элемент gallery 
 .gallery__images-box{ 
-    margin-top: 169px;
+    // margin-top: 169px;
 } 
 // основной контейнер (является самостоятельным блоком)
 .images-box{ 
@@ -52,15 +52,18 @@
     grid-template-rows: auto auto auto;
     grid-auto-flow: column;
     // height: 589px;
-    grid-gap: 5px;
+    // grid-gap: 5px;
+    grid-gap: calc( 100vw * (5 / 1440) );
     position: relative;
 } 
 // декоративный градиент справа
 .img-contents__imgs-tape:after{ 
     content: '';
     display: block;
-    width: 109px;
-    height: 589px;
+    // width: 109px;
+    width: calc( 100vw * (109 / 1440) );
+    // height: 589px;
+    height: calc( 100vw * (589/1440) );
     position: absolute;
     top: 0px;
     right: 0px;
@@ -69,8 +72,13 @@
 }
 // элемент li с маленькой картинкой внутри
 .img-contents__imgs-tape-item{ 
-    width: 193px;
-    height: 193px;
+    // width: 193px;
+    width: calc( 100vw * (193 / 1440) );
+    max-width: 193px;
+
+    // height: 193px;
+    height: calc( 100vw * (193 / 1440) );
+    max-height: 193px;
 } 
 // изменение элемента с картинкой при наведении курсора
 .img-contents__imgs-tape-item:hover{ 
@@ -93,8 +101,13 @@
 } 
 // маленькая картинка (<img>)
 .img-contents__small-img{ 
-    width: 193px;
-    height: 193px;
+    // width: 193px;
+    width: calc( 100vw * (193 / 1440) );
+    max-width: 193px;
+
+    // height: 193px;
+    height: calc( 100vw * (193 / 1440) );
+    max-height: 193px;
 } 
 
 // блок с глазом Саурона
@@ -102,28 +115,43 @@
 .images-box__pointer-box{ 
     position: absolute;
     top: 204px;
+    top: calc( 100vw * (204 / 1440) );
+
     left: 198px;
+    left: calc( 100vw * (198 / 1440) );
 } 
 // блок сглазом и текстом "посмотреть" (является самостоятельным блоком, поэтому отдельный класс в соответствии с БЭМ)
 .pointer-box{ 
     display: flex;
     flex-direction: column;
-    width: 193px;
-    height: 193px;
+    // width: 193px;
+    width: calc( 100vw * (193 / 1440) );
+
+    // height: 193px;
+    height: calc( 100vw * (193 / 1440) );
 
     background: rgba(255,255,255,0.3);
 } 
 // глаз Саурона
 .pointer-box__eye-icon{ 
     text-align: center;
-    margin-top: 78px; 
+    // margin-top: 78px; 
+    margin-top: calc( 100vw * (78 / 1440) );
+
 } 
 // подпись под "глазом"
 .pointer-box__label{ 
     @include get-glr-font(400); // миксин объявлен в gallery.scss
     color: #fff;
     text-align: center;
-    margin-top: 5px;
+    // шрифт должен меняться от 18px до 12px
+    // font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) );
+    font-size: calc( 100vw * (18 / 1440) );
+    // Lh(viewportWidth) = 100vw * 7/480 + 1px
+    line-height: calc( (100vw * 7) / 480 + 1px );
+    line-height: calc( 100vw * (22 / 1440) );
+    // margin-top: 5px;
+    margin-top: calc( 100vw * (5 / 1440) );
 } 
 .img-contents__large-img-preloader{
     position: absolute;
@@ -133,4 +161,100 @@
     left: 0;
 }
 @import "gallery-slider/gallery-slider.scss";
-@import "preloader/preloader.scss"
+@import "preloader/preloader.scss";
+
+// ----- Ограничители -----
+@media screen and (min-width: 1440px){
+    // блок с глазом Саурона
+    .images-box__pointer-box{
+        top: 204px;
+	    left: 198px;
+    }
+    // блок сглазом и текстом "посмотреть" (является самостоятельным блоком, поэтому отдельный класс в соответствии с БЭМ)    
+    .pointer-box{
+        max-width: 193px;
+        max-height: 193px;
+    }
+    // глаз Саурона
+    .pointer-box__eye-icon{
+        margin-top: 78px; 
+    }
+    // подпись под "глазом"
+    .pointer-box__label{
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 5px;
+    }
+}
+// ----- мобильная версия -----
+@media screen and (max-width: 767px){
+    // отключить глаз Саурона
+    .images-box__pointer-box{
+        display: none;
+    }
+
+    //список ul с маленькими картинками
+    .img-contents__imgs-tape{
+        grid-template-rows: auto;
+        grid-gap: 3px;
+    }
+    .img-contents__imgs-tape:after{
+        display: none;
+    }
+    // элемент li с маленькой картинкой внутри
+    .img-contents__imgs-tape-item{
+        width: 251px;
+        height: 168px;
+
+        max-width: 251px;
+        max-height: 168px;
+    }
+    // маленькая картинка (<img>)
+    .img-contents__small-img{
+        max-width: 251px;
+        max-height: 168px;
+        width: 251px;
+        height: 168px;
+        object-fit: cover;
+    }
+    // основной контейнер; 
+    .gallery__images-box{
+        margin-top: 53px;
+        margin-left: 9px;
+    }
+    // "обрезаем" ленту по краям контейнера
+    .img-contents__imgs-tape-hidden-box{
+        overflow: hidden;
+    }
+}
+@media screen and (max-width: 320px){
+    // //список ul с маленькими картинками
+    // .img-contents__imgs-tape{
+    //     grid-template-rows: auto;
+    //     grid-gap: 3px;
+    // }
+    // .img-contents__imgs-tape:after{
+    //     display: none;
+    // }
+    // // элемент li с маленькой картинкой внутри
+    // .img-contents__imgs-tape-item{
+    //     width: 251px;
+    //     height: 168px;
+
+    //     max-width: 251px;
+    //     max-height: 168px;
+    // }
+    // // маленькая картинка (<img>)
+    // .img-contents__small-img{
+    //     max-width: 251px;
+    //     max-height: 168px;
+    //     width: 251px;
+    //     height: 168px;
+    //     object-fit: cover;
+    // }
+    // // основной контейнер; 
+    // .gallery__images-box{
+    //     margin-top: 53px;
+    //     margin-left: 9px;
+    // }
+}
