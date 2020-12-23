@@ -1,4 +1,3 @@
-console.log('top-nav');
 class CreateMobileMenu{
     constructor(menuId){
         this.menuBox = document.querySelector('#' + menuId);
@@ -35,6 +34,10 @@ class CreateMobileMenu{
                     self.menuBox.classList.add(self.cssNames.mobileClick)
                 });
             }
+        } else {
+            window.requestAnimationFrame(()=>{
+                self.menuBox.classList.remove(self.cssNames.mobileClick)
+            });
         }
     }
 }

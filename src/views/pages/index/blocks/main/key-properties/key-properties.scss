@@ -3,9 +3,7 @@ $key-img-width: calc( 100vw * (365 / 1440) );
 $key-img-height: calc( 100vw * (365 / 1440) );
 
 // размеры подписей картинок
-// width:273px при vp:1440px
 $key-caption-width: calc( 100vw * (273 / 1440) );
-// height:52px при vp:1440px
 $key-caption-height: calc( 100vw * (52 / 1440) );
 
 // шрифт подписей должен меняться от 18px при vp:1440px
@@ -18,11 +16,9 @@ $key-font-size: calc( 100vw * (18 / 1440) );
 // контейнер картинок - предложений
 .key-properties__properties-box{
     display: flex;
-    // 155px при vp:1440px 
+
     margin-left: calc(100vw * (155 / 1440));
-    // 171px при vp:1440px 
     margin-top: calc(100vw * (171 / 1440) ); 
-    // 114px при vp:1440px
     margin-right: calc( 100vw * (114 / 1440) ); 
 }
 // контейнер для картинки и описания (подписи)
@@ -37,7 +33,6 @@ $key-font-size: calc( 100vw * (18 / 1440) );
 // интервал между картинками
 .key-properties{
     .key-properties__img-box+.key-properties__img-box{
-        // 38px при vp:1440px
         margin-left: calc(100vw * (38 / 1440) );
     }
 }
@@ -113,7 +108,7 @@ $key-font-size: calc( 100vw * (18 / 1440) );
     }
     // контейнер для картинок-предложений
     .key-properties__properties-box{
-        margin-top: 182px;
+        margin-top: 181px;
         margin-left: 155px;
         margin-right: 114px;
     }
@@ -121,10 +116,6 @@ $key-font-size: calc( 100vw * (18 / 1440) );
     .key-properties .key-properties__img-box+.key-properties__img-box{
         margin-left: 38px;
     }
-}
-@media screen and (max-width: 767px){
-
-
 }
 
 // --- подгонка под макет ---
@@ -207,7 +198,6 @@ $key-font-size: calc( 100vw * (18 / 1440) );
         width: calc(100vw * (113 / 320) );
         
         // менять шрифты от 18 до 12
-        // font-size: calc(100vw * (12 / 320) );
         font-size: calc( 100vw * (6 / 447) + (3444px / 447) );
         // меняем line-height:1.2
         line-height: 1.2;
@@ -221,11 +211,9 @@ $key-font-size: calc( 100vw * (18 / 1440) );
     }
     // вертикальные отступы между картинками
     .key-properties__img-box:nth-child(1){ // первая картинка 
-        // 49px при vp:320px
         margin-bottom: calc(100vw * 49 / 320);
     }
     .key-properties__img-box:nth-child(2){ // вторая картинка
-        // 46px при 320px
         margin-bottom: calc(100vw * 46 / 320);
     }
 

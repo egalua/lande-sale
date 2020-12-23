@@ -1,3 +1,327 @@
+// внешний контейнер footer (сетка)
 .footer{
     width: 100%;
+}
+// внутренний контейнер footer (позиционирование относительно внешнего контейнера)
+.footer__footer-box{
+
+
+}
+// внутренний контейнер footer (внутренние стили footer)
+.footer-box{
+    display: flex;
+    background: #0F250E;
+}
+// блок с контактами - внешний контейнер(по БЭМ)
+.footer-box__contacts-box{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+// блок с контактами - внешний контейнер
+.contacts-box{
+
+}
+// блок с контактами - внутренний контейнер (по БЭМ)
+.contacts-box__conacts{
+    transform: translate(0, calc(100vw * ((0 - 109) / 1440)) );
+}
+// блок с контактами - внутренний контейнер
+.contacts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+// декоративная картинка блока с контактами
+.contacts__img{
+    width: calc(100vw * (485 / 1440));
+    height: calc(100vw * (552 / 1440));
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('./img/contacts-img.jpg');
+}
+// блок с текстом контактов
+.contacts__text{
+    font-family: 'Montserrat';
+    font-size: 18px; // не меняется до мобильной версии
+    line-height: 22px; // не меняется до мобильной версии
+    color: #F1F5F2;
+    font-weight: normal;
+
+    margin-top: calc(100vw * (18 / 1440));
+}
+// заголовок блока контактов
+.contacts__caption{
+
+}
+// блок с контактными телефонами
+.contacts__phones{
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(100vw * (23 / 1440));
+}
+// контактный телефон
+.contacts__phone-number{
+    color: #F1F5F2;
+}
+// блок с контактными e-mail адресами
+.contacts__e-mails{
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(100vw * (23 / 1440));
+}
+// e-mail адрес
+.contacts__email-address{
+    color: #F1F5F2;
+}
+// внешний контейнер блока с формой "отправить заявку" (по БЭМ) 
+.footer-box__form-wrapper{
+    width: 50%;
+}
+// внешний контейнер блока с формой "отправить заявку"
+.form-wrapper{
+    display: flex;
+}
+// блок с формой "отправить заявку" (по БЭМ)
+.form-wrapper__form-block{
+    margin-top: calc(100vw * (1 / 84) + (258px / 7));
+    margin-left: calc(100vw * (53 / 672) - (235px / 7));
+}
+// блок с формой "отправить заявку"
+.form-block{
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(139, 175, 137, 0.7);
+    background: rgba(68, 86, 37, 0.7);
+
+    font-family: 'Montserrat';
+
+    width: calc(100vw * (223 / 1120) + (222080px / 1120));
+    height: calc(100vw * (215 / 1120) + (308640px / 1120));
+
+    width: calc(100vw * (223 / 672) + (50px / 7));
+    height: calc(100vw * (215 / 672) + (639px / 7));
+}
+
+// заголовок блока с формой
+.form-block__caption{
+    font-size: calc(100vw * (1 / 56) + (30px / 7));
+    line-height: calc(100vw * ( 5 / 224) + (34px / 7));
+    font-weight: normal;
+    color: #0F250E;
+
+    margin-top: calc(100vw * (50 / 1440));
+    margin-left: calc(100vw * (51 / 1440));
+    margin-right: calc(100vw * (89 / 1440));
+
+}
+// сама форма (<form>)
+.form-block__form{
+
+}
+// сама форма (<form>)
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+// поля ввода ФИО и email
+.form__name, .form__email{
+    font-size:18px;
+    line-height: 22px;
+    font-weight: normal;
+    color: #000;
+    // background: #759773;
+
+    background: #415826;
+    width: calc(100vw * (383/1440));
+    
+    padding: 12px 12px 10px 12px;
+    
+    border: 3px solid #31431C;
+}
+.form__name::placeholder, .form__email::placeholder{
+    color: #000;
+}
+// поле ввода ФИО
+.form__name{
+    margin-top: calc(100vw * (11 / 224) - (110px / 7));
+}
+// поле ввода email
+.form__email{
+    margin-top:calc(100vw * (1 / 28) - (136px / 7));
+}
+// кнопка "отправить"
+.form__send{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #2E2E2E;
+
+    width: calc(100vw * ( 5 / 84) + (1311px / 7));
+    height: 52px;
+
+    background: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+
+    margin-top: calc(100vw * (5 / 56) - (242px / 7));
+    
+}
+
+// ----- Ограничители -----
+@media screen and (min-width: 1440px){
+    // блок с текстом контактов
+    .contacts__text{
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 18px;
+    }
+    // блок с контактными телефонами
+    .contacts__phones{
+        margin-top: 23px;
+    }
+    // блок с контактными e-mail адресами
+    .contacts__e-mails{
+        margin-top: 23px;
+    }
+    // блок с формой "отправить заявку" (по БЭМ)
+    .form-wrapper__form-block{
+        margin-top: 54px;
+        margin-left: 80px;
+    }    
+    // блок с формой "отправить заявку"
+    .form-block{
+        width: 485px;
+        height: 552px;
+    }
+    // заголовок блока с формой
+    .form-block__caption{
+        font-size: 30px;
+        line-height: 37px;
+        
+        margin-top: 50px;
+        margin-left: 51px;
+        margin-right: 89px;
+    }
+    // поля ввода ФИО и email
+    .form__name, .form__email{
+        font-size:18px;
+        line-height: 22px;
+
+        width: 383px;
+        
+        padding: 12px 12px 10px 12px;
+        
+        border: 3px solid #31431C;
+    }
+    // поле ввода ФИО
+    .form__name{
+        margin-top: 55px;
+    }
+    // поле ввода email
+    .form__email{
+        margin-top: 32px;
+    }
+    // кнопка "отправить"
+    .form__send{
+        width: 273px;
+        margin-top: 94px;
+    }
+
+    // декоративная картинка блока с контактами
+    .contacts__img{
+        width: 485px;
+        height: 552px;
+    }
+    // блок с контактами - внутренний контейнер (по БЭМ)
+    .contacts-box__conacts{
+        transform: translate(0, -109px);
+    }
+}
+
+// ----- Стили для мобильных -----
+@media screen and (max-width: 767px){
+    // блок с контактами - внешний контейнер
+    .contacts-box{
+        display: none;
+    }
+    .form-wrapper{
+        width: 100%;
+        justify-content: center;
+    }
+    // блок с формой "отправить заявку"
+    .form-block{
+        margin-top: 46px;
+        margin-bottom: 61px;
+        margin-left: auto;
+        margin-right: auto;
+
+        width: 262px;
+        height: 337px;
+    }
+    // заголовок блока с формой
+    .form-block__caption{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    
+    // поле ввода ФИО
+    .form__name{
+        margin-top: 22px;
+        width: 233px;
+    }
+    // поле ввода email
+    .form__email{
+        margin-top: 8px;
+        width: 233px;
+    }
+    // кнопка "отправить"
+    .form__send{
+        margin-top: 34px;
+        width: 233px;
+    }
+    // блок с формой "отправить заявку"
+    .form-block{
+    }
+}
+@media screen and (max-width: 320px){
+    // заголовок блока с формой
+    .form-block__caption{
+        margin-top: 38px;
+        margin-left: 49px;
+        margin-right: 33px;
+    }
+    // поле ввода ФИО
+    .form__name{
+        margin-top: 15px;
+        padding-left: 5px;
+    }
+    // поле ввода email
+    .form__email{
+        margin-top: 8px;
+        padding-top: 14px;
+        padding-bottom: 8px;
+        padding-left: 5px;
+    }
+    // кнопка "отправить"
+    .form__send{
+        margin-top: 34px;
+        width: 233px;
+    }
+    // блок с формой "отправить заявку"
+    .form-block{
+        width: 262px;
+        height: 337px;
+        margin-top: 46px;
+        margin-left: 27px;
+    }
 }

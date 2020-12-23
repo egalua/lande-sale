@@ -1,0 +1,42 @@
+.slider{
+
+}
+.slider__slider-box{
+    margin-top: calc(100vw * (125 / 1440) );
+    width: 100vw;
+    height: calc(100vw * (700 / 1440) );
+
+    >span{
+        font-size: 18px;
+        color: #fff;
+    }
+
+    background: #0F250E;
+}
+// ----- Ограничители -----
+@media screen and (min-width: 1440px){
+    .slider__slider-box{
+        width: 1440px;
+        height: 700px;
+        margin-top: 125px;
+    }
+}
+// ----- Стили для мобильной версии -----
+@media screen and (max-width:767px){
+
+    .slider__slider-box{
+        margin-top: 0;
+        width: 100vw;
+        height: calc(100vw * (517 / 320) );
+    }
+
+}
+@media screen and (max-width: 320px){
+    
+    .slider__slider-box{
+        margin-top: 0;
+        width: 320px;
+        height: 517px;
+    }    
+    
+}

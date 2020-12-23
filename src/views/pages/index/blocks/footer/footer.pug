@@ -1,1 +1,20 @@
-footer.footer.col
+footer.footer.col#footer
+    .footer__footer-box.footer-box#feedback
+        .footer-box__contacts-box.contacts-box
+            .contacts-box__conacts.contacts
+                .contacts__img
+                .contacts__text
+                    .contacts__caption Связаться с нами:
+                    .contacts__phones
+                        a.contacts__phone-number(href = "tel: +78008008080") +7 800 800 80 80
+                        a.contacts__phone-number(href = "tel: +78008008080") +7 800 800 80 80
+                    .contacts__e-mails
+                        a.contacts__email-address(href = "mailto:email@email.com") email@email.com
+        .footer-box__form-wrapper.form-wrapper
+            .form-wrapper__form-block.form-block
+                .form-block__caption Cделайте первый шаг к мечте - оставьте заявку! 
+                form.form-block__form.form( action="http://" method="post")
+                    input.form__name(type="text" name="username" value="" placeholder="ФИО")
+                    input.form__email(type="text" name="email-address" value="" placeholder="EMAIL")
+                    button.form__send(name="submit") Отправить
+
