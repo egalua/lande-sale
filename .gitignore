@@ -3,3 +3,4 @@ node_modules/.cache
 debug.log
 dist
 .vscode
+node_modules
