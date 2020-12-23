@@ -34,7 +34,7 @@ $img-height: 100px;
         // на всех кнопках меняется курсор
         &:hover{ 
             cursor: pointer;
-            background:rgba(0,0,0,0.6);
+            // background:rgba(0,0,0,0.6);
         }
     // правая кнопка большой картинки
     @if $direction == 'right'{
