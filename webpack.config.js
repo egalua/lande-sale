@@ -153,6 +153,13 @@ module.exports = {
                     outputPath: 'fonts',
                     name: '[name].[ext]'
                 }
+            },
+            { // правило для подключения php
+                test: /\.(php)$/,
+                loader: 'file-loader',
+                options:{
+                    name: '[name].[ext]'
+                }
             }
 
         ]
