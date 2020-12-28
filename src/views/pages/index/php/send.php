@@ -43,15 +43,15 @@
 
         // Настройки вашей почты
         $mail->Host       = 'smtp.yandex.ru'; // SMTP сервера вашей почты
-        $mail->Username   = 'don.akkaru@yandex.ru'; // Логин на почте
-        $mail->Password   = 'iotyprmmbfaxnmna'; // Пароль на почте
+        $mail->Username   = '____@yandex.ru'; // Логин на почте
+        $mail->Password   = '____'; // Пароль на почте
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
-        $mail->setFrom('don.akkaru@yandex.ru', 'Landing - продажа земли'); // Адрес самой почты и имя отправителя
+        $mail->setFrom('____@yandex.ru', 'Landing - продажа земли'); // Адрес самой почты и имя отправителя
 
         // Получатель письма
-        $mail->addAddress('vizard_@mail.ru');  
-        $mail->addAddress('nikka11@yandex.ru'); // Ещё один, если нужен
+        $mail->addAddress('____@mail.ru');  
+        $mail->addAddress('____@yandex.ru'); // Ещё один, если нужен
 
         // Прикрипление файлов к письму
     if (!empty($file['name'][0])) {
