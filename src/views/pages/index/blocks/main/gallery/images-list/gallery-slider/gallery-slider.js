@@ -13,6 +13,8 @@ export default class PopupGallery{
             commonImgsBox: 'img-contents',
             // Контейнер с кнопками управления и большой картинкой 
             LargeImgsBox: 'img-contents__control-box',
+            // Контейнер с большой картинкой и счетчиком
+            LargeImgsBoxContent: 'img-contents__large-img-box',
             // левая кнопка рядом с большой картинкой
             LargeImgToLeft: 'img-contents__to-left',
             // правая кнопка рядом с большой картинкой
@@ -46,6 +48,17 @@ export default class PopupGallery{
             GalleryBoxClone: 'galleryBoxClone-js',
             // preloader для большой картинки
             Preloader: 'img-contents__large-img-preloader'
+        };
+        // параметры и переменные для обработки touch событий
+        this.touchSettings = {
+            startX: 0, // координата X при touchstart
+            startY: 0, // координата Y при touchstart
+            dist: 0, // расстояние от точки прикосновения до точки отрыва
+            threshold: 100, // минимальное расстояние для swipe
+            yDeviationHold: 150, // максимальное отклонение по вертикали
+            allowedTime: 1000, // максимальное время прохождения установленного расстояния
+            elapsedTime: 0, // пройденное время от touchstart до touchend
+            startTime: 0 // время возникновения события touchstart
         };
         // основной контейнер галереи (css класс images-box)
         this.gallery = document.querySelector('.' + className);
@@ -132,6 +145,32 @@ export default class PopupGallery{
         // обработчик нажания на правую кнопку ленты preview картинок
         const toRightTapeHandler = this.toRightTapeHandler.bind(this);
         this.popupGallery.addEventListener('click', toRightTapeHandler);
+
+        // обработчик touchstart события на ленте галереи
+        const touchStartHandler = this.touchStartHandler.bind(this, this.cssNames.TapeViewfinder);
+        this.popupGallery.addEventListener('touchstart', touchStartHandler);
+
+        // обработчик touchmove события на ленте галереи
+        const touchMoveHandler = this.touchMoveHandler.bind(this, this.cssNames.TapeViewfinder);
+        this.popupGallery.addEventListener('touchmove', touchMoveHandler);
+
+        // обработчик touchend события на ленте галереи
+        const touchEndHandler = this.touchEndHandler.bind(this, this.cssNames.TapeViewfinder);
+        this.popupGallery.addEventListener('touchend', touchEndHandler);
+
+        // обработчик touchstart события на большой картинке
+        const touchStartImgHandler = this.touchStartHandler.bind(this, this.cssNames.LargeImgsBoxContent);
+        this.popupGallery.addEventListener('touchstart', touchStartImgHandler);
+
+
+        // обработчик touchmove события на большой картинке
+        const touchMoveImgHandler = this.touchMoveHandler.bind(this, this.cssNames.LargeImgsBoxContent);
+        this.popupGallery.addEventListener('touchmove', touchMoveImgHandler);
+
+        // обработчик touchend события на большой картинке
+        const touchEndImgHandler = this.touchEndHandler.bind(this, this.cssNames.LargeImgsBoxContent);
+        this.popupGallery.addEventListener('touchend', touchEndImgHandler);
+
     }
     /**
      * Обработчик клика по preview картинки из ленты
@@ -195,18 +234,8 @@ export default class PopupGallery{
 
         target = target.closest('.' + this.cssNames.TapeToLeft);
         if(target !== null){
-            // смещение ленты
-            let tapeOffset = this.getTapeOffset();
-            // ширина viewfinder
-            let viewfinderWidth = this.getViewfinderWidth();
-
-            // рассчитываем смещение 
-            tapeOffset -= viewfinderWidth;
-            // выравниваем
-            tapeOffset = this.alignTapeOnLeft(tapeOffset);
-
-            // применяем рассчеты
-            this.setTapeOffset(tapeOffset);
+            // смещение ленты влево
+            this.moveTape('left');
         }
         
     }
@@ -219,15 +248,115 @@ export default class PopupGallery{
 
         target = target.closest('.' + this.cssNames.TapeToRight);
         if(target !== null){
-            // смещение ленты
-            let tapeOffset = this.getTapeOffset();
-            // ширина viewfinder
-            let viewfinderWidth = this.getViewfinderWidth();
-
-            tapeOffset += viewfinderWidth;
-            tapeOffset = this.alignTapeOnRight(tapeOffset);
-            this.setTapeOffset(tapeOffset);
+            // смещение ленты вправо
+            this.moveTape('right');
         }
+    }
+    /**
+     * обработчик touchstart события на ленте галереи
+     * @param {String} objClass css класс объекта, для которого устанавливается обработчик
+     * @param {Event} ev объект события
+     */
+    touchStartHandler(objClass, ev)
+    {
+        let target = ev.target;
+        // objClass == this.cssNames.TapeViewfinder - для ленты
+        // objClass == this.cssNames.LargeImgsBoxContent - для большой картинки
+        target = target.closest('.' + objClass);
+
+        if(target !== null){
+            let touchobj = ev.changedTouches[0];
+            this.touchSettings.dist = 0;
+            this.touchSettings.startX = touchobj.pageX;
+            this.touchSettings.startY = touchobj.pageY;
+            this.touchSettings.startTime = new Date().getTime();
+
+            console.log("Событие touchstart на ленте галереи");
+
+        }
+    }
+    /**
+     * обработчик touchmove события на ленте галереи
+     * @param {String} objClass css класс объекта, для которого устанавливается обработчик
+     * @param {Event} ev объект события
+     */
+    touchMoveHandler(objClass, ev){
+        let target = ev.target;
+        // objClass == this.cssNames.TapeViewfinder - для ленты
+        // objClass == this.cssNames.LargeImgsBoxContent - для большой картинки
+        target = target.closest('.' + objClass);
+
+        if(target !== null){
+            ev.preventDefault();
+            console.log("Событие touchmove на ленте галереи");
+
+        }
+    }
+    /**
+     * обработчик touchend события на ленте галереи
+     * @param {String} objClass css класс объекта, для которого устанавливается обработчик
+     * @param {Event} ev объект события
+     */
+    touchEndHandler(objClass, ev){
+        let target = ev.target;
+        // objClass == this.cssNames.TapeViewfinder - для ленты
+        // objClass == this.cssNames.LargeImgsBoxContent - для большой картинки
+        target = target.closest('.' + objClass);
+
+        if(target !== null){
+         
+            let touchobj = ev.changedTouches[0];
+            this.touchSettings.dist = touchobj.pageX - this.touchSettings.startX;
+            this.touchSettings.elapsedTime = new Date().getTime() - this.touchSettings.startTime;
+            
+            const toRight = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist>=this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY)<=this.touchSettings.yDeviationHold);
+            const toLeft = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist < 0 && Math.abs(this.touchSettings.dist)>=this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY)<=this.touchSettings.yDeviationHold);
+
+            if(toRight){
+                if(objClass == this.cssNames.TapeViewfinder){
+                    this.moveTape('right');
+                }
+                if(objClass == this.cssNames.LargeImgsBoxContent){ 
+                    this.openPopupGallery(this.getNewActiveIdx(-1));
+                }
+            } 
+            if(toLeft){
+                if(objClass == this.cssNames.TapeViewfinder){
+                    this.moveTape('left');
+                }
+                if(objClass == this.cssNames.LargeImgsBoxContent){ 
+                    this.openPopupGallery(this.getNewActiveIdx(1));
+                }
+            }
+        }
+    }
+    /* ------- move methods ------- */
+    /**
+     * Смещает ленты на ширину блока fiewfinder (визира)
+     * @param {String} dir направление смещения ленты 'right' == вправо | 'left' == влево
+     */
+    moveTape(dir){
+        /* --------right-------- */
+        // смещение ленты
+        let tapeOffset = this.getTapeOffset();
+        // ширина viewfinder
+        let viewfinderWidth = this.getViewfinderWidth();
+
+        if(dir == 'right'){
+            // рассчитываем смещение 
+            tapeOffset += viewfinderWidth;
+            // выравниваем
+            tapeOffset = this.alignTapeOnRight(tapeOffset);
+        } 
+        if(dir == 'left'){
+            // рассчитываем смещение 
+            tapeOffset -= viewfinderWidth;
+            // выравниваем
+            tapeOffset = this.alignTapeOnLeft(tapeOffset);
+        }
+        // применяем рассчеты
+        this.setTapeOffset(tapeOffset);           
+
     }
 
     /* ------- get methods ------- */
@@ -291,7 +420,7 @@ export default class PopupGallery{
         return 0;
     }
     /**
-     * Возвращает ширину окна мшуцаштвук ("визира")
+     * Возвращает ширину окна viewfinder ("визира")
      * @returns {Float} ширина окна визира в px
      */
     getViewfinderWidth(){

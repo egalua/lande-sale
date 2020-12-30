@@ -43,11 +43,11 @@
 
         // Настройки вашей почты
         $mail->Host       = 'smtp.yandex.ru'; // SMTP сервера вашей почты
-        $mail->Username   = '____@yandex.ru'; // Логин на почте
-        $mail->Password   = '____'; // Пароль на почте
+        $mail->Username   = '_____@yandex.ru'; // Логин на почте
+        $mail->Password   = '_____'; // Пароль на почте
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
-        $mail->setFrom('____@yandex.ru', 'Landing - продажа земли'); // Адрес самой почты и имя отправителя
+        $mail->setFrom('_____@yandex.ru', '____'); // Адрес самой почты и имя отправителя
 
         // Получатель письма
         $mail->addAddress('____@mail.ru');  
