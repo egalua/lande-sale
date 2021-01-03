@@ -26,17 +26,21 @@ $images-maxwidth:703px;
 // блок с описанием
 .gallery__description{ 
     width: $gallery-description-width;
-    max-width: $description-maxwidth;
 }
 // блок с галереей
 .gallery__images{ 
     width: $gallery-images-width;
-    max-width: $images-maxwidth;
 }
 // ----- Ограничители -----
 @media screen and (min-width: 1440px){
     .gallery{
         margin-top: 169px;
+    }
+    .gallery__images{
+        max-width: $images-maxwidth;
+    }
+    .gallery__description{
+        max-width: $description-maxwidth;
     }
 }
 // ----- Стили для мобильной версии -----
