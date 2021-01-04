@@ -270,9 +270,6 @@ export default class PopupGallery{
             this.touchSettings.startX = touchobj.pageX;
             this.touchSettings.startY = touchobj.pageY;
             this.touchSettings.startTime = new Date().getTime();
-
-            console.log("Событие touchstart на ленте галереи");
-
         }
     }
     /**
@@ -288,8 +285,6 @@ export default class PopupGallery{
 
         if(target !== null){
             ev.preventDefault();
-            console.log("Событие touchmove на ленте галереи");
-
         }
     }
     /**
@@ -593,7 +588,6 @@ export default class PopupGallery{
     setActiveClass(itemNum){
         // псевдомассив активных preview картинок
         const tapeActiveItems = this.popupGallery.querySelectorAll('.' + this.cssNames.ImgsTapeItemActive);
-        // console.log('setActiveClass: tapeActiveItems = ', tapeActiveItems);
         if(tapeActiveItems.length != 0){
             // удалить active класс у всех картинок
             for(let i = 0; i < tapeActiveItems.length; i++){
