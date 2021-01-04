@@ -12,9 +12,13 @@ footer.footer.col#footer
                         a.contacts__email-address(href = "mailto:email@email.com") email@email.com
         .footer-box__form-wrapper.form-wrapper
             .form-wrapper__form-block.form-block
+                .form-block__send-message 
+                    .form-block__send-message-title Спасибо за проявленный интерес
+                    .form-block__send-message-content
+                    .form-block__send-message-close Ок
                 .form-block__caption Cделайте первый шаг к мечте - оставьте заявку! 
-                form.form-block__form.form( action="http://" method="post")
-                    input.form__name(type="text" name="username" value="" placeholder="ФИО")
-                    input.form__email(type="text" name="email-address" value="" placeholder="EMAIL")
+                form.form-block__form.form( action="" method="post")
+                    input.form__name.form__field(type="text" name="username" value="" placeholder="ФИО")
+                    input.form__email.form__field(type="text" name="email-address" value="" placeholder="EMAIL")
                     button.form__send(name="submit") Отправить
 

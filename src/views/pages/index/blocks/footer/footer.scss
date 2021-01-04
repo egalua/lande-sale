@@ -90,6 +90,7 @@
 }
 // блок с формой "отправить заявку"
 .form-block{
+    position: relative;
     display: flex;
     flex-direction: column;
 
@@ -103,6 +104,63 @@
 
     width: calc(100vw * (223 / 672) + (50px / 7));
     height: calc(100vw * (215 / 672) + (639px / 7));
+}
+
+// блок с сообщением об отправке заявки
+.form-block__send-message{
+    display: none;
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    background: rgba(0,0,0, 0.9);
+    background: rgba(68, 86, 37, 0.9);
+    background: rgba(15, 37, 14, 1);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+    z-index: 1;
+}
+// включение блока с сообщением об отправке заявки
+.form-block__send-message_active{
+    display: flex;
+}
+// заголовок сообщения об отправке
+.form-block__send-message-title{
+    color: #fff;
+    text-align: center;
+    font-family: 'Montserrat';
+    // от 18 при 1440 до 14 при 767px
+    font-size: calc(100vw * ( 4 / 673) + (6354px / 673));
+    width: 80%;
+}
+// тело сообщения об отправке
+.form-block__send-message-content{
+    color: #fff;
+    // margin-left: 5px;
+    // margin-right: 5px; 
+    font-family: 'Montserrat';
+    // от 16 при 1440 до 12 при 767px
+    font-size: calc(100vw * ( 4 / 673) + (5008px / 673));
+    width: 80%;
+}
+// кнопка "закрыть сообщение"
+.form-block__send-message-close{
+    color: #fff;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    padding: 4px;
+    background: rgba(0,0,0, 0.9);
+    background: rgba(139, 175, 137, 0.7);
+    border: 1px solid #000;
+    border-radius: 4px;
+    width: 80%;
+    text-align: center;
+    cursor: default;
 }
 
 // заголовок блока с формой
@@ -129,7 +187,7 @@
 
 }
 // поля ввода ФИО и email
-.form__name, .form__email{
+.form__field{
     font-size:18px;
     line-height: 22px;
     font-weight: normal;
@@ -142,6 +200,16 @@
     padding: 12px 12px 10px 12px;
     
     border: 3px solid #31431C;
+}
+.form__field_error{
+    // border-bottom-color: rgb(98, 23, 8);
+    // box-shadow: 1px 1px 1px rgb(98, 23, 8),
+    //             1px 0px 1px rgb(98, 23, 8),
+    //             0px 1px 1px rgb(98, 23, 8),
+    //             -1px -1px 1px rgb(98, 23, 8),
+    //             -1px 0px 1px rgb(98, 23, 8),
+    //             0px -1px 1px rgb(98, 23, 8);
+    background: rgba(98,23,08,0.5);
 }
 .form__name::placeholder, .form__email::placeholder{
     color: #000;
@@ -213,7 +281,7 @@
         margin-right: 89px;
     }
     // поля ввода ФИО и email
-    .form__name, .form__email{
+    .form__field{
         font-size:18px;
         line-height: 22px;
 
@@ -245,6 +313,17 @@
     // блок с контактами - внутренний контейнер (по БЭМ)
     .contacts-box__conacts{
         transform: translate(0, -109px);
+    }
+    // заголовок сообщения об отправке
+    .form-block__send-message-title{
+        // от 18 при 1440 до 14 при 767px
+        font-size: 18px;
+        
+    }
+    // тело сообщения об отправке
+    .form-block__send-message-content{
+        // от 16 при 1440 до 12 при 767px
+        font-size: 16px;
     }
 }
 
@@ -291,6 +370,14 @@
     }
     // блок с формой "отправить заявку"
     .form-block{
+    }
+    // заголовок сообщения об отправке
+    .form-block__send-message-title{
+        font-size: 14px;
+    }
+    // тело сообщения об отправке
+    .form-block__send-message-content{
+        font-size: 12px;
     }
 }
 @media screen and (max-width: 320px){
