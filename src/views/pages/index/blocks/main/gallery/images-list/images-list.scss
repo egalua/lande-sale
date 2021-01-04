@@ -19,13 +19,13 @@
 // блок с малыми картинками и большой картинкой (является самостоятельным блоком)
 // клонируем его через js для создания gallery-slider
 .img-contents{ 
-    overflow: hidden;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-bottom: 5px;
-    margin-left:-5px;
-    margin-top: -5px;
-    margin-bottom: -5px;
+    // overflow: hidden;
+    // padding-top: 5px;
+    // padding-left: 5px;
+    // padding-bottom: 5px;
+    // margin-left:-5px;
+    // margin-top: -5px;
+    // margin-bottom: -5px;
 }
 // контейнер для большой картинки и блока управляющих кнопок всплывающей галереи
 .img-contents__control-box{ 
@@ -39,6 +39,35 @@
 .img-contents__imgs-tape-wrapper{ 
 
 }
+// контейнер, ограничивающий видимость ленты 
+.img-contents__imgs-tape-hidden-box{
+    position: relative;
+    overflow: hidden;
+    
+    // box-sizing: content-box;
+    padding: 5px;
+    margin: -5px;
+
+    padding-left: calc(100vw * (25 / 1440));
+    margin-left: calc(100vw * ((0 - 25) / 1440));
+}
+// декоративный градиент справа
+.img-contents__imgs-tape-hidden-box::after{
+    content: '';
+    display: block;
+    // width: 109px;
+    width: calc( 100vw * (109 / 1440) );
+    // height: 589px;
+    height: calc( 100vw * (589/1440) );
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    right: 0px;
+    margin: auto;
+    background: linear-gradient(to right, transparent, white);
+    z-index: 1;
+}
+
 // правая и левая кнопки 
 // по бокам блока preview картинок
 .img-contents__tape-to-left, 
@@ -54,22 +83,7 @@
     // height: 589px;
     // grid-gap: 5px;
     grid-gap: calc( 100vw * (5 / 1440) );
-    position: relative;
 } 
-// декоративный градиент справа
-.img-contents__imgs-tape:after{ 
-    content: '';
-    display: block;
-    // width: 109px;
-    width: calc( 100vw * (109 / 1440) );
-    // height: 589px;
-    height: calc( 100vw * (589/1440) );
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background: linear-gradient(to right, transparent, white);
-    z-index: 1;
-}
 // элемент li с маленькой картинкой внутри
 .img-contents__imgs-tape-item{ 
     // width: 193px;
@@ -93,6 +107,7 @@
                 3px -3px 1.7px rgba(1,2,3,0.2),
                 -3px 3px 1.7px rgba(1,2,3,0.2),;
     outline: 1px solid #fff;
+    z-index: 2;
 
 }
 // ссылка на большую картинку соответствующую маленькой (<a>)
@@ -115,10 +130,14 @@
 .images-box__pointer-box{ 
     position: absolute;
     top: 204px;
-    top: calc( 100vw * (204 / 1440) );
+    top: calc( 100vw * (204 / 1440));
+
+    top: 0;
+    bottom: 0;
+    margin: auto;
 
     left: 198px;
-    left: calc( 100vw * (198 / 1440) );
+    left: calc( 100vw * (198 / 1440));
 } 
 // блок сглазом и текстом "посмотреть" (является самостоятельным блоком, поэтому отдельный класс в соответствии с БЭМ)
 .pointer-box{ 
@@ -165,9 +184,14 @@
 
 // ----- Ограничители -----
 @media screen and (min-width: 1440px){
+    // контейнер, ограничивающий видимость ленты 
+    .img-contents__imgs-tape-hidden-box{
+        padding-left: 25px;
+        margin-left: -25px;
+    }
     // блок с глазом Саурона
     .images-box__pointer-box{
-        top: 204px;
+        // top: 204px;
 	    left: 198px;
     }
     // блок сглазом и текстом "посмотреть" (является самостоятельным блоком, поэтому отдельный класс в соответствии с БЭМ)    
@@ -198,8 +222,20 @@
         grid-template-rows: auto;
         grid-gap: 3px;
     }
-    .img-contents__imgs-tape:after{
+    // декоративный градиент справа
+    .img-contents__imgs-tape-hidden-box::after{
         display: none;
+    }
+    // контейнер, ограничивающий видимость ленты 
+    .img-contents__imgs-tape-hidden-box{
+        box-sizing: border-box;
+        padding-left: 9px;
+        margin-left: -9px;
+    }
+    // изменение элемента с картинкой при наведении курсора
+    .img-contents__imgs-tape-item:hover{
+        box-shadow: none;
+        outline: none;
     }
     // элемент li с маленькой картинкой внутри
     .img-contents__imgs-tape-item{
