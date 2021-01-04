@@ -185,6 +185,7 @@ $img-height: 100px;
         overflow: hidden;
         width: 100%;
         padding: 10px 3px; //чтобы при hover на preview-картинки им было куда расти
+        margin: 0;
     }
     // кнопка управления движением ленты (влево)
     .img-contents__tape-to-left{ 
@@ -211,8 +212,8 @@ $img-height: 100px;
         transform: translateX(0px); // намёк, что лента будет двигаться с помощью translateX()
         transition: transform 0.5s;
     }
-    // декоративный блок с градиентом, скрвающий в оригинальном блоке не поместившиеся справа картинки
-    .img-contents__imgs-tape:after{ 
+    // декоративный градиент справа, скрвающий в оригинальном блоке не поместившиеся справа картинки
+    .img-contents__imgs-tape-hidden-box::after{
         display: none;
     }
     // блок <li> == контейнер для preview картинок
