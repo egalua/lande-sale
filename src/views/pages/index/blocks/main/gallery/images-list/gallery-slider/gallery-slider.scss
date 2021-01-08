@@ -21,16 +21,19 @@ $img-height: 100px;
                 fill: #a1a2a5; 
             }
         }
-        // все кнопки подсвечиваются при наведении
-        &:hover svg{ 
-            path{
-                fill: #f1f2f5; //original
+        @media screen and(min-width:768px){
+            // все кнопки подсвечиваются при наведении
+            &:hover svg{ 
+                path{
+                    fill: #f1f2f5; //original
+                }
+            }
+            // все кнопки увеличиваются при наведении
+            &:hover>.svg-box{ 
+                transform: scale(1.065);
             }
         }
-        // все кнопки увеличиваются при наведении
-        &:hover>.svg-box{ 
-            transform: scale(1.065);
-        }
+        
         // на всех кнопках меняется курсор
         &:hover{ 
             cursor: pointer;
