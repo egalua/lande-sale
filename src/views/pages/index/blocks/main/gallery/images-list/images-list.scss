@@ -77,12 +77,13 @@
 }
 //список ul с маленькими картинками
 .img-contents__imgs-tape{ 
-    display: grid;
+    display: inline-grid;
     grid-template-rows: auto auto auto;
     grid-auto-flow: column;
     // height: 589px;
     // grid-gap: 5px;
     grid-gap: calc( 100vw * (5 / 1440) );
+    transition: transform 0.5s;
 } 
 // элемент li с маленькой картинкой внутри
 .img-contents__imgs-tape-item{ 
@@ -228,9 +229,12 @@
     }
     // контейнер, ограничивающий видимость ленты 
     .img-contents__imgs-tape-hidden-box{
-        box-sizing: border-box;
+        box-sizing: content-box;
         padding-left: 9px;
         margin-left: -9px;
+        padding-right: 9px;
+        margin-right: -9px;
+
     }
     // изменение элемента с картинкой при наведении курсора
     .img-contents__imgs-tape-item:hover{
@@ -261,6 +265,7 @@
     // "обрезаем" ленту по краям контейнера
     .img-contents__imgs-tape-hidden-box{
         overflow: hidden;
+        max-width: 100%;
     }
 }
 @media screen and (max-width: 320px){
