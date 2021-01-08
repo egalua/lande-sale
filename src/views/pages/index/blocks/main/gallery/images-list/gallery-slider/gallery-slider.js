@@ -304,8 +304,8 @@ export default class PopupGallery{
             this.touchSettings.dist = touchobj.pageX - this.touchSettings.startX;
             this.touchSettings.elapsedTime = new Date().getTime() - this.touchSettings.startTime;
             
-            const toRight = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist>=this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY)<=this.touchSettings.yDeviationHold);
-            const toLeft = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist < 0 && Math.abs(this.touchSettings.dist)>=this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY)<=this.touchSettings.yDeviationHold);
+            const toRight = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist >= this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY) <= this.touchSettings.yDeviationHold);
+            const toLeft = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist < 0 && Math.abs(this.touchSettings.dist) >= this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY) <= this.touchSettings.yDeviationHold);
 
             if(toRight){
                 if(objClass == this.cssNames.TapeViewfinder){
