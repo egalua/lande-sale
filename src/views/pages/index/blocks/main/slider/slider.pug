@@ -1,3 +1,88 @@
+-var path="./img";
+//- необходимые данные по каждой картинке
+-var images = [
+-   {alt: "15 минут до цивилизации", lgHref: path + "/lg-monastery-photo.png", mdHref: path + "/img1-md.png", smHref: path + "img1-sm.png",mediaSm: "media(max-width: 767px)",mediaMd: "media(max-width: 1440px)",desc:"Ближайший центр цивилизации в 15-ти минутах езды",activeClassName:"tape-hiding-box__tape-item_active"},
+-   {alt: "Борисоглебский монастырь", lgHref: path + "/img2-lg.jpg", mdHref: path + "/img2-md.png", smHref: path + "img2-sm.png",mediaSm: "media(max-width: 767px)",mediaMd: "media(max-width: 1440px)",desc:"Близко расположен Борисоглебский монастырь",activeClassName:""},
+-   {alt: "Больница", lgHref: path + "/img3-lg.jpg", mdHref: path + "/img3-md.png", smHref: path + "img3-sm.png",mediaSm: "media(max-width: 767px)",mediaMd: "media(max-width: 1440px)",desc:"Борисоглебская ЦРБ (центральная районная больница), помощь всегда рядом",activeClassName:""},
+-   {alt: "Магазины", lgHref: path + "/img4-lg.jpg", mdHref: path + "/img4-md.png", smHref: path + "img4-sm.png",mediaSm: "media(max-width: 767px)",mediaMd: "media(max-width: 1440px)",desc:"В ближайших магазинах есть всё необходимое для жизни",activeClassName:""},
+-   {alt: "Школа", lgHref: path + "/img5-lg.jpg", mdHref: path + "/img5-md.png", smHref: path + "img5-sm.png",mediaSm: "media(max-width: 767px)",mediaMd: "media(max-width: 1440px)",desc:"Отличная школа",activeClassName:""},
+-   ];
+
 section.slider#slider
-    .slider__slider-box
-        span Слайдер
+    .slider__slider-box.slider-box
+        h3.slider-box__title Город Борисоглебск
+        .slider-box__tape-hiding-box.tape-hiding-box
+            ul.tape-hiding-box__tape
+                each content in images
+                    li.tape-hiding-box__tape-item(class=content.activeClassName)
+                        picture.tape-hiding-box__picture-box
+                                source(srcset = content.smHref, media = content.mediaSm)
+                                source(srcset = content.mdHref, media = content.mediaMd)
+                                img(src = content.lgHref alt = content.alt)
+        .slider-box__description-box.description-box
+            ul.description-box__list-box.list-box
+                each content in images
+                    li.list-box__item-box.item-box(class = content.activeClassName!='' ? "list-box__item-box_active": "")
+                        .item-box__desc=content.desc
+        ul.slider-box__control
+            each content in images
+                li.slider-box__control-item(class = content.activeClassName!='' ? "slider-box__control-item_active": "")
+        //- .slider-box__desription-box.desription-box
+        //-     h3.desription-box__title Город Борисоглебск
+        //-     .desription-box__list-box.list-box
+        //-         ul.list-box__list.list
+        //-             li.list__item
+        //-                 .list__desc Ближайший центр цивилизации в 15-ти минутах езды
+        //-             li.list__item.list__item_active
+        //-                 .list__desc Близко расположен Борисоглебский монастырь
+        //-             li.list__item
+        //-                 .list__desc Борисоглебская ЦРБ (центральная районная больница), помощь всегда рядом
+        //-             li.list__item
+        //-                 .list__desc В ближайших магазинах есть всё необходимое для жизни
+        //-             li.list__item
+        //-                 .list__desc Отличная школа
+        //- .slider-box__pictures-box.pictures-box
+        //-     .pictures-box__tape-img-box.tape-img-box
+        //-         ul.img-box__imgs-tape.imgs-tape
+        //-             li.img-list__img-item.img-item
+        //-                 picture.img-item__img
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     img(src="", alt="")
+        //-             li.img-list__img-item.img-item.img-item_active
+        //-                 picture.img-item__img
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     img(src="", alt="")
+        //-             li.img-list__img-item.img-item
+        //-                 picture.img-item__img
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     img(src="", alt="")
+        //-             li.img-list__img-item.img-item
+        //-                 picture.img-item__img
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     img(src="", alt="")
+        //-             li.img-list__img-item.img-item
+        //-                 picture.img-item__img
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     source(srcset="",media="()")
+        //-                     img(src="", alt="")
+        //-     .content-box__control-box.control-box
+        //-         ul.control-box__control.control
+        //-             li.control__item
+        //-                 .control__tab
+        //-             li.control__item
+        //-                 .control__tab.control__tab_active
+        //-             li.control__item
+        //-                 .control__tab
+        //-             li.control__item
+        //-                 .control__tab
+        //-             li.control__item
+        //-                 .control__tab

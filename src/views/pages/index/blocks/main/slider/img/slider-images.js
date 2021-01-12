@@ -1,0 +1,1 @@
+import img1Lg from "./lg-monastery-photo.png"

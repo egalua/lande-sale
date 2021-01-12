@@ -1,38 +1,266 @@
 .slider{
 
 }
+// общий контейнер слайдера
 .slider__slider-box{
-    margin-top: calc(100vw * (125 / 1440) );
-    width: 100vw;
-    height: calc(100vw * (700 / 1440) );
+    // 125px при vw:1440px; 0px при vw:320px
+    margin-top: calc(100vw * (25 / 224) - (250px / 7));
+    width: 100%;
 
-    >span{
-        font-size: 18px;
-        color: #fff;
-    }
-
+    height: calc(100vw * 700 / 1440);
     background: #0F250E;
 }
+// общий контейнер слайдера
+.slider-box{
+    display: flex;
+    position: relative;
+}
+// -------------
+// заголовок слайдера
+.slider-box__title{
+    position: absolute;
+    top: calc(100vw * 106 / 1440);
+    left: calc(100vw * 272 / 1440);
+
+    font-family: 'Montserrat';
+    font-weight: 900;
+    font-size: calc(100vw * 48 / 1440);
+    line-height: calc(59 / 48);
+    letter-spacing: 0.05em;
+    color: #F1F5F2;
+
+    z-index: 2;
+}
+// -------------
+// viewfinder контейнер для ленты со слайдами
+.slider-box__tape-hiding-box{
+    // width: 749px;
+    width: calc(100vw * 749 / 1440);
+    // height: 554px;
+    height: calc(100vw * 554 / 1440);
+    overflow: hidden;
+
+    position: absolute;
+
+    top: calc(100vw * 51 / 1440);
+    right: calc(100vw * 112 / 1440);
+}
+
+// контейнер со списком слайдов и описаниями <ul>
+.tape-hiding-box__tape{
+    display: inline-flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+// элемент списка слайдов == контейнер для описания и картинки <li>
+.tape-hiding-box__tape-item{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.7s;
+}
+
+// "активный" слайд
+.tape-hiding-box__tape-item_active{
+    opacity: 1;
+}
+// блок с картинкой
+.tape-hiding-box__picture-box{
+
+    >img{
+        // width: 100%;
+        width: calc(100vw * 749 / 1440);
+        // height: 100%;
+        height: calc(100vw * 554 / 1440);
+        object-fit: cover;
+        max-width: unset;
+    }
+}
+
+// ------------
+
+// блок с описанием слайдов
+.slider-box__description-box{
+    position: absolute;
+    width: calc(100vw * 485 / 1440);
+    height: calc(100vw * 550 / 1440);
+    background: #34471E;
+    top: calc(100vw * 186 / 1440);
+    left: calc(100vw * 154 / 1440);
+}
+.description-box{
+    font-family: 'Montserrat';
+    font-size: calc(100vw * 18 / 1440);
+    font-weight: 400;
+    line-height: calc(100vw * 22/1440);
+
+    padding-top: calc(100vw * 31/ 1440);
+    padding-right: calc(100vw * 27 /1440);
+    padding-left: calc(100vw * 51 / 1440);
+}
+// список описаний слайдов <ul>
+.description-box__list-box{
+    display: flex;
+    flex-direction: column;
+}
+// элемент списка с описанием слайда <li>
+.list-box__item-box{
+    margin-top: calc(100vw * 24 / 1440);
+    margin-bottom: calc(100vw * 24 / 1440);
+}
+.list-box__item-box:hover{
+    cursor: pointer;
+}
+// активный элемент списка == описание активного слайда
+.list-box__item-box_active{
+    >.item-box__desc{
+        color: #F1F5F2;
+        position: relative;
+    }
+    >.item-box__desc::before{
+        content: '';
+        display: block;
+        width: calc(100vw * 5 / 1440);
+        height: calc(100vw * 5 / 1440);
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        top: calc(100vw * 9 / 1440);
+        transform: translateY(-50%);
+        left: calc(100vw * -10 / 1440);
+    }
+}
+// описание слайда
+.item-box__desc{
+    color:rgba(241, 245, 242, 0.6);
+}
+
+// описание слайда
+.slide-itm__desc{
+
+}
+// -------------
+
+// блок индикации и управления слайдера <ul>
+.slider-box__control{
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw * 5 / 1440);
+    height: calc(100vw * 53 / 1440);
+    justify-content: space-between;
+    position: absolute;
+    top: calc(100vw * 617 / 1440);
+    left: calc(100vw * 646 / 1440);
+}
+// элемент индикации <li>
+.slider-box__control-item{
+    width: 100%;
+    height: calc(100vw * 5 / 1440);
+    background: rgba(233, 233, 233, 0.3);
+
+
+}
+// индикатор активного слайда
+.slider-box__control-item_active{
+    background: #E9E9E9;
+}
+
 // ----- Ограничители -----
 @media screen and (min-width: 1440px){
+    .slider-box__title{
+        top: 106px;
+        left: 272px;
+
+        font-size: 48px;
+        line-height: 59px;
+
+    }
     .slider__slider-box{
         width: 1440px;
         height: 700px;
         margin-top: 125px;
     }
+    // блок с описанием слайдов
+    .slider-box__description-box{
+        position: absolute;
+        width: 485px;
+        height: 550px;
+        background: #34471E;
+        
+        top: 186px;
+        left: 154px;
+    }
+    .description-box{
+        font-family: 'Montserrat';
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 22px;
+
+        padding-top: 31px;
+        padding-right: 27px;
+        padding-left: 51px;
+    }
+    // элемент списка с описанием слайда <li>
+    .list-box__item-box{
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+    // активный элемент списка == описание активного слайда
+    .list-box__item-box_active{
+        >.item-box__desc::before{
+            width: 5px;
+            height: 5px;
+            top: 9px;
+            left: -10px;
+        }
+    }
+    // viewfinder контейнер для ленты со слайдами
+    .slider-box__tape-hiding-box{
+        // width: 749px;
+        width: 749px;
+        // height: 554px;
+        height: 554px;
+
+        top: 51px;
+        right: 112px;
+    }
+    // блок индикации и управления слайдера <ul>
+    .slider-box__control{
+        width: 5px;
+        height: 53px;
+
+        top: 617px;
+        left: 646px;
+    }
+    // элемент индикации <li>
+    .slider-box__control-item{
+        height: 5px;
+    }
 }
 // ----- Стили для мобильной версии -----
 @media screen and (max-width:767px){
-
+    // общий контейнер слайдера
     .slider__slider-box{
         margin-top: 0;
-        width: 100vw;
-        height: calc(100vw * (517 / 320) );
+        width: 100%;
+        // height: calc(100vw * (517 / 320) );
     }
+    // // заголовок слайдера
+    // .slider-box__title{
+    //     position: absolute;
+    //     top: 106px;
+    //     left: 272px;
+        
+    //     font-size: 48px;
+    //     line-height: 59px;
+    // }
 
 }
 @media screen and (max-width: 320px){
-    
+    // общий контейнер слайдера
     .slider__slider-box{
         margin-top: 0;
         width: 320px;
