@@ -24,15 +24,19 @@ $header-img: url('img/header.gif'); // фоновая картинка header-б
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
+    position: relative;
 }
 .top-window__offer-box{
-    width: ($offer-box-width/$container-max-width)*100%;
+    // width: ($offer-box-width/$container-max-width)*100%;
 }
 .top-window__use-cases-box{
-    width: ($use-cases-box-width / $container-max-width) * 100%;
+    // width: ($use-cases-box-width / $container-max-width) * 100%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 /* стили для мобильных */
 @media screen and (max-width: 767px) {
