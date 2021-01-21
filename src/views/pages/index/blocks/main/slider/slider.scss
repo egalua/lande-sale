@@ -288,6 +288,11 @@
         width: 100%;
         // height: calc(100vw * (517 / 320) );
     }
+    .slider-box{
+        *{
+            display: none;
+        }
+    }
     // // заголовок слайдера
     // .slider-box__title{
     //     position: absolute;
