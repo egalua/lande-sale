@@ -145,6 +145,15 @@ module.exports = {
                     name: '[name].[ext]'
                 }
             },
+            { // Images
+                test: /favicon.ico$/,
+                // use:['file-loader'],
+                loader: 'file-loader',
+                options:{
+                    outputPath: './',
+                    name: '[name].[ext]'
+                }
+            },
             { // правило для подключения шрифтов
                 test: /\.(ttf|woff|woff2|eot)$/,
                 // use:['file-loader']
