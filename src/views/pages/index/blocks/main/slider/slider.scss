@@ -317,30 +317,26 @@
         align-self: center;
     }
 
-    // контейнер со списком слайдов и описаниями <ul>
+    // лента со слайдами - картинками <ul>
     .tape-hiding-box__tape{
         display: inline-flex;
         position: relative;
         width: auto;
         height: 100%;
+        transform: translateX(0px); // намёк, что лента будет двигаться с помощью translateX()
+        transition: transform 0.5s;
     }   
-    // элемент списка слайдов == контейнер для описания и картинки <li>
+    // слайд == контейнер для картинки <li>
     .tape-hiding-box__tape-item{
         position: static;
         opacity: 1;
-        z-index: 0;
-        // width: 310px; /* vw: 320px */
         width: calc(100vw * 310 / 320);
-        // max-width: 749px;
-        // height: calc(310px * 554 / 749); /* vw:320px */
-        // height: calc(100vw * (310 * 554) / (749 * 320));
         height: 100%;
-        // max-height: 554px;
     }
-    // "активный" слайд
+    // "активный" слайд (активный элемент с картинкой)
     .tape-hiding-box__tape-item_active{
-        opacity: 1;
-        z-index: 0;
+        // opacity: 1;
+        // z-index: 0;
     }
 
     // -----------------------
@@ -381,7 +377,8 @@
     ul.description-box__list-box{
         display: inline-flex;
         flex-direction: row;
-        width: calc(100vw * 310 / 320);
+        // width: calc(100vw * 310 / 320);
+        width: calc(100% * 310 / 320);
         // height: 128px; /* vw:320px; */
         height: 90%;
         flex-wrap: nowrap;
@@ -413,7 +410,7 @@
 
         z-index: -1;
         opacity: 0;
-        transition: opacity 0.7s;
+        transition: opacity 0.5s;
     }
     .list-box__item-box:hover{
         cursor: auto;
