@@ -106,6 +106,7 @@ $item-font-size: 18px; // размер шрифта пунктов меню
         // активное (открытое) мобильное меню (блок <ul>)
         >.nav-box__menu{
             position: absolute;
+            z-index: 1;
             top: 100%;
             left: 27px;
             display: inline-flex;
