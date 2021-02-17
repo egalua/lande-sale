@@ -170,9 +170,17 @@
     font-weight: normal;
     color: #0F250E;
 
-    margin-top: calc(100vw * (50 / 1440));
-    margin-left: calc(100vw * (51 / 1440));
-    margin-right: calc(100vw * (89 / 1440));
+    // margin-top: calc(100vw * (50 / 1440));
+    // margin-left: calc(100vw * (51 / 1440));
+    // margin-right: calc(100vw * (89 / 1440));
+
+    // 50px vw:1440px -- 38px vw:767px
+    margin-top: calc(100vw * (12 / 673) + (16370px / 673));
+    // 51px vw:1440px -- 49px vw:767px
+    margin-left: calc(100vw * (2 / 673) + (31443px / 673));
+    // 89px vw:1440px -- 33px vw:767px
+    margin-right: calc(100vw * (56 / 673) - (20743px / 673));
+
 
 }
 // сама форма (<form>)
@@ -351,6 +359,10 @@
     .form-block__caption{
         font-size: 18px;
         line-height: 22px;
+        
+        margin-top: 38px;
+        margin-left: 49px;
+        margin-right: 33px;
     }
     
     // поле ввода ФИО
@@ -382,11 +394,11 @@
 }
 @media screen and (max-width: 320px){
     // заголовок блока с формой
-    .form-block__caption{
-        margin-top: 38px;
-        margin-left: 49px;
-        margin-right: 33px;
-    }
+    // .form-block__caption{
+    //     margin-top: 38px;
+    //     margin-left: 49px;
+    //     margin-right: 33px;
+    // }
     // поле ввода ФИО
     .form__name{
         margin-top: 15px;
