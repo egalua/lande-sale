@@ -1,50 +1,76 @@
 /**
+ * Создаёт прилипшее к низу окно 
+ * и выводит туда сообщения лога
+ */
+class Log{
+    constructor(){
+        this.logArea = document.createElement('div');
+        this.logArea.style.cssText = "position: fixed; bottom: 0; left:0; right: 0; margin: auto; background-color: #cfe; min-height: 30px; max-height: 160px; overflow: auto;";
+        document.body.appendChild(this.logArea);
+    }
+    /**
+     * Печатает строку лога
+     * @param {String} str строка лога
+     */
+    print(str){
+        const logRecord = document.createElement('div');
+        logRecord.innerHTML = str;
+        this.logArea.appendChild(logRecord);
+        // const rec = logRecord.getBoundingClientRect();
+        this.logArea.scroll(0, logRecord.offsetTop);
+    }
+}
+
+
+/**
  * Класс кнопки, прилипающей к верхнему краю экрана
  * при скролле страницы
  */
 class stickyButton{
     constructor(buttonClass){
+        const self = this;
         this.cssNames = {
             stikyClass: 'call-button_sticky'
         };
+        // оригинпльная кнопка
         this.button = document.querySelector('.' + buttonClass);
-        // начальное положение кнопки относительно страницы
-        this.yOffset = this._getTopPositionButton();
+        // клон кнопки
+        this.stickyButton = this.button.cloneNode(true);
+        
+        this.stickyButton.classList.add(this.cssNames.stikyClass);
+        document.body.appendChild(this.stickyButton);
+        window.requestAnimationFrame(()=>{
+            self.stickyButton.style.display = 'none';
+        });
+        
         this.setHandlers();
 
     }
     // ----- handlers -----
+    /**
+     * Установка обработчиков событий
+     */
     setHandlers(){
         const scrollHandler = this.scrollHandler.bind(this);
         window.addEventListener('scroll', scrollHandler);
         window.addEventListener('resize', scrollHandler);
-        const resizeHandler = this.resizeHandler.bind(this);
-        window.addEventListener('resize', resizeHandler);
     }
+    /**
+     * Обработчик события scroll
+     * @param {Event} e объект события
+     */
     scrollHandler(e){
-        // должно работать только на мобильных: vw<168
+        const self = this;
         if(this._getViewportWidth() < 768){
-            const self = this;
-            if(this.yOffset < window.pageYOffset){
-                // прижатая к верху кнопка
-                if(!this.button.classList.contains(this.cssNames.stikyClass)){
-                    window.requestAnimationFrame(()=>{
-                        self.button.classList.add(self.cssNames.stikyClass);
-                    });
-                }
+            if( (this.button.offsetHeight + this.button.getBoundingClientRect().top) < 0){
+                window.requestAnimationFrame(()=>{
+                    self.stickyButton.style.display = '';
+                });
             } else {
-                // обычный вид кнопки
-                if(this.button.classList.contains(this.cssNames.stikyClass)){
-                    window.requestAnimationFrame(()=>{
-                        self.button.classList.remove(self.cssNames.stikyClass);
-                    });
-                }
+                window.requestAnimationFrame(()=>{
+                    self.stickyButton.style.display = 'none';
+                });
             }
-        }        
-    }
-    resizeHandler(e){
-        if(this._getViewportWidth() < 768){
-            this.yOffset = this._getTopPositionButton();
         }
     }
     // ------ get methods -----
@@ -54,15 +80,6 @@ class stickyButton{
      */
     _getViewportWidth() {
         return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    }
-    /**
-     * Возвращает вертикальное смещение кнопки 
-     * от начала документа (т.е. yOffset)
-     * @returns {Float} y смещение от начала документа
-     */
-    _getTopPositionButton(){
-        let box = this.button.getBoundingClientRect();
-        return box.top + window.pageYOffset;
     }
 }
 
