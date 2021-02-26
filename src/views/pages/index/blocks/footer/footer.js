@@ -7,6 +7,7 @@ class FormHandler{
             form: 'form',
             email: "form__email",
             name: "form__name",
+            text: 'form__text',
             submit: "form__send",
             fields: "form__field",
             errorField: "form__field_error",
@@ -16,7 +17,7 @@ class FormHandler{
             closeReport: 'form-block__send-message-close'
         }
         this.setHandlers();
-        this.action = 'http://landing2/send.php';
+        this.action = '';
     }
     // ----- handlers методы -----
     setHandlers(){
@@ -88,6 +89,7 @@ class FormHandler{
             // поля формы и кнопка
             const nameField = form.querySelector('.' + this.cssNames.name);
             const emailField = form.querySelector('.' + this.cssNames.email);
+            const textField = form.querySelector('.' + this.cssNames.text);
             const submitButton = form.querySelector('.' + this.cssNames.submit);
 
             // объект для AJAX запросов
@@ -118,6 +120,7 @@ class FormHandler{
                         // чистим поля формы 
                         nameField.value = '';
                         emailField.value = '';
+                        textField.value = '';
                     } else { // если произошла ошибка
                         const errorReport = "<p>К сожалению, произошла ошибка при отправке формы.</p><p>Пожалуйста, свяжитесь с нами по телефону <a href='tel:88001111111'>8 800 1111111</a></p>";
                         console.log('sendFormHandler: произошла ошибка request.response = ', request.response, '; request.status = ', request.status);
@@ -133,7 +136,8 @@ class FormHandler{
             }
             // тело сообщения
             const body =    nameField.name      + '=' + nameField.value + '&' + 
-                            emailField.name     + '=' + emailField.value + '&' + 
+                            emailField.name     + '=' + emailField.value + '&' +
+                            textField.name      + '=' + textField.value +  '&' +
                             submitButton.name   + '=' + submitButton.value;
 
             // Обработчик неудачной отправки запроса (Если не удалось отправить запрос. Стоит блок на хостинге)
