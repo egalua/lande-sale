@@ -20,7 +20,7 @@
     // Переменные, которые отправляет пользователь
     $name = $_POST['username'];
     $email = $_POST['email-address'];
-    // $text = $_POST['text'];
+    $text = $_POST['text'];
     $file = $_FILES['myfile'];
 
     // Формирование самого письма
@@ -29,8 +29,9 @@
     <h2>Заявка</h2>
     <b>Имя:</b> $name<br>
     <b>Почта:</b> $email<br>
-    <b>Ссылка на сайт с формой: </b><a href='http://_____'>_____</a><br><br>
-    <b>Сообщение:</b><br> текст (в будущем, возможно, сообщение пользователя)
+    <b>Ссылка на сайт с формой: </b><a href='http://landsale.hostronavt.ru'>landsale.hostronavt.ru</a><br><br>
+    <b>Сообщение:</b><br> 
+    <pre>$text</pre>
     ";
 
     // Настройки PHPMailer
@@ -43,16 +44,17 @@
         $mail->Debugoutput = function($str, $level) {$GLOBALS['status'][] = $str;};
 
         // Настройки вашей почты
-        $mail->Host       = 'smtp.yandex.ru'; // SMTP сервера вашей почты
-        $mail->Username   = '_____@yandex.ru'; // Логин на почте
-        $mail->Password   = '_____'; // Пароль на почте
+        $mail->Host       = ''; // SMTP сервера вашей почты
+        $mail->Username   = ''; // Логин на почте
+        $mail->Password   = ''; // Пароль на почте
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
-        $mail->setFrom('_____@yandex.ru', '____'); // Адрес самой почты и имя отправителя
+        $mail->setFrom('', ''); // Адрес самой почты и имя отправителя
 
         // Получатель письма
-        $mail->addAddress('____@mail.ru');  
-        $mail->addAddress('____@yandex.ru'); // Ещё один, если нужен
+        $mail->addAddress('');  
+        $mail->addAddress(''); // Ещё один, если нужен
+        $mail->addAddress('');
 
         // Прикрипление файлов к письму
     if (!empty($file['name'][0])) {
