@@ -110,8 +110,8 @@ class Slider{
             const activeIdx = this.getActiveIdx();
             if(toRight){
                 // свайп вправо
-                if( (activeIdx - 1) < 0 ) return;
-                const newActiveIdx = activeIdx - 1;
+                // if( (activeIdx - 1) < 0 ) return;
+                const newActiveIdx = activeIdx - 1 < 0 ? activeIdx - 1 + totalSlides: activeIdx - 1;
                 
                 window.requestAnimationFrame(()=>{
                     self.moveSlidesTape(newActiveIdx);
@@ -123,8 +123,8 @@ class Slider{
             if(toLeft){
                 // свайп влево
 
-                if( (activeIdx + 1) >= totalSlides) return;
-                const newActiveIdx = activeIdx + 1;
+                // if( (activeIdx + 1) >= totalSlides) return;
+                const newActiveIdx = activeIdx + 1 >= totalSlides  ? 0: activeIdx + 1;
 
                 window.requestAnimationFrame(()=>{
                     self.moveSlidesTape(newActiveIdx);
