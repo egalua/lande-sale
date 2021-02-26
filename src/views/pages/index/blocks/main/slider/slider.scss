@@ -367,11 +367,13 @@
         padding: 0;
         display: flex;
         justify-content: center;
+        // padding-bottom:20px при vw:767px; padding-bottom:10px при vw:320px
+        padding-bottom: calc(100vw * (10 / 447) + (1270px / 447));
         // display: none;
         // padding-top: calc(100vw * 31/ 1440);
         // padding-right: calc(100vw * 27 /1440);
         // padding-left: calc(100vw * 51 / 1440);
-        
+                
     }
     // список описаний слайдов <ul>
     ul.description-box__list-box{
@@ -380,15 +382,44 @@
         // width: calc(100vw * 310 / 320);
         width: calc(100% * 310 / 320);
         // height: 128px; /* vw:320px; */
-        height: 90%;
+        min-height: 90%;
         flex-wrap: nowrap;
         position: relative;
         // border-radius: 6px;
-        padding: 0 5px;
+        padding: 0 20px;
+
         // background-color: rgb(52, 71, 30);
         //rgb(15,37,14); + 20
         // rgb(52, 71, 30) +20;
         background-color: rgb(72, 91, 50);
+    }
+    ul.description-box__list-box::before{
+        content: '';
+        display: block;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        left: 6px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border-top: 2px solid #fff;
+        border-left: 2px solid #fff;
+        transform: rotate(-45deg);
+    }
+    ul.description-box__list-box::after{
+        content: '';
+        display: block;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        right: 6px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border-top: 2px solid #fff;
+        border-left: 2px solid #fff;
+        transform: rotate(135deg);
     }
     // элемент списка с описанием слайда <li>
     .list-box__item-box{
@@ -401,8 +432,13 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 0;
-        right: 0;
+        // left: 0;
+        // right: 0;
+        width: calc(100% - 40px);
+        margin-left: auto;
+        margin-right: auto;
+        left: 20px;
+
         opacity: 0;
         display: flex;
         align-items: center;
