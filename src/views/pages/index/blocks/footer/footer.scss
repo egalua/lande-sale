@@ -99,11 +99,9 @@
 
     font-family: 'Montserrat';
 
-    width: calc(100vw * (223 / 1120) + (222080px / 1120));
-    height: calc(100vw * (215 / 1120) + (308640px / 1120));
-
-    width: calc(100vw * (223 / 672) + (50px / 7));
-    height: calc(100vw * (215 / 672) + (639px / 7));
+    width: calc(100vw * 485 / 1440);
+    // vw:1440px height:552px; :: vw:768px; height:340px;
+    height: calc(100vw * (53 / 168) + (684px / 7));
 }
 
 // блок с сообщением об отправке заявки
@@ -134,17 +132,15 @@
     color: #fff;
     text-align: center;
     font-family: 'Montserrat';
-    // от 18 при 1440 до 14 при 767px
+    // от 18px при vw:1440px до 14px при vw:767px
     font-size: calc(100vw * ( 4 / 673) + (6354px / 673));
     width: 80%;
 }
 // тело сообщения об отправке
 .form-block__send-message-content{
     color: #fff;
-    // margin-left: 5px;
-    // margin-right: 5px; 
     font-family: 'Montserrat';
-    // от 16 при 1440 до 12 при 767px
+    // от 16px при vw:1440px до 12px при vw:767px
     font-size: calc(100vw * ( 4 / 673) + (5008px / 673));
     width: 80%;
 }
@@ -165,22 +161,17 @@
 
 // заголовок блока с формой
 .form-block__caption{
-    font-size: calc(100vw * (1 / 56) + (30px / 7));
-    line-height: calc(100vw * ( 5 / 224) + (34px / 7));
+    // vw:1440px; font-size:26px; :: vw:768px; font-size:18px;
+    font-size: calc(100vw * (1 / 84) + (62px / 7));
+    // vw:1440px; line-height:37px; :: vw:768px; line-height:22px;
+    line-height: calc(100vw * (5 / 224) + (34px / 7));
+
     font-weight: normal;
     color: #0F250E;
 
-    // margin-top: calc(100vw * (50 / 1440));
-    // margin-left: calc(100vw * (51 / 1440));
-    // margin-right: calc(100vw * (89 / 1440));
-
-    // 50px vw:1440px -- 38px vw:767px
-    margin-top: calc(100vw * (12 / 673) + (16370px / 673));
-    // 51px vw:1440px -- 49px vw:767px
-    margin-left: calc(100vw * (2 / 673) + (31443px / 673));
-    // 89px vw:1440px -- 33px vw:767px
-    margin-right: calc(100vw * (56 / 673) - (20743px / 673));
-
+    // vw:1440px; margin-top:30px; :: vw:768px; margin-top:20px;
+    margin-top: calc(100vw * (5 / 336) + (60px / 7));
+    text-align: center;
 
 }
 // сама форма (<form>)
@@ -196,50 +187,76 @@
 }
 // поля ввода ФИО и email
 .form__field{
-    font-size:18px;
-    line-height: 22px;
+    // vw:1440px; font-size:18px; :: vw:768px; font-size:16px;
+    font-size:calc(100vw * (1 / 336) + (96px / 7));
+    // vw:1440px; line-height:22px; :: vw:768px; line-height:18px;
+    line-height: calc(100vw * (1 / 168) + (94px / 7));
+    // vw:1440px; padding:12px 12px 10px 12px; :: vw:768px; padding: 10px 10px 8px;
+    // padding: 12px 12px 10px 12px;
+    padding: calc(100vw * (1 / 336) + (54px / 7))
+             calc(100vw * (1 / 336) + (54px / 7))
+             calc(100vw * (1 / 336) + (40px / 7));
+
     font-weight: normal;
     color: #000;
-    // background: #759773;
 
     background: #415826;
     width: calc(100vw * (383/1440));
     
-    padding: 12px 12px 10px 12px;
-    
     border: 3px solid #31431C;
 }
+// подсветка при ошибке ввода
 .form__field_error{
-    // border-bottom-color: rgb(98, 23, 8);
-    // box-shadow: 1px 1px 1px rgb(98, 23, 8),
-    //             1px 0px 1px rgb(98, 23, 8),
-    //             0px 1px 1px rgb(98, 23, 8),
-    //             -1px -1px 1px rgb(98, 23, 8),
-    //             -1px 0px 1px rgb(98, 23, 8),
-    //             0px -1px 1px rgb(98, 23, 8);
     background: rgba(98,23,08,0.5);
 }
-.form__name::placeholder, .form__email::placeholder{
+.form__name::placeholder, .form__email::placeholder, .form__text::placeholder{
     color: #000;
 }
 // поле ввода ФИО
 .form__name{
-    margin-top: calc(100vw * (11 / 224) - (110px / 7));
+    // vw:1440px; margin-top: 24px; :: vw:768px; margin-top: 15px;
+    margin-top: calc(100vw * (3 / 224) + (33px / 7));
 }
 // поле ввода email
 .form__email{
-    margin-top:calc(100vw * (1 / 28) - (136px / 7));
+    // vw:1440px; margin-top: 13px; :: vw:768px; margin-top: 5px;
+    margin-top: calc(100vw * (1 / 84) - (29px / 7));
+}
+// поле ввода текста сообщения
+.form__text{
+    resize: none; 
+    // vw:1440px; margin-top: 13px; :: vw:768px; margin-top: 5px;
+    margin-top: calc(100vw * (1 / 84) - (29px / 7));
+    // vw:1440px; width:383px;
+    width: calc(100vw * 383/1440); 
+    border: 3px solid #31431C;
+    background: #415826;
+    // vw:1440px; font-size: 18px; :: vw:768px; font-size: 16px;
+    font-size: calc(100vw * (1 / 336) + (96px / 7));
+    // vw:1440;	line-height: 22px; :: vw:768px; line-height: 18px;
+    line-height: calc(100vw * (1 / 168) + (94px / 7));
+    // vw:1440;	height: 200px; :: vw:768px; height: 115px;
+    height: calc(100vw * (85 / 672) + (125px / 7));
+    //  vw:1440;	padding: 23px 16px; :: vw:768; padding: 8px 8px;
+    padding: calc(100vw * (5 / 224) - (64px / 7))
+             calc(100vw * (1 / 84) - (8px / 7));
+
 }
 // кнопка "отправить"
 .form__send{
-    font-size: 18px;
-    line-height: 22px;
+    // vw:1440; font-size:18px; :: vw:768px; font-size:16px;
+    font-size: calc(100vw * (1 / 336) + (96px / 7));
+    // vw:1440; line-height: 22px; :: vw:768px; line-height: 18px;
+    line-height: calc(100vw * (1 / 168) + (94px / 7));
+
     font-weight: 500;
     letter-spacing: -0.02em;
     color: #2E2E2E;
 
-    width: calc(100vw * ( 5 / 84) + (1311px / 7));
-    height: 52px;
+    // vw:1440	width: 377px;
+    width: calc(100vw * 377/1440); 
+    // vw:1440;	height:52px; :: vw:768px; height: 42px;
+    height: calc(100vw * (5 / 336) + (214px / 7));
 
     background: #fff;
 
@@ -249,7 +266,8 @@
 
     border: none;
 
-    margin-top: calc(100vw * (5 / 56) - (242px / 7));
+    // vw:1440;	margin-top: 31px; :: vw:768; margin-top: 15px;
+    margin-top: calc(100vw * (1 / 42) - (23px / 7));
     
 }
 
@@ -281,12 +299,14 @@
     }
     // заголовок блока с формой
     .form-block__caption{
-        font-size: 30px;
+        font-size: 26px;
         line-height: 37px;
         
-        margin-top: 50px;
-        margin-left: 51px;
-        margin-right: 89px;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 383px;
+        text-align: center;
     }
     // поля ввода ФИО и email
     .form__field{
@@ -294,23 +314,42 @@
         line-height: 22px;
 
         width: 383px;
-        
         padding: 12px 12px 10px 12px;
         
         border: 3px solid #31431C;
     }
     // поле ввода ФИО
     .form__name{
-        margin-top: 55px;
+        margin-top: 24px;
     }
     // поле ввода email
     .form__email{
-        margin-top: 32px;
+        margin-top: 13px;
+    }
+    // поле ввода текста сообщения
+    .form__text{
+        margin-top: 13px;
+        resize: none;
+
+        font-size:18px;
+        line-height: 22px;
+        font-weight: normal;
+        color: #000;
+
+        background: #415826;
+        width: 383px;
+        height: 200px;
+
+        padding: 23px 16px;
+        
+        border: 3px solid #31431C;
     }
     // кнопка "отправить"
     .form__send{
         width: 273px;
-        margin-top: 94px;
+        margin-top: 31px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     // декоративная картинка блока с контактами
@@ -326,7 +365,6 @@
     .form-block__send-message-title{
         // от 18 при 1440 до 14 при 767px
         font-size: 18px;
-        
     }
     // тело сообщения об отправке
     .form-block__send-message-content{
@@ -348,15 +386,17 @@
     // блок с формой "отправить заявку"
     .form-block{
         margin-top: 46px;
-        margin-bottom: 61px;
+        // vw:767px; margin-bottom:61px :: vw:320px; margin-bottom:30px;
+        margin-bottom: calc(100vw * (31 / 447) + (3490px / 447));
         margin-left: auto;
         margin-right: auto;
 
-        width: 262px;
-        height: 337px;
+        width: calc(100% * 262 / 320);
+        height: 512px;
     }
     // заголовок блока с формой
     .form-block__caption{
+        text-align: center;
         font-size: 18px;
         line-height: 22px;
         
@@ -364,21 +404,48 @@
         margin-left: 49px;
         margin-right: 33px;
     }
-    
+    // поля ввода ФИО и email
+    .form__field{
+        width: calc(100% * 218 / 262);
+        
+        font-size:16px;
+        line-height: 18px;
+        padding: 10px 10px 8px;
+    }
     // поле ввода ФИО
     .form__name{
-        margin-top: 22px;
-        width: 233px;
+        margin-top: 15px;
     }
     // поле ввода email
     .form__email{
         margin-top: 8px;
-        width: 233px;
+    }
+    // поле ввода текста сообщения
+    .form__text{
+        margin-top: 13px;
+        resize: none;
+
+        font-size:18px;
+        line-height: 22px;
+        font-weight: normal;
+        color: #000;
+
+        background: #415826;
+        width: calc(100% * 218 / 262);
+        height: 200px;
+
+        padding: 8px;
+        
+        border: 3px solid #31431C;
     }
     // кнопка "отправить"
     .form__send{
         margin-top: 34px;
-        width: 233px;
+        width: calc(100% * 218 / 262);
+        height: 42px;
+        font-size: 16px;
+        line-height: 18px;
+
     }
     // блок с формой "отправить заявку"
     .form-block{
@@ -393,34 +460,28 @@
     }
 }
 @media screen and (max-width: 320px){
-    // заголовок блока с формой
-    // .form-block__caption{
-    //     margin-top: 38px;
-    //     margin-left: 49px;
-    //     margin-right: 33px;
-    // }
+
+    // блок с формой "отправить заявку"
+    .form-block{
+        width: 262px;
+        height: 512px;
+        margin-top: 46px;
+        margin-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     // поле ввода ФИО
     .form__name{
-        margin-top: 15px;
-        padding-left: 5px;
+
     }
     // поле ввода email
     .form__email{
-        margin-top: 8px;
-        padding-top: 14px;
-        padding-bottom: 8px;
-        padding-left: 5px;
+
     }
     // кнопка "отправить"
     .form__send{
         margin-top: 34px;
-        width: 233px;
     }
-    // блок с формой "отправить заявку"
-    .form-block{
-        width: 262px;
-        height: 337px;
-        margin-top: 46px;
-        margin-left: 27px;
-    }
+
 }
