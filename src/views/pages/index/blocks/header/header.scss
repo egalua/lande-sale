@@ -2,7 +2,7 @@
 $offer-box-width: 737px; // ширина блока с предложением
 $use-cases-box-width: 703px; // ширина блока "вариантов использования"
 $header-height: 800px; // высота блока header, возможно, придётся менять при адаптивном дизайне
-$header-img: url('img/header.gif'); // фоновая картинка header-блока (картинка 880Кб, нужно ужимать для мобильных версий)
+$header-img: url('img/header-1440px.jpg'); // фоновая картинка header-блока (картинка 880Кб, нужно ужимать для мобильных версий)
 
 
 @import 'top-nav/top-nav.scss';
@@ -46,10 +46,13 @@ $header-img: url('img/header.gif'); // фоновая картинка header-б
     .top-window__offer-box{
         width: 100%;
     }
+    .header_background{
+        background-image: url('./img/header-768px.jpg');
+    }
 }
 @media screen and (max-width:320px){
     .header_background{
-        background-image: url('./img/header-background-320px.png');
+        background-image: url('./img/header-320px.jpg');
     }    
 }
 /* ----- Ограничители ----- */
