@@ -49,6 +49,51 @@ export default class PopupGallery{
             // preloader для большой картинки
             Preloader: 'img-contents__large-img-preloader'
         };
+        // суффиксы файлов картинок в зависимости от диапазона разрешений экрана
+        this.filesSuffixes = [
+            {
+                range: {
+                    min: 0,
+                    max: 320
+                },
+                suffix: '_320px'
+            },
+            {
+                range: {
+                    min: 320,
+                    max: 420
+                },
+                suffix: '_420px'
+            },
+            {
+                range: {
+                    min: 420,
+                    max: 768
+                },
+                suffix: '_768px'
+            },
+            {
+                range: {
+                    min: 768,
+                    max: 1024
+                },
+                suffix: '_1024px'
+            },
+            {
+                range: {
+                    min: 1024,
+                    max: 1440
+                },
+                suffix: '_1440px'
+            },
+            {
+                range: {
+                    min: 1440,
+                    max: Infinity
+                },
+                suffix: '_1920px'
+            }
+        ];
         // параметры и переменные для обработки touch событий
         this.touchSettings = {
             startX: 0, // координата X при touchstart
@@ -64,9 +109,13 @@ export default class PopupGallery{
         this.gallery = document.querySelector('.' + className);
         
         this.cssNames.GalleryBoxClone = cloneClassName;
-
+        
         // создать галерею 
         this.createPopupGallery();
+        
+        // устанавливает ссылки на картинки подходящего размера
+        this.setPopupImgLinks();
+
         // установить обработчики событий
         this.setHandlers();
     }
@@ -115,6 +164,11 @@ export default class PopupGallery{
         // изменение размеров окна
         window.addEventListener('resize', (e)=>{
             self.showActiveItem();
+        });
+
+        // меняет большие картинки в соответствии с текущей шириной экрана
+        window.addEventListener('resize', (e)=>{
+            self.setPopupImgLinks();
         });
 
         // отмена стандартой реакции клика по ссылкам
@@ -532,6 +586,28 @@ export default class PopupGallery{
 
         return partlyVis;
     }
+    /**
+     * Возвращает суффикс файлов с картинокой
+     * зависящий от разрешения экрана
+     * @returns {String} суффикс файла
+     */
+    getFileSuffix(){
+        const vw = this._getViewportWidth();
+        for(let i in this.filesSuffixes){
+            
+            if(this.filesSuffixes[i].range.min < vw && vw <= this.filesSuffixes[i].range.max){
+                return this.filesSuffixes[i].suffix;
+            }
+        }
+        return '';
+    }
+    /**
+     * Возвращает текущее значение ширины viewport
+     * @returns {Float} ширина viewport
+     */
+    _getViewportWidth() {
+        return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      }
     /* ------- create methods ------- */
     /**
      * Создание всплывающей галереи
@@ -619,6 +695,23 @@ export default class PopupGallery{
             const tape = self.popupGallery.querySelector('.' + self.cssNames.ImgsTape);
             tape.style.transform = "matrix(1, 0, 0, 1," + tapeOffset + ", 0)";
         });
+    }
+    /**
+     * Обновляет ссылки на большие картинки во всплывающей галерее
+     * в соответствии с текущим размером экрана
+     */
+    setPopupImgLinks(){
+        // суффикс файла соответвтвующий текущей ширине экрана
+        let suffix = this.getFileSuffix();
+        // регулярное выражение для замены суффикса файла
+        let reg = /_\d+px/i;
+        let popupGallaryLinks = this.popupGallery.querySelectorAll('.' + this.cssNames.LargeImgLink);
+        
+        for(let i = 0; i < popupGallaryLinks.length; i++){
+            let imgHref = popupGallaryLinks[i].href;
+
+            popupGallaryLinks[i].href = imgHref.replace(reg, suffix);
+        }
     }
     /* ------- show methods ------- */
     /**
