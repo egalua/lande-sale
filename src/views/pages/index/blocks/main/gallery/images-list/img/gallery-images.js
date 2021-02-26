@@ -1,25 +1,15 @@
-import img1Lg from "./img1-lg.jpg"
-import img2Lg from "./img2-lg.jpg"
-import img3Lg from "./img3-lg.jpg"
-import img4Lg from "./img4-lg.jpg"
-import img5Lg from "./img5-lg.jpg"
-import img6Lg from "./img6-lg.jpg"
-import img7Lg from "./img7-lg.jpg"
-import img8Lg from "./img8-lg.jpg"
-import img9Lg from "./img9-lg.jpg"
-import img10Lg from "./img10-lg.jpg"
-import img11Lg from "./img11-lg.jpg"
-import img12Lg from "./img12-lg.jpg"
-
-import img1tmbs from "./img1-thumbs.png"
-import img2tmbs from "./img2-thumbs.png"
-import img3tmbs from "./img3-thumbs.png"
-import img4tmbs from "./img4-thumbs.png"
-import img5tmbs from "./img5-thumbs.png"
-import img6tmbs from "./img6-thumbs.png"
-import img7tmbs from "./img7-thumbs.png"
-import img8tmbs from "./img8-thumbs.png"
-import img9tmbs from "./img9-thumbs.png"
-import img10tmbs from "./img10-thumbs.png"
-import img11tmbs from "./img11-thumbs.png"
-import img12tmbs from "./img12-thumbs.png"
+// иморт картинок под разные разрешения
+import './img1/img1.js'
+import './img2/img2.js'
+import './img3/img3.js'
+import './img4/img4.js'
+import './img5/img5.js'
+import './img6/img6.js'
+import './img7/img7.js'
+import './img8/img8.js'
+import './img9/img9.js'
+import './img10/img10.js'
+import './img11/img11.js'
+import './img12/img12.js'
+// импорт preview картинок
+import './thumbs/thumbs.js'
