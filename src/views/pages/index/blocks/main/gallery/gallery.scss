@@ -20,7 +20,10 @@ $images-maxwidth:703px;
     display: flex;
     align-items: flex-start;
     // margin-top: 169px;
-    margin-top: calc( 100vw * (169/1440) );
+    // margin-top: calc( 100vw * (169/1440) );
+    // margin-top:85px; padding-top:84px;  при vw:1440px;
+    margin-top: calc(100vw * (85/1440));
+    padding-top: calc(100vw * (84/1440));
 
 }
 // блок с описанием
@@ -34,7 +37,9 @@ $images-maxwidth:703px;
 // ----- Ограничители -----
 @media screen and (min-width: 1440px){
     .gallery{
-        margin-top: 169px;
+        // margin-top: 169px;
+        margin-top: 85px;
+        padding-top: 84px;
     }
     .gallery__images{
         max-width: $images-maxwidth;
