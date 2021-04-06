@@ -6,8 +6,7 @@
 }
 
 /* Убираем внутренние отступы */
-ul[class],
-ol[class] {
+ul[class] {
   padding: 0;
 }
 
@@ -19,7 +18,6 @@ h3,
 h4,
 p,
 ul[class],
-ol[class],
 li,
 figure,
 figcaption,
@@ -38,8 +36,7 @@ body {
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
-ul[class],
-ol[class] {
+ul[class] {
   list-style: none;
 }
 
@@ -68,7 +65,7 @@ a[class]:hover{
 //   margin-top: 1em;
 // }
 
-/* Наследуем шрифты для инпутов и кнопок */
+/* Наследуем шрифты для <input> и кнопок */
 input,
 button,
 textarea,
