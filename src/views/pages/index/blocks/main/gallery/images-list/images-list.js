@@ -92,7 +92,7 @@ class Gallery{
     /**
      * Выравнивает ленту по правой границе контейнера, если это необходимо
      * @param {Float} idx индекс смещения ленты
-     * @returns {Float} смещениеленты после выравнимания
+     * @returns {Float} смещение ленты после выравнивания
      */
     alignTape(idx){
         // стили ленты
@@ -200,10 +200,10 @@ class Gallery{
         let target = ev.target;
         target.closest('.' + this.cssNames.tape);
         if(target !== null){
-            let touchobj = ev.changedTouches[0];
+            let touchObj = ev.changedTouches[0];
             this.touchSettings.dist = 0;
-            this.touchSettings.startX = touchobj.pageX;
-            this.touchSettings.startY = touchobj.pageY;
+            this.touchSettings.startX = touchObj.pageX;
+            this.touchSettings.startY = touchObj.pageY;
             this.touchSettings.startTime = new Date().getTime();
 
             let pointerBox = self.gallery.querySelector('.' + this.cssNames.pointerBox);
@@ -234,13 +234,13 @@ class Gallery{
 
         target.closest('.' + this.cssNames.tape);
         if(target !== null){
-            let touchobj = ev.changedTouches[0];
+            let touchObj = ev.changedTouches[0];
             
-            this.touchSettings.dist = touchobj.pageX - this.touchSettings.startX;
+            this.touchSettings.dist = touchObj.pageX - this.touchSettings.startX;
             this.touchSettings.elapsedTime = new Date().getTime() - this.touchSettings.startTime;
 
-            const toRight = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist >= this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY) <= this.touchSettings.yDeviationHold);
-            const toLeft = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist < 0 && Math.abs(this.touchSettings.dist) >= this.touchSettings.threshold && Math.abs(touchobj.pageY - this.touchSettings.startY) <= this.touchSettings.yDeviationHold);
+            const toRight = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist >= this.touchSettings.threshold && Math.abs(touchObj.pageY - this.touchSettings.startY) <= this.touchSettings.yDeviationHold);
+            const toLeft = (this.touchSettings.elapsedTime <=  this.touchSettings.allowedTime && this.touchSettings.dist < 0 && Math.abs(this.touchSettings.dist) >= this.touchSettings.threshold && Math.abs(touchObj.pageY - this.touchSettings.startY) <= this.touchSettings.yDeviationHold);
 
             if(this._getViewportWidth() <= 767){
                 // mobile
@@ -355,7 +355,7 @@ class Gallery{
         const itemStyle = window.getComputedStyle(this.tape.getElementsByClassName(this.cssNames.tapeItem)[0]);
         // стили контейнера ленты
         const viewfinderStyle = window.getComputedStyle(this.tapeBox);
-        // стили псевдоэлемента, закрывающего часть картинок справа    
+        // стили псевдо-элемента, закрывающего часть картинок справа    
         const grdtBoxStyle = window.getComputedStyle(this.tapeBox,':after'); 
         
         
