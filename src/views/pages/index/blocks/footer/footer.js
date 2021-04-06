@@ -1,4 +1,5 @@
 import './img/footer-imgs.js'
+import UserAgreement from './agreement/agreement.js'
 
 class FormHandler{
     constructor(formId){
@@ -11,13 +12,17 @@ class FormHandler{
             submit: "form__send",
             fields: "form__field",
             errorField: "form__field_error",
-            reporte: 'form-block__send-message',
-            reporteText: 'form-block__send-message-content',
+            errorCheckbox: "form__conditions-label_error",
+            checkboxContainer: 'form__conditions-label',
+            checkbox: 'form__conditions-checkbox',
+            report: 'form-block__send-message',
+            reportText: 'form-block__send-message-content',
             activeReport: 'form-block__send-message_active',
-            closeReport: 'form-block__send-message-close'
+            closeReport: 'form-block__send-message-close',
+            agreementAcceptance: 'form__conditions-checkbox'
         }
         this.setHandlers();
-        this.action = '';
+        this.action = 'http://landsale.hostronavt.ru/send.php';
     }
     // ----- handlers методы -----
     setHandlers(){
@@ -34,7 +39,7 @@ class FormHandler{
     }
     /**
      * Проверка полей формы
-     * @returns массив полей с ошибками или пустой масссив, если ошибок нет
+     * @returns массив полей с ошибками или пустой массив, если ошибок нет
      */
     getFormDataErrors(){
         // массив с именами полей (name), в которых есть ошибки ввода
@@ -42,9 +47,12 @@ class FormHandler{
         // поля формы
         const mailField = this.feedback.querySelector('.' + this.cssNames.email);
         const nameField = this.feedback.querySelector('.' + this.cssNames.name);
+        const checkbox = this.feedback.querySelector('.' + this.cssNames.agreementAcceptance);
+        
         // введённое значение
         const mail = mailField.value;
         const name = nameField.value;
+        const agreement = checkbox.checked;
 
         // регулярное выражение для теста email
         const mailRegExp = /\S+@\S+\.\S+/;
@@ -54,6 +62,9 @@ class FormHandler{
         }
         if(!mailRegExp.test(mail)){
             errArr.push(mailField.name);
+        }
+        if(!agreement){
+            errArr.push(checkbox.name)
         }
 
         return errArr;
@@ -65,13 +76,19 @@ class FormHandler{
     resetErrorHandler(event){
         let target = event.target;
         target = target.closest('.' + this.cssNames.errorField);
-
-        if(target !== null){
+        
+        if(target === null){
+            target = event.target;
+            target = target.closest('.' + this.cssNames.errorCheckbox);
+            if(target!==null){
+                target.classList.remove(this.cssNames.errorCheckbox);    
+            }
+        } else {
             target.classList.remove(this.cssNames.errorField);
         }
     }
     /**
-     * Обработчик отпраки формы
+     * Обработчик отправки формы
      * @param {Event} ev объект события
      */
     sendFormHandler(ev){
@@ -113,14 +130,15 @@ class FormHandler{
                     
                     // действия в случае успеха и неудачи
                     if(json.result == "success"){
-                        // окно с отчетом об отпркавке
+                        // окно с отчетом об отправке
                         const okReport = "<p>Ваша заявка отправлена.</p><p>Мы свяжемся с Вами в ближайшее время.</p>";
                         console.log('sendFormHandler: сообщение отправлено, request.status = ', request.status);
                         openSendReport(okReport);
                         // чистим поля формы 
-                        nameField.value = '';
-                        emailField.value = '';
-                        textField.value = '';
+                        form.reset();
+                        // nameField.value = '';
+                        // emailField.value = '';
+                        // textField.value = '';
                     } else { // если произошла ошибка
                         const errorReport = "<p>К сожалению, произошла ошибка при отправке формы.</p><p>Пожалуйста, свяжитесь с нами по телефону <a href='tel:88001111111'>8 800 1111111</a></p>";
                         console.log('sendFormHandler: произошла ошибка request.response = ', request.response, '; request.status = ', request.status);
@@ -158,11 +176,22 @@ class FormHandler{
 
             for(let i in errorFields){
                 // поле ввода с ошибкой
-                const errFielr = form.querySelector('.'+this.cssNames.fields+'[name='+errorFields[i]+']');
+                const errField = form.querySelector('input'+'[name='+errorFields[i]+']');
                 
-                if(!errFielr.classList.contains(this.cssNames.errorField)){
-                    errFielr.classList.add(this.cssNames.errorField);
+                // различить поля ввода по type
+                // type=='text' и type='checkbox'
+
+                if(errField.type=='text' && !errField.classList.contains(this.cssNames.errorField)){
+                    errField.classList.add(this.cssNames.errorField);
                 }
+                
+                if(errField.type=='checkbox'){
+                    const checkboxContainer = form.querySelector('.' + this.cssNames.checkboxContainer);
+                    if(!checkboxContainer.classList.contains(this.cssNames.errorCheckbox)){
+                        checkboxContainer.classList.add(this.cssNames.errorCheckbox);    
+                    }
+                }
+
             }
             
         }
@@ -172,8 +201,8 @@ class FormHandler{
      * @param {String} report отчет о доставке
     */
     openSendReport(report){
-        const sendReportBox = this.feedback.querySelector('.' + this.cssNames.reporte);
-        const contentBox = sendReportBox.querySelector('.' + this.cssNames.reporteText);
+        const sendReportBox = this.feedback.querySelector('.' + this.cssNames.report);
+        const contentBox = sendReportBox.querySelector('.' + this.cssNames.reportText);
         if( !sendReportBox.classList.contains(this.cssNames.activeReport) ){
             sendReportBox.classList.add(this.cssNames.activeReport);
             contentBox.innerHTML = report;
@@ -187,7 +216,7 @@ class FormHandler{
         let target = ev.target;
         target = target.closest(this.cssNames.closeReport);
 
-        const sendReportBox = this.feedback.querySelector('.' + this.cssNames.reporte);
+        const sendReportBox = this.feedback.querySelector('.' + this.cssNames.report);
 
         if(target !== null){
             sendReportBox.classList.remove(this.cssNames.activeReport);
@@ -202,3 +231,4 @@ class FormHandler{
 
 
 const formHandler = new FormHandler('feedback');
+const userAgreement = new UserAgreement();
