@@ -19,14 +19,17 @@
 // заголовок слайдера
 .slider-box__title{
     position: absolute;
-    top: calc(100vw * 106 / 1440);
-    left: calc(100vw * 272 / 1440);
+    // top: calc(100vw * 106 / 1440);
+    top: calc(100vw * 66 / 1440);
+    // left: 154px; vw:1440px; left:51px; vw:768px;
+    left: calc(100vw * (103 / 672) - (467px / 7));
 
     font-family: 'Montserrat';
     font-weight: 900;
-    font-size: calc(100vw * 48 / 1440);
-    line-height: calc(59 / 48);
-    letter-spacing: 0.05em;
+    font-size: calc(100vw * 40 / 1440);
+
+    line-height: calc(49 / 40);
+    letter-spacing: 0.1em;
     color: #F1F5F2;
 
     z-index: 2;
@@ -37,16 +40,18 @@
 // -------------
 // viewfinder контейнер для ленты со слайдами
 .slider-box__tape-hiding-box{
-    // width: 749px;
     width: calc(100vw * 749 / 1440);
-    // height: 554px;
     height: calc(100vw * 554 / 1440);
     overflow: hidden;
 
     position: absolute;
 
-    top: calc(100vw * 51 / 1440);
-    right: calc(100vw * 112 / 1440);
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    
+    right: calc(100vw * 51 / 1440);
 }
 
 // контейнер со списком слайдов и описаниями <ul>
@@ -70,7 +75,7 @@
     height: calc(100vw * 554 / 1440);
     max-height: 554px;
 }
-// ссылка-обёртка для некоторых слыйдов
+// ссылка-обёртка для некоторых слайдов
 .tape-hiding-box__item-link{
     display: block;
     width: 100%;
@@ -112,9 +117,7 @@
     height: 100%;
     >img{
         width: 100%;
-        // width: calc(100vw * 749 / 1440);
         height: 100%;
-        // height: calc(100vw * 554 / 1440);
         object-fit: cover; 
         max-width: unset;
     }
@@ -126,10 +129,13 @@
 .slider-box__description-box{
     position: absolute;
     width: calc(100vw * 485 / 1440);
-    min-height: calc(100vw * 550 / 1440);
-    background: #34471E;
     top: calc(100vw * 186 / 1440);
-    left: calc(100vw * 154 / 1440);
+    // left:154px vw: 1440 left:51px vw:768px
+    // left: calc(100vw * (103 / 672) - (467px / 7));
+    // left:134px vw: 1440 left:51px vw:768px
+    left: calc(100vw * (83 / 672) - (307px / 7));
+
+    background: transparent;
 }
 .description-box{
     font-family: 'Montserrat';
@@ -137,45 +143,92 @@
     font-weight: 400;
     line-height: calc(100vw * 22/1440);
 
-    padding-top: calc(100vw * 31/ 1440);
+    padding-top: 0;
     padding-right: calc(100vw * 27 /1440);
-    padding-left: calc(100vw * 51 / 1440);
+    padding-left: 0;
 }
 // список описаний слайдов <ul>
 .description-box__list-box{
     display: flex;
     flex-direction: column;
+
+    position: relative;
+    
+}
+// декоративная вертикальная направляющая
+.description-box__list-box::before{
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 100%;
+    border-left: calc(100vw * 2 / 1440) solid #97A297;
+    left: calc(100vw * (-16) / 1440);
+    
 }
 // элемент списка с описанием слайда <li>
 .list-box__item-box{
-    margin-top: calc(100vw * 24 / 1440);
-    margin-bottom: calc(100vw * 24 / 1440);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.list-box__item-box + .list-box__item-box{
+    margin-top: calc(100vw * 29 / 1440);
 }
 .list-box__item-box:hover{
     cursor: pointer;
+}
+// декоративные элементы для сокрытия концов вертикальной направляющей
+.list-box__item-box:first-child > .item-box__desc::after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -20px;
+    width: 20px;
+    height: calc(50% - 100vw * 5 / 1440);
+    top: 0;
+    background: rgb(15, 37, 14);
+}
+.list-box__item-box:last-child > .item-box__desc::after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -20px;
+    width: 20px;
+    height: calc(50% - 100vw * 5 / 1440);
+    bottom: 0;
+    background: rgb(15, 37, 14);
 }
 // активный элемент списка == описание активного слайда
 .list-box__item-box_active{
     >.item-box__desc{
         color: #F1F5F2;
-        position: relative;
     }
     >.item-box__desc::before{
-        content: '';
-        display: block;
-        width: calc(100vw * 5 / 1440);
-        height: calc(100vw * 5 / 1440);
-        border-radius: 50%;
         background: #fff;
-        position: absolute;
-        top: calc(100vw * 9 / 1440);
-        transform: translateY(-50%);
-        left: calc(100vw * -10 / 1440);
+        border-color: #fff;
     }
 }
 // описание слайда
 .item-box__desc{
     color:rgba(241, 245, 242, 0.6);
+    position: relative;
+    
+}
+// декоративные точки-пункты слайдера
+.item-box__desc::before{
+    content: '';
+    display: block;
+    width: calc(100vw * 10 / 1440);
+    height: calc(100vw * 10 / 1440);
+    border-radius: 50%;
+    border: calc(100vw * 2 / 1440) solid #97A297;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    left: calc(100vw * -20 / 1440);
+
+    background: rgb(15, 37, 14);
 }
 
 // описание слайда
@@ -194,6 +247,8 @@
     position: absolute;
     top: calc(100vw * 617 / 1440);
     left: calc(100vw * 646 / 1440);
+
+    display: none;
 }
 // элемент индикации <li>
 .slider-box__control-item{
@@ -211,11 +266,15 @@
 // ----- Ограничители -----
 @media screen and (min-width: 1440px){
     .slider-box__title{
-        top: 106px;
-        left: 272px;
+        // top: 106px;
+        top: 66px;
+        // left: 272px;
+        left: 155px;
 
-        font-size: 48px;
-        line-height: 59px;
+        // font-size: 48px;
+        font-size: 40px;
+        // line-height: 59px;
+        line-height: 49px;
 
     }
     .slider__slider-box{
@@ -227,11 +286,12 @@
     .slider-box__description-box{
         position: absolute;
         width: 485px;
-        min-height: 550px;
-        background: #34471E;
+        // min-height: 550px;
+        // background: #34471E;
         
         top: 186px;
-        left: 154px;
+        // left: 154px;
+        left: 134px;
     }
     .description-box{
         font-family: 'Montserrat';
@@ -239,22 +299,61 @@
         font-weight: 400;
         line-height: 22px;
 
-        padding-top: 31px;
+        // padding-top: 31px;
+        padding-top: 0;
         padding-right: 27px;
-        padding-left: 51px;
+        // padding-left: 51px;
+        padding-left: 0;
+    }
+    .description-box__list-box::before{
+        left: -16px;
+        border-width: 2px;
+        
     }
     // элемент списка с описанием слайда <li>
     .list-box__item-box{
-        margin-top: 24px;
-        margin-bottom: 24px;
+        // margin-top: 24px;
+        margin-top: 0;
+        // margin-bottom: 24px;
+        margin-bottom: 0;
+    }
+    .list-box__item-box + .list-box__item-box{
+        margin-top: 29px
+    }
+    // декоративные точки-пункты слайдера
+    .item-box__desc::before{
+        // width: 5px;
+        width: 10px;
+        // height: 5px;
+        height: 10px;
+        border-width: 2px;
+        left: -20px;
+    }
+    // декоративные элементы для сокрытия концов вертикальной направляющей
+    .list-box__item-box:first-child > .item-box__desc::after{
+        height: calc(50% - 5px);
+    }
+    .list-box__item-box:last-child > .item-box__desc::after{
+        height: calc(50% - 5px);
     }
     // активный элемент списка == описание активного слайда
     .list-box__item-box_active{
         >.item-box__desc::before{
-            width: 5px;
-            height: 5px;
-            top: 9px;
-            left: -10px;
+            // width: 5px;
+            // width: 10px;
+            // height: 5px;
+            // height: 10px;
+            // border-radius: 50%;
+            
+            // background: #fff;
+            // border-color: #fff;
+            // // top: 9px;
+            // top: 0;
+            // bottom: 0;
+            // margin-top:auto;
+            // margin-bottom: auto;
+            
+            // left: -20px;
         }
     }
     // viewfinder контейнер для ленты со слайдами
@@ -264,8 +363,9 @@
         // height: 554px;
         height: 554px;
 
-        top: 51px;
-        right: 112px;
+        // top: 51px;
+        // right: 112px;
+        right: 51px;
     }
     // блок индикации и управления слайдера <ul>
     .slider-box__control{
@@ -421,6 +521,11 @@
         border-left: 2px solid #fff;
         transform: rotate(135deg);
     }
+    // декоративные элементы для сокрытия концов вертикальной направляющей
+    .list-box__item-box:first-child > .item-box__desc::after,
+    .list-box__item-box:last-child > .item-box__desc::after{
+        display: none;
+    }
     // элемент списка с описанием слайда <li>
     .list-box__item-box{
         // margin-top: calc(100vw * 24 / 1440);
@@ -474,7 +579,7 @@
 
     // блок индикации и управления слайдера <ul>
     ul.slider-box__control{
-        // display: flex;
+        display: flex;
         flex-direction: row;
         width: 100%;
         height: auto;
