@@ -68,7 +68,7 @@ function getPlugin(){
         // }),
         new CleanWebpackPlugin(), // чистит pruduction директорию перед новой сборкой
         new MiniCssExtractPlugin({ // сохранение css в файлы
-            filename: 'css/[name]-bandle.css'
+            filename: 'css/[name].css'
         })
     ];
     if(isComps) return [
@@ -80,7 +80,7 @@ function getPlugin(){
         }),
         new CleanWebpackPlugin(), // чистит pruduction директорию перед новой сборкой
         new MiniCssExtractPlugin({ // сохранение css в файлы
-            filename: 'css/[name]-bandle.css'
+            filename: 'css/[name].css'
         })
     ];
 }
@@ -93,8 +93,8 @@ module.exports = {
     //     'about': PATHS.source + '/views/pages/about/about.js'
     // },
     output:{ // шаблон имен и местоположение для выходных файлов
-        filename: 'app/[name]-bandle.js',
-        path: PATHS.buildm
+        filename: 'app/[name].js',
+        path: PATHS.build
     },
     devServer:{
         port: 4200,
