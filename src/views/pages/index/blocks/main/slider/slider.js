@@ -153,7 +153,7 @@ class Slider{
         this.slider.addEventListener('touchend', touchEndHandler);
 
         const showCurrentActiveSlide = this.showCurrentActiveSlide.bind(this);
-        window.addEventListener('resize', (e) => { console.log('window resize --->'); showCurrentActiveSlide(); });
+        window.addEventListener('resize', (e) => { /*console.log('window resize --->');*/ showCurrentActiveSlide(); });
     }
     /**
      * Устанавливает классы активности у всех необходимых элементов
