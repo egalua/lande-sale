@@ -157,7 +157,7 @@ class Slider{
     }
     /**
      * Устанавливает классы активности у всех необходимых элементов
-     * @param {Inteder} idx индекс элементов, у которых нужно установить класс активности
+     * @param {Integer} idx индекс элементов, у которых нужно установить класс активности
      */
     setActivity(idx){
         this.descList.children[idx].classList.add(this.cssNames.activeDescriptionItem);
