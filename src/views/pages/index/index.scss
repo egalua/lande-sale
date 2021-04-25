@@ -1,6 +1,7 @@
 @import "/fonts.glob/fonts.scss";
 @import "/styles.glob/common/reset.scss";
 @import "/styles.glob/common/grid.scss";
+@import "bad-browser/bad-browser.scss";
 @import "template/base.scss";
 @import "blocks/noscript/noscript.scss";
 @import "blocks/header/header.scss";
