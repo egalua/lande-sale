@@ -32,7 +32,7 @@ class stickyButton{
         this.cssNames = {
             stikyClass: 'call-button_sticky'
         };
-        // оригинпльная кнопка
+        // оригинальная кнопка
         this.button = document.querySelector('.' + buttonClass);
         // клон кнопки
         this.stickyButton = this.button.cloneNode(true);
