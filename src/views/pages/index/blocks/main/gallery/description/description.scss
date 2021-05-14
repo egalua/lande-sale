@@ -2,10 +2,10 @@
 $glr-desc-box-width: calc( 100vw * (582 / 1440) ); 
 // левый отступ блока с описанием
 $glr-desc-box-padding-lt: calc(100vw * (155 / 1440)); 
-// нижний отступ заголовка описания:  24px при vw:768px, 86px при vw:1440px
-$glr-desc-ttl-margin-btm: calc(100vw * (62 / 672) - (31488px / 672) ); 
-// верхний отступ заголовка описания: 0px при 768px; 65px при 1440px
-$glr-desc-ttl-margin-top: calc(100vw * (65 / 672) - (49920px / 672) );
+// нижний отступ заголовка описания: 12px при vw:768px, 25px при vw:1440px
+$glr-desc-ttl-margin-btm: calc(100vw * (13 / 672) - (20px / 7));
+// верхний отступ заголовка описания
+$glr-desc-ttl-margin-top: 0px;
 // блок с описанием
 .gallery__description-box{ 
     width: 100%;
@@ -20,14 +20,20 @@ h3.gallery__description-title{ // заголовок описания
     font-weight: 700;
     margin-bottom: $glr-desc-ttl-margin-btm;
     margin-top: $glr-desc-ttl-margin-top;
-    // от 18px при vw:1440px до 12px при vw:320px
-    font-size: calc( ( (100vw * 3) / 560 ) + (72px / 7) ); 
+    // font-size:18px; vw:1440px; font-size:12px vw:768px;
+    font-size: calc(100vw * (1 / 112) + (36px / 7));
     margin-left: 4px;
 }
 // блок текста описания участка
 .gallery__description-text{ 
     >p{
-        margin-bottom: calc( 100vw * (25 / 1440) );
+        // margin-bottom:25px vw:1440px; margin-bottom:8px vw:768px
+        margin-bottom: calc(100vw * (17 / 672) - (80px / 7));
+        
+        // font-size:18px; vw:1440px ; font-size: 9px; vw:768px;
+        font-size: calc(100vw * (3 / 224) - (9px / 7));
+        // line-height: 22px; vw:1440px line-height: 13.5px; vw:768px;
+        line-height: calc(100vw * (17 / 1344) + (53px / 14));
     }
     >p:last-child{
         margin-bottom: 0;
@@ -44,8 +50,8 @@ h3.gallery__description-title{ // заголовок описания
     }
     // заголовок описания
     h3.gallery__description-title{
-        margin-bottom: 86px;
-        margin-top: 65px;
+        margin-bottom: 25px;
+        margin-top: 0px;
     }
     // блок с описанием
     .gallery__description-box{
@@ -56,6 +62,11 @@ h3.gallery__description-title{ // заголовок описания
     .gallery__description-text{
         >p{
             margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 22px;
+        }
+        >p:last-child{
+            margin-bottom: 0;
         }
     }
     
@@ -84,6 +95,16 @@ h3.gallery__description-title{ // заголовок описания
         // line-height: От 22px при vw:767px до 15px при vw:320px
         line-height: calc(100vw * (7 / 447) + (4465px / 447) );
     }
+    // блок текста описания участка
+    .gallery__description-text{
+        >p{
+            margin-bottom: 25px;
+            // font-size: от 18px при vw:767px до 12px при vw:320px
+            font-size: calc(100vw * (6 / 447) + (3444px / 447) );
+            // line-height: От 22px при vw:767px до 15px при vw:320px
+            line-height: calc(100vw * (7 / 447) + (4465px / 447) );
+        }
+    }
 }
 @media screen and (max-width: 320px){
     // заголовок описания и блок с описанием
@@ -91,5 +112,15 @@ h3.gallery__description-title{ // заголовок описания
     h3.gallery__description-title{
         font-size: 12px !important;
         line-height: 15px;
+    }
+    // блок текста описания участка
+    .gallery__description-text{
+        >p{
+            margin-bottom: 25px;
+            // font-size: от 18px при vw:767px до 12px при vw:320px
+            font-size: 12px;
+            // line-height: От 22px при vw:767px до 15px при vw:320px
+            line-height: 15px;
+        }
     }
 }
